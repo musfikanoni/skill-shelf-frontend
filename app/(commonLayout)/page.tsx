@@ -1,4 +1,4 @@
-// import BestSellingProducts from "@/components/landingPage/BestSellingSection";
+
 // import BrowseCategory from "@/components/landingPage/BrowseCategory";
 // import FeaturedCourses from "@/components/landingPage/FeaturedCourses";
 // import HeroSection from "@/components/landingPage/heroSection/HeroSection";
@@ -9,19 +9,24 @@
 // import TrustBadgeBanner from "@/components/landingPage/TrustBadgeBanner";
 // import VipBundlePage from "@/components/landingPage/VipBundlePage";
 
+import BestSellingProducts from "@/components/home/BestSellingSection";
+import HeroSection from "@/components/home/HeroSection";
+import StatsSection from "@/components/home/StatsSection";
+import TrustBadgeBanner from "@/components/home/TrustBadgeBanner";
+
 const page = () => {
   return (
     <div>
-      {/* <HeroSection />
+      <HeroSection />
       <StatsSection />
       <TrustBadgeBanner />
       <BestSellingProducts />
-      <BrowseCategory />
-      <FeaturedCourses />
-      <VipBundlePage />
-      <PopulaProductSection />
-      <OurCustomer />
-      <PricingPlans /> */}
+      {/* <BrowseCategory /> */}
+      {/* <FeaturedCourses /> */}
+      {/* <VipBundlePage /> */}
+      {/* <PopulaProductSection /> */}
+      {/* <OurCustomer /> */}
+      {/* <PricingPlans /> */}
     </div>
   );
 };
