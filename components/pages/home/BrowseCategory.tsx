@@ -1,22 +1,45 @@
 "use client";
 
-import { Briefcase, Target, Mail, Share2, PenTool, Code, Smartphone, Globe } from "lucide-react";
+import {
+  Briefcase,
+  Target,
+  Mail,
+  Share2,
+  PenTool,
+  Code,
+  Smartphone,
+  Globe,
+} from "lucide-react";
 import { useGetCategoriesQuery } from "@/redux/api/landingPageApi/LandingPageApi";
-import PageLoading from "../Others/Loading";
+import PageLoading from "../../Others/Loading";
 import Image from "next/image";
 
 const BrowseCategory = () => {
   const { data: categoryData, isLoading, error } = useGetCategoriesQuery({});
 
   if (isLoading) {
-    return <PageLoading title="Loading Categories" message="Organizing our collections for you..." />;
+    return (
+      <PageLoading
+        title="Loading Categories"
+        message="Organizing our collections for you..."
+      />
+    );
   }
 
   if (error) {
     return null;
   }
 
-  const iconPool = [Briefcase, Target, Mail, Share2, PenTool, Code, Smartphone, Globe];
+  const iconPool = [
+    Briefcase,
+    Target,
+    Mail,
+    Share2,
+    PenTool,
+    Code,
+    Smartphone,
+    Globe,
+  ];
   const colorPool = [
     { bg: "bg-blue-100", color: "text-blue-600" },
     { bg: "bg-purple-100", color: "text-purple-600" },
@@ -26,9 +49,11 @@ const BrowseCategory = () => {
     { bg: "bg-teal-100", color: "text-teal-600" },
   ];
 
-  const categories = (Array.isArray(categoryData?.data) 
-    ? categoryData.data 
-    : (categoryData?.data?.data || [])).map((cat: any, index: number) => ({
+  const categories = (
+    Array.isArray(categoryData?.data)
+      ? categoryData.data
+      : categoryData?.data?.data || []
+  ).map((cat: any, index: number) => ({
     id: cat._id,
     name: cat.name,
     image: cat.image,
@@ -58,7 +83,7 @@ const BrowseCategory = () => {
                 <div
                   className={`w-16 h-16 flex items-center justify-center rounded-xl overflow-hidden mb-4 ${item.bg} group-hover:scale-105 transition-transform duration-300`}
                 >
-                  {item.image ? ( 
+                  {item.image ? (
                     <Image
                       src={item.image}
                       alt={item.name}

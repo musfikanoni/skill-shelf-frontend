@@ -2,10 +2,10 @@
 
 import { useState, FC } from "react";
 import Image from "next/image";
-import SecondaryButton from "../shared/secondaryButton/SecondaryButton";
+import SecondaryButton from "../../shared/secondaryButton/SecondaryButton";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { useRouter } from "next/navigation";
-import Loading from "../Others/Loading";
+import Loading from "../../Others/Loading";
 import { useGetProductsQuery } from "@/redux/api/landingPageApi/LandingPageApi";
 
 interface Product {

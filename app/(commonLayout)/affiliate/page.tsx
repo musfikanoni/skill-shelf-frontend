@@ -1,5 +1,5 @@
 
-import AffiliateApplication from '@/components/affiliateApplication/AffiliateApplication'
+import AffiliateApplication from '@/components/pages/affiliateApplication/AffiliateApplication'
 import PageHeader from '@/components/shared/pageHeader/PageHeader'
 import Image from 'next/image'
 

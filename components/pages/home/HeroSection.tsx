@@ -1,18 +1,17 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import SecondaryButton from "../shared/secondaryButton/SecondaryButton";
+import SecondaryButton from "../../shared/secondaryButton/SecondaryButton";
 
 const HeroSection = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const exploreProducts = (type: "products" | "courses") => {
     router.push(`/${type}`);
   };
-  
+
   return (
     <section className="relative w-full min-h-screen overflow-hidden">
-
       <div className="absolute inset-0">
         <img
           src="/images/heroImg/heroBgColor.png"
@@ -25,10 +24,7 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 px-6 lg:px-12 pt-32 flex items-center">
-
         <div className="max-w-2xl space-y-6">
-
-
           <div className="inline-flex items-center gap-2 bg-[#201212] backdrop-blur-md px-4 py-1.5 rounded-full text-sm text-yellow-400 font-medium border border-white/10">
             ✨ Trusted by 10,000+ Digital Entrepreneurs
           </div>
@@ -40,8 +36,8 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-white text-base md:text-lg leading-relaxed">
-            Access hundreds of ready-to-use digital products, templates,
-            and expert-led courses designed to help you grow your business faster.
+            Access hundreds of ready-to-use digital products, templates, and
+            expert-led courses designed to help you grow your business faster.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-gray-400">
@@ -65,7 +61,8 @@ const HeroSection = () => {
             <button
               onClick={() => exploreProducts("courses")}
               className="bg-gradient-to-b from-[#6C3FC5] to-[#341E5F] text-white font-semibold px-6 py-3 rounded-md
-             text-sm uppercase tracking-wide hover:bg-purple-500 transition cursor-pointer">
+             text-sm uppercase tracking-wide hover:bg-purple-500 transition cursor-pointer"
+            >
               Browse Courses
             </button>
           </div>
@@ -73,27 +70,27 @@ const HeroSection = () => {
           <div className="flex items-center gap-3 pt-4">
             <div className="flex -space-x-3">
               <img
-                src={`/images/heroImg/User1.png`} 
+                src={`/images/heroImg/User1.png`}
                 alt="user"
                 className="w-8 h-8 rounded-full border-2 border-[#020617] object-cover"
               />
               <img
-                src={`/images/heroImg/User2.png`} 
+                src={`/images/heroImg/User2.png`}
                 alt="user"
                 className="w-8 h-8 rounded-full border-2 border-[#020617] object-cover"
               />
               <img
-                src={`/images/heroImg/User1.png`} 
+                src={`/images/heroImg/User1.png`}
                 alt="user"
                 className="w-8 h-8 rounded-full border-2 border-[#020617] object-cover"
               />
               <img
-                src={`/images/heroImg/User2.png`} 
+                src={`/images/heroImg/User2.png`}
                 alt="user"
                 className="w-8 h-8 rounded-full border-2 border-[#020617] object-cover"
               />
               <img
-                src={`/images/heroImg/User1.png`} 
+                src={`/images/heroImg/User1.png`}
                 alt="user"
                 className="w-8 h-8 rounded-full border-2 border-[#020617] object-cover"
               />
@@ -102,7 +99,6 @@ const HeroSection = () => {
               30,000+ happy Business Owners
             </span>
           </div>
-
         </div>
       </div>
     </section>

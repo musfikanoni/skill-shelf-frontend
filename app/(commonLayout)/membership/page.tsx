@@ -1,8 +1,7 @@
-
-import PricingPlans from '@/components/home/PricingPlans'
-import CurrentSubscription from '@/components/shared/currentSubscription/CurrentSubscription'
-import PageHeader from '@/components/shared/pageHeader/PageHeader'
-import Image from 'next/image'
+import PricingPlans from "@/components/pages/home/PricingPlans";
+import CurrentSubscription from "@/components/shared/currentSubscription/CurrentSubscription";
+import PageHeader from "@/components/shared/pageHeader/PageHeader";
+import Image from "next/image";
 
 const MembershipPage = () => {
   return (
@@ -22,7 +21,7 @@ const MembershipPage = () => {
       <PricingPlans />
       <CurrentSubscription />
     </div>
-  )
-}
+  );
+};
 
-export default MembershipPage     
+export default MembershipPage;

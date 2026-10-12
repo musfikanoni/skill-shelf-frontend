@@ -1,7 +1,10 @@
+import CourseDetails from "@/components/pages/productsPage/CourseDetails";
 
-import CourseDetails from "@/components/productsPage/CourseDetails";
-
-const CourseDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+const CourseDetailsPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
   const { id } = await params;
   return (
     <div>
@@ -19,9 +22,8 @@ const CourseDetailsPage = async ({ params }: { params: Promise<{ id: string }> }
       /> */}
 
       <CourseDetails id={id} />
+    </div>
+  );
+};
 
-    </div >
-  )
-}
-
-export default CourseDetailsPage
+export default CourseDetailsPage;

@@ -1,14 +1,13 @@
-
-import BestSellingProducts from "@/components/home/BestSellingSection";
-import BrowseCategory from "@/components/home/BrowseCategory";
-import FeaturedCourses from "@/components/home/FeaturedCourses";
-import HeroSection from "@/components/home/HeroSection";
-import OurCustomer from "@/components/home/OurCustomer";
-import PopulaProductSection from "@/components/home/PopulaProductSection";
-import PricingPlans from "@/components/home/PricingPlans";
-import StatsSection from "@/components/home/StatsSection";
-import TrustBadgeBanner from "@/components/home/TrustBadgeBanner";
-import VipBundlePage from "@/components/home/VipBundlePage";
+import BestSellingProducts from "@/components/pages/home/BestSellingSection";
+import BrowseCategory from "@/components/pages/home/BrowseCategory";
+import FeaturedCourses from "@/components/pages/home/FeaturedCourses";
+import HeroSection from "@/components/pages/home/HeroSection";
+import OurCustomer from "@/components/pages/home/OurCustomer";
+import PopulaProductSection from "@/components/pages/home/PopulaProductSection";
+import PricingPlans from "@/components/pages/home/PricingPlans";
+import StatsSection from "@/components/pages/home/StatsSection";
+import TrustBadgeBanner from "@/components/pages/home/TrustBadgeBanner";
+import VipBundlePage from "@/components/pages/home/VipBundlePage";
 
 const page = () => {
   return (
@@ -27,5 +26,4 @@ const page = () => {
   );
 };
 
-export default page; 
-
+export default page;

@@ -2,9 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetCoursesQuery } from "@/redux/api/landingPageApi/LandingPageApi";
-import SectionHeader from "../shared/sectionHeader/SectionHeader";
-
-
+import SectionHeader from "../../shared/sectionHeader/SectionHeader";
 
 function BookIcon({ size = "md" }: { size?: "sm" | "md" }) {
   const s = size === "sm" ? 12 : 14;
@@ -109,7 +107,7 @@ export default function FeaturedCourses() {
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Main Large Card (Left) */}
         {courses[0] && (
-          <div 
+          <div
             onClick={() => handleViewDetails(courses[0]._id)}
             className="relative rounded-3xl overflow-hidden group cursor-pointer h-full min-h-[550px] flex flex-col shadow-xl"
           >
@@ -143,7 +141,7 @@ export default function FeaturedCourses() {
                 <span className="text-3xl font-black text-yellow-400">
                   ${courses[0].price}
                 </span>
-                <button 
+                <button
                   onClick={(e) => {
                     e.stopPropagation();
                     handleViewDetails(courses[0]._id);
@@ -197,7 +195,7 @@ export default function FeaturedCourses() {
                     <span className="text-xl font-bold text-yellow-400">
                       ${course.price}
                     </span>
-                    <button 
+                    <button
                       onClick={(e) => {
                         e.stopPropagation();
                         handleViewDetails(course._id);
@@ -214,7 +212,7 @@ export default function FeaturedCourses() {
 
           {/* Bottom Wide Card */}
           {courses[3] && (
-            <div 
+            <div
               onClick={() => handleViewDetails(courses[3]._id)}
               className="relative rounded-3xl overflow-hidden group cursor-pointer flex-1 min-h-[250px] shadow-lg"
             >
@@ -251,7 +249,7 @@ export default function FeaturedCourses() {
                   <span className="text-2xl font-black text-yellow-400">
                     ${courses[3].price}
                   </span>
-                  <button 
+                  <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handleViewDetails(courses[3]._id);

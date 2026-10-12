@@ -1,6 +1,6 @@
-import ProductSection from '@/components/productsPage/ProductSection'
-import PageHeader from '@/components/shared/pageHeader/PageHeader'
-import Image from 'next/image'
+import ProductSection from "@/components/pages/productsPage/ProductSection";
+import PageHeader from "@/components/shared/pageHeader/PageHeader";
+import Image from "next/image";
 
 const ProductsPage = () => {
   return (
@@ -19,9 +19,8 @@ const ProductsPage = () => {
       />
 
       <ProductSection />
+    </div>
+  );
+};
 
-    </div >
-  )
-}
-
-export default ProductsPage
+export default ProductsPage;

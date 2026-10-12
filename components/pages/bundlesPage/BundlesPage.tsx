@@ -1,8 +1,8 @@
-"use client"
-import PopulaProductSection from '@/components/home/PopulaProductSection'
-import PageHeader from '@/components/shared/pageHeader/PageHeader'
-import UpgradeBanner from '@/components/shared/upgradeBanner/UpgradeBanner'
-import Image from 'next/image'
+"use client";
+import PopulaProductSection from "@/components/pages/home/PopulaProductSection";
+import PageHeader from "@/components/shared/pageHeader/PageHeader";
+import UpgradeBanner from "@/components/shared/upgradeBanner/UpgradeBanner";
+import Image from "next/image";
 
 export default function BundlesPage() {
   return (
