@@ -60,6 +60,19 @@ export const landingPageApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    getBundleById: builder.query({
+      query: (id) => ({
+        url: `/bundle/public/${id}`,
+        method: "GET",
+      }),
+    }),
+    createBundleCheckout: builder.mutation({
+      query: (body) => ({
+        url: "/bundle/checkout",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -73,4 +86,6 @@ export const {
   useGetReviewsQuery,
   useGetCourseByIdQuery,
   useCreateEnrollmentCheckoutMutation,
+  useGetBundleByIdQuery,
+  useCreateBundleCheckoutMutation,
 } = landingPageApi;
