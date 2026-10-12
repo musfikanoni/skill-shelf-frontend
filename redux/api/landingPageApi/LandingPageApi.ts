@@ -73,6 +73,19 @@ export const landingPageApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    getProductById: builder.query({
+      query: (id) => ({
+        url: `/product/id/${id}`,
+        method: "GET",
+      }),
+    }),
+    createOrderCheckout: builder.mutation({
+      query: (body) => ({
+        url: "/order/checkout",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -88,4 +101,6 @@ export const {
   useCreateEnrollmentCheckoutMutation,
   useGetBundleByIdQuery,
   useCreateBundleCheckoutMutation,
+  useGetProductByIdQuery,
+  useCreateOrderCheckoutMutation,
 } = landingPageApi;
