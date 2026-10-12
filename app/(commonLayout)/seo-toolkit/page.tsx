@@ -1,5 +1,5 @@
 
-import SEOToolkitBundle from "@/components/seoToolkitBundle/SEOToolkitBundle"
+import SEOToolkitBundle from "@/components/pages/seoToolkitBundle/SEOToolkitBundle"
 
 function SeoToolkit() {
     return (

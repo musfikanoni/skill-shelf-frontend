@@ -1,4 +1,5 @@
-import BundlesPage from "@/components/bundlesPage/BundlesPage";
+
+import BundlesPage from "@/components/pages/bundlesPage/BundlesPage";
 
 const Bundles = () => {
   return (
