@@ -37,7 +37,7 @@ import { useDispatch } from "react-redux";
 import { logout as logoutAction } from "@/redux/features/user/userSlice";
 import { toast } from "sonner";
 import { useLogoutMutation } from "@/redux/api/auth/AuthApi";
-import Logo from "../users/Logo";
+import Logo from "../Logo";
 
 const data = {
   USER: {
