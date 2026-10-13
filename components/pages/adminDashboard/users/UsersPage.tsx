@@ -11,8 +11,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { OrderStatCard } from "@/components/shared/orderStateCard/OrderStateCard";
 import { UsersTable } from "@/components/shared/users/Userstable";
-import { Membership, Users } from "@/users.type";
-import { useDeleteUserMutation, useGetAllUsersQuery } from "@/redux/api/userDashboardApi/userManagementApi";
+import { Membership, Users } from "@/types/users.type";
+import {
+  useDeleteUserMutation,
+  useGetAllUsersQuery,
+} from "@/redux/api/userDashboardApi/userManagementApi";
 import { UserDetailsModal } from "@/components/shared/users/UserDetailsModal";
 
 export default function UsersPage() {
@@ -27,7 +30,7 @@ export default function UsersPage() {
     page: currentPage,
     limit: pageSize,
     searchTerm,
-    role: selectedPlan === 'all' ? undefined : selectedPlan
+    role: selectedPlan === "all" ? undefined : selectedPlan,
   });
 
   const [deleteUser, { isLoading: isDeleting }] = useDeleteUserMutation();
@@ -155,7 +158,10 @@ export default function UsersPage() {
       />
 
       {/* Delete Confirmation Dialog */}
-      <Dialog open={!!deletingUserId} onOpenChange={(open) => !open && setDeletingUserId(null)}>
+      <Dialog
+        open={!!deletingUserId}
+        onOpenChange={(open) => !open && setDeletingUserId(null)}
+      >
         <DialogContent className="sm:max-w-[440px] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white">
           <div className="p-8 space-y-6">
             <DialogHeader className="space-y-3">
@@ -163,7 +169,8 @@ export default function UsersPage() {
                 Confirm Deletion
               </DialogTitle>
               <DialogDescription className="text-slate-500 text-base font-medium leading-relaxed">
-                Are you sure you want to delete this user? This action is permanent and cannot be reversed.
+                Are you sure you want to delete this user? This action is
+                permanent and cannot be reversed.
               </DialogDescription>
             </DialogHeader>
 
