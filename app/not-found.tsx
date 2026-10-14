@@ -31,7 +31,6 @@ export default function NotFound() {
         background: "radial-gradient(ellipse at top left, #3b1a6e 0%, #1a0a3c 40%, #0f0626 100%)",
       }}
     >
-      {/* Decorative Blur Orbs */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/20 blur-[120px] rounded-full"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-pink-600/10 blur-[120px] rounded-full"></div>
 
