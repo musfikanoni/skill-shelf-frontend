@@ -1,3 +1,4 @@
+import { MyCommissionResponse } from "@/types/affiliate.type";
 import baseApi from "../baseApi";
 
 export const affiliateApi = baseApi.injectEndpoints({
@@ -8,7 +9,8 @@ export const affiliateApi = baseApi.injectEndpoints({
         if (params?.page) queryParams.append("page", params.page.toString());
         if (params?.limit) queryParams.append("limit", params.limit.toString());
         if (params?.searchTerm) queryParams.append("search", params.searchTerm);
-        if (params?.status && params.status !== "all") queryParams.append("status", params.status);
+        if (params?.status && params.status !== "all")
+          queryParams.append("status", params.status);
 
         return {
           url: `/affiliate?${queryParams.toString()}`,
@@ -32,11 +34,30 @@ export const affiliateApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Affiliate"],
     }),
+
+    getMyCommission: builder.query<MyCommissionResponse, void>({
+      query: () => ({
+        url: "/affiliate/my-commissions",
+        method: "GET",
+      }),
+      providesTags: ["Affiliate"],
+    }),
+
+    createAffiliate: builder.mutation({
+      query: (formData: any) => ({
+        url: "/affiliate",
+        method: "POST",
+        body: formData,
+      }),
+      invalidatesTags: ["Affiliate"],
+    }),
   }),
 });
 
-export const { 
-  useGetAffiliatesQuery, 
+export const {
+  useGetAffiliatesQuery,
   useUpdateAffiliateMutation,
-  useDeleteAffiliateMutation 
+  useDeleteAffiliateMutation,
+  useGetMyCommissionQuery,
+  useCreateAffiliateMutation,
 } = affiliateApi;
