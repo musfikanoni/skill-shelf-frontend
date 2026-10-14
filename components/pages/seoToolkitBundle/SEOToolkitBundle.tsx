@@ -4,12 +4,11 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useGetProductByIdQuery, useCreateOrderCheckoutMutation } from "@/redux/api/landingPageApi/LandingPageApi";
-import PageLoading from "../Others/Loading";
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
-import LoginRequiredModal from "../shared/payment/LoginRequiredModal";
-// import LoginRequiredModal from "../subscription/payment/LoginRequiredModal";
+import Loading from "@/components/Others/Loading";
+import LoginRequiredModal from "@/components/shared/payment/LoginRequiredModal";
 
 const packages = [
     {
@@ -103,7 +102,7 @@ export default function SEOToolkitBundle() {
     };
 
     if (isLoading) {
-        return <PageLoading title="Loading Product Details" message="Fetching the best offers for you..." />;
+        return <Loading title="Loading Product Details" message="Fetching the best offers for you..." />;
     }
 
     if (error || !product) {

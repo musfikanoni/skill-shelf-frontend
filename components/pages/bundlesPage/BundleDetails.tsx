@@ -3,12 +3,13 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useGetBundleByIdQuery, useCreateBundleCheckoutMutation } from "@/redux/api/landingPageApi/LandingPageApi";
-import PageLoading from "../Others/Loading";
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import React, { useState } from "react";
-import LoginRequiredModal from "../shared/payment/LoginRequiredModal";
+import LoginRequiredModal from "@/components/shared/payment/LoginRequiredModal";
+import Loading from "@/components/Others/Loading";
+
 
 function StarRating({ rating, count }: { rating: number; count: number }) {
     return (
@@ -71,7 +72,7 @@ export default function BundleDetails({ id }: { id: string }) {
     };
 
     if (isLoading) {
-        return <PageLoading title="Loading Bundle Details" message="Fetching bundle information..." />;
+        return <Loading title="Loading Bundle Details" message="Fetching bundle information..." />;
     }
 
     if (error || !bundle) {
