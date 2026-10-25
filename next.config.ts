@@ -15,6 +15,32 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "paeyking-store.sfo3.digitaloceanspaces.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "paeyking-store.sfo3.digitaloceanspaces.com",
+        pathname: "/products/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/fkzn0avi/image/upload/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
