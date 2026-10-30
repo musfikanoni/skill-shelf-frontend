@@ -92,25 +92,33 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
             {/* Logo */}
-            <Link href="/">
-              <div className="flex items-center gap-1">
-                <Image
-                  src={footerLogo}
-                  width={44}
-                  height={44}
-                  alt="logo"
-                  className="w-[30px] h-[30px] md:w-[60px] md:h-[60px]"
-                />
-                <p className="flex items-center leading-none">
-                  <span className="text-[1.7rem] md:text-[2rem] font-extrabold bg-gradient-to-r from-[#4F8EF7] to-[#7B3FE4] bg-clip-text text-transparent font-[family-name:var(--font-nunito)]">
-                    Skill
-                  </span>
-                  <span className="text-[1.7rem] md:text-[2rem] font-extrabold bg-gradient-to-r from-[#FF8C00] to-[#F5C518] bg-clip-text text-transparent font-[family-name:var(--font-nunito)]">
-                    Shelf
-                  </span>
-                </p>
-              </div>
-            </Link>
+            <div>
+              <Link href="/">
+                <div className="flex items-center gap-1">
+                  <Image
+                    src={footerLogo}
+                    width={44}
+                    height={44}
+                    alt="logo"
+                    className="w-[30px] h-[30px] md:w-[60px] md:h-[60px]"
+                  />
+                  <p className="flex items-center leading-none">
+                    <span className="text-[1.7rem] md:text-[2rem] font-extrabold bg-gradient-to-r from-[#4F8EF7] to-[#7B3FE4] bg-clip-text text-transparent font-[family-name:var(--font-nunito)]">
+                      Skill
+                    </span>
+                    <span className="text-[1.7rem] md:text-[2rem] font-extrabold bg-gradient-to-r from-[#FF8C00] to-[#F5C518] bg-clip-text text-transparent font-[family-name:var(--font-nunito)]">
+                      Shelf
+                    </span>
+                  </p>
+                </div>
+              </Link>
+
+              <p className="text-white/60 text-sm">
+                Discover top-tier course modules, digital books, and interactive
+                learning tools designed to boost your professional career and
+                personal growth.
+              </p>
+            </div>
 
             {/* Products */}
             <div>
@@ -127,7 +135,7 @@ export default function Footer() {
                   <li key={item.name}>
                     <a
                       href={item.href}
-                      className="text-white hover:text-violet-400 text-xs"
+                      className="text-white/70 hover:text-violet-400 text-xs"
                     >
                       {item.name}
                     </a>
@@ -149,7 +157,7 @@ export default function Footer() {
                   <li key={item}>
                     <a
                       href="#"
-                      className="text-white hover:text-violet-400 text-xs"
+                      className="text-white/70 hover:text-violet-400 text-xs"
                     >
                       {item}
                     </a>
@@ -163,14 +171,14 @@ export default function Footer() {
               <h4 className="text-white font-semibold text-lg mb-2">
                 Stay Updated
               </h4>
-              <p className="text-white text-xs mb-4">
+              <p className="text-white/70 text-xs mb-4">
                 Get the latest products and offers.
               </p>
             </div>
           </div>
 
           {/* bottom */}
-          <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between text-xs text-white">
+          <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between text-xs text-white/70">
             <p>© 2026 PLR Store. All rights reserved.</p>
 
             <div className="flex gap-5">

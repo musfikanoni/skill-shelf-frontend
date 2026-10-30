@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Home, ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import logoImg from "@/assets/images/logo.png";
 
 export default function NotFound() {
   const router = useRouter();
@@ -93,7 +94,7 @@ export default function NotFound() {
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col items-center gap-4">
            <div className="flex items-center gap-4">
               <Image 
-                src="/images/navbarImg/logo.png"
+                src={logoImg}
                 alt="Logo"
                 width={40}
                 height={40}
