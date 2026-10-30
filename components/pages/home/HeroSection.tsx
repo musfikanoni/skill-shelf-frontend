@@ -2,6 +2,8 @@
 import { useRouter } from "next/navigation";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import SecondaryButton from "../../shared/secondaryButton/SecondaryButton";
+import Image from "next/image";
+import heroBgColor from '@/assets/images/home/herobg.png';
 
 const HeroSection = () => {
   const router = useRouter();
@@ -13,9 +15,10 @@ const HeroSection = () => {
   return (
     <section className="relative w-full min-h-screen overflow-hidden">
       <div className="absolute inset-0">
-        <img
-          src="/images/heroImg/heroBgColor.png"
+        <Image
+          src={heroBgColor}
           alt="hero"
+          fill
           className="w-full h-full object-cover object-right"
         />
       </div>
