@@ -168,7 +168,7 @@ export default function MyCoursesPage() {
             </p>
           </div>
 
-          <Link href={"/dashboard/membership"}>
+          <Link href={"/user-dashboard/membership"}>
             <Button className="w-full sm:w-auto bg-yellow-400 hover:bg-yellow-500 text-[#1E293B] font-extrabold rounded-xl px-6 md:px-8 h-11 md:h-12 shadow-xl flex items-center justify-center gap-2 group transition-all text-sm md:text-base">
               Upgrade Now
               <ChevronRight className="h-4 w-4 md:h-5 md:w-5 transition-transform group-hover:translate-x-1" />

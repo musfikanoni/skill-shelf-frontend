@@ -39,13 +39,23 @@ const Navbar = () => {
     }, 1500);
   };
 
+  // const handleDashboard = () => {
+  //   if (user?.role === "SUPER_ADMIN") {
+  //     router.push("/admin-dashboard");
+  //   } else {
+  //     router.push("/dashboard");
+  //   }
+  // };
+
   const handleDashboard = () => {
-    if (user?.role === "SUPER_ADMIN") {
-      router.push("/admin-dashboard");
-    } else {
-      router.push("/dashboard");
-    }
-  };
+  if (user?.role === "USER") {
+    router.push("/user-dashboard");
+  } else if (user?.role === "SUPER_ADMIN" || user?.role === "ADMIN") {
+    router.push("/admin-dashboard");
+  } else {
+    toast.error("Unauthorized user role");
+  }
+};
 
   return (
     <div className="sticky top-0 left-0 w-full z-50 px-3 lg:px-12 border-b border-[#5f5b5bcc] bg-black py-5">

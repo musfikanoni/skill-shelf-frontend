@@ -116,19 +116,19 @@ const stats = [
             </p>
           </div>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 w-full xl:w-auto">
-            <Link href={"/dashboard/my-courses"}>
+            <Link href={"/user-dashboard/my-courses"}>
               <Button className="w-full sm:w-auto bg-[#6C3FC5] text-white rounded-md h-11 md:h-12 px-6 font-bold shadow-md shadow-indigo-100">
                 <PlayCircle className="mr-2 h-5 w-5 fill-white/20" />
                 Continue Course
               </Button>
             </Link>
-            <Link href={"/dashboard/downloads"}>
+            <Link href={"/user-dashboard/downloads"}>
               <Button variant="outline" className="w-full sm:w-auto border-slate-200 text-slate-600 rounded-md h-11 md:h-12 px-6 font-bold bg-white hover:bg-slate-50 transition-all">
                 <Download className="mr-2 h-5 w-5 text-slate-400" />
                 Download Products
               </Button>
             </Link>
-            <Link href={"/dashboard/membership"}>
+            <Link href={"/user-dashboard/membership"}>
               <Button variant="outline" className="w-full sm:w-auto border-slate-200 text-slate-600 rounded-md h-11 md:h-12 px-6 font-bold bg-white hover:bg-slate-50 transition-all">
                 <Zap className="mr-2 h-5 w-5 text-slate-400" />
                 Upgrade Membership
@@ -162,7 +162,7 @@ const stats = [
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-extrabold text-[#1E293B]">Recent Purchases</h3>
-          <Link  href={"/dashboard/my-orders"}>
+          <Link  href={"/user-dashboard/my-orders"}>
             <Button variant="link" className="text-[#6366F1] text-xs font-bold p-0 h-auto">
               View all orders
             </Button>

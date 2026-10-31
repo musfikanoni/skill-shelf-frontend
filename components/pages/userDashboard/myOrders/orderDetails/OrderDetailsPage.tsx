@@ -111,7 +111,7 @@ export default function OrderDetailsPage() {
     <div className="space-y-6 pb-10">
       {/* Back Button */}
       <Link
-        href="/dashboard/my-orders"
+        href="/user-dashboard/my-orders"
         className="flex items-center gap-2 text-slate-400 hover:text-[#1E293B] font-medium text-sm transition-colors group w-fit"
       >
         <ArrowLeft className="h-4 w-4" />
@@ -210,7 +210,7 @@ export default function OrderDetailsPage() {
                   </div>
                 </div>
 
-                <Link href={"/dashboard/downloads"}>
+                <Link href={"/user-dashboard/downloads"}>
                   <Button
                     // onClick={handleDownloadInvoice}
                     className="bg-[#F5C518] hover:bg-[#E5B508] text-black font-bold rounded-lg h-11 px-6 shadow-md shadow-yellow-100 gap-2 shrink-0"

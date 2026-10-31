@@ -38,9 +38,11 @@ export default function MyOrdersPage() {
     return () => clearTimeout(handler);
   }, [searchTerm]);
 
-  const { data: getMyOrdersData, isLoading, error } = useGetMyOrdersQuery(
-    debouncedSearchTerm || undefined,
-  );
+  const {
+    data: getMyOrdersData,
+    isLoading,
+    error,
+  } = useGetMyOrdersQuery(debouncedSearchTerm || undefined);
 
   const orders = getMyOrdersData?.data || [];
   // console.log("get-------", orders)
@@ -98,9 +100,7 @@ export default function MyOrdersPage() {
           </div>
 
           <DropdownMenu>
-            <DropdownMenuTrigger
-              className="h-11 border border-slate-200 rounded-xl gap-2 font-bold text-slate-600 bg-white hover:bg-slate-50 min-w-[120px] inline-flex items-center justify-center px-4 text-sm"
-            >
+            <DropdownMenuTrigger className="h-11 border border-slate-200 rounded-xl gap-2 font-bold text-slate-600 bg-white hover:bg-slate-50 min-w-[120px] inline-flex items-center justify-center px-4 text-sm">
               <Filter className="h-4 w-4" />
               {filter}
               <ChevronDown className="h-4 w-4 ml-auto opacity-50" />
@@ -223,7 +223,7 @@ export default function MyOrdersPage() {
                     </TableCell>
                     <TableCell className="py-5 text-right pr-6">
                       <div className="flex items-center justify-end gap-2">
-                        <Link href={`/dashboard/my-orders/${order._id}`}>
+                        <Link href={`/my-orders/${order._id}`}>
                           <Button
                             variant="outline"
                             size="sm"
@@ -298,7 +298,7 @@ export default function MyOrdersPage() {
             Unlock dedicated account managers and 24/7 priority support for your
             entire organization.
           </p>
-          <Link href={"/dashboard/membership"}>
+          <Link href={"/user-dashboard/membership"}>
             <Button className="bg-white text-[#6C3FC5] hover:bg-white/90 font-extrabold rounded-lg px-8 h-12 shadow-sm transition-all text-sm">
               Upgrade Now
             </Button>
@@ -313,7 +313,6 @@ export default function MyOrdersPage() {
           </svg>
         </div>
       </div>
-
     </div>
   );
 }

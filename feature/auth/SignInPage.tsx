@@ -56,14 +56,15 @@ export default function SignInPage() {
         Cookies.set("refreshToken", response.data.refreshToken);
 
         toast.success("Login successful");
+        router.push("/");
 
-        const role = response?.data?.user?.role;
+        // const role = response?.data?.user?.role;
 
-        if (role === "SUPER_ADMIN") {
-          router.push("/admin-dashboard");
-        } else {
-          router.push("/dashboard");
-        }
+        // if (role === "SUPER_ADMIN") {
+        //   router.push("/admin-dashboard");
+        // } else {
+        //   router.push("/dashboard");
+        // }
       }
     } catch (error: any) {
       console.error(error);

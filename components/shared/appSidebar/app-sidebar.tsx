@@ -44,22 +44,22 @@ const data = {
     navMain: [
       {
         title: "Dashboard",
-        url: "/dashboard",
+        url: "/user-dashboard",
         icon: LayoutGrid,
       },
       {
         title: "My Orders",
-        url: "/dashboard/my-orders",
+        url: "/user-dashboard/my-orders",
         icon: ShoppingCart,
       },
       {
         title: "Downloads",
-        url: "/dashboard/downloads",
+        url: "/user-dashboard/downloads",
         icon: Download,
       },
       {
         title: "My Courses",
-        url: "/dashboard/my-courses",
+        url: "/user-dashboard/my-courses",
         icon: GraduationCap,
       },
       // {
@@ -69,19 +69,19 @@ const data = {
       // },
       {
         title: "Membership",
-        url: "/dashboard/membership",
+        url: "/user-dashboard/membership",
         icon: Award,
       },
       {
         title: "Affiliate",
-        url: "/dashboard/affiliate",
+        url: "/user-dashboard/affiliate",
         icon: Users,
       },
     ],
     navSecondary: [
       {
         title: "Settings",
-        url: "/dashboard/settings",
+        url: "/user-dashboard/settings",
         icon: Settings,
       },
     ],
@@ -135,14 +135,19 @@ const data = {
         url: "/admin-dashboard/courses",
         icon: BookOpen,
       },
-    ],
-    navSecondary: [
       {
         title: "Settings",
         url: "/admin-dashboard/settings",
         icon: Settings,
       },
     ],
+    // navSecondary: [
+    //   {
+    //     title: "Settings",
+    //     url: "/admin-dashboard/settings",
+    //     icon: Settings,
+    //   },
+    // ],
   },
 };
 
@@ -184,7 +189,7 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
       </SidebarHeader>
       <SidebarContent className="px-4">
         <SidebarMenu className="gap-2">
-          {sidebarData?.navMain.map((item) => {
+          {/* {sidebarData?.navMain.map((item) => {
             // const isActive =
             //   pathname === item.url ||
             //   (item.url !== "/dashboard" && pathname.startsWith(item.url));
@@ -213,13 +218,45 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
             );
+          })} */}
+
+          {sidebarData?.navMain.map((item) => {
+            const isDashboardRoute =
+              item.url === "/user-dashboard" || item.url === "/admin-dashboard";
+
+            const isActive = isDashboardRoute
+              ? pathname === item.url
+              : pathname === item.url || pathname.startsWith(`${item.url}/`);
+
+            return (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton
+                  render={<Link href={item.url} />}
+                  isActive={isActive}
+                  className={`h-12 rounded-lg transition-all duration-200 px-4 gap-3 ${
+                    isActive
+                      ? "bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black shadow-md hover:from-[#F9C32C] hover:to-[#EFA00B] hover:text-black"
+                      : "bg-[#F8FAFC] text-slate-500 hover:bg- hover:text-[#B77900] hover:shadow-sm"
+                  }`}
+                >
+                  <item.icon
+                    className={`h-5 w-5 ${
+                      isActive
+                        ? "text-black"
+                        : "text-slate-500 group-hover:text-[#B77900]"
+                    }`}
+                  />
+                  <span className="font-semibold">{item.title}</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            );
           })}
         </SidebarMenu>
 
         <div className="my-6 px-2">
           <SidebarSeparator className="bg-slate-100" />
         </div>
-
+{/* 
         <SidebarMenu>
           {sidebarData?.navSecondary.map((item) => {
             const isActive = pathname === item.url;
@@ -228,10 +265,11 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
                 <SidebarMenuButton
                   render={<Link href={item.url} />}
                   isActive={isActive}
-                  className={`h-12 rounded-lg transition-all duration-200 px-4 gap-3 ${isActive
-                    ? "bg-linear-to-r from-[#F9C32C] to-[#EFA00B] text-black shadow-md"
-                    : "bg-[#F8FAFC] text-slate-500 hover:bg-slate-100 hover:text-slate-900"
-                    }`}
+                  className={`h-12 rounded-lg transition-all duration-200 px-4 gap-3 ${
+                    isActive
+                      ? "bg-linear-to-r from-[#F9C32C] to-[#EFA00B] text-black shadow-md"
+                      : "bg-[#F8FAFC] text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                  }`}
                 >
                   <item.icon
                     className={`h-5 w-5 ${isActive ? "text-black" : "text-slate-500"}`}
@@ -241,7 +279,7 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
               </SidebarMenuItem>
             );
           })}
-        </SidebarMenu>
+        </SidebarMenu> */}
       </SidebarContent>
 
       <SidebarFooter className="p-4 mt-auto">

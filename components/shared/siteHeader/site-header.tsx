@@ -8,6 +8,7 @@ import { useGetMeQuery } from "@/redux/api/getMe/getMeApi"
 export function SiteHeader() {
   const { data: userData, isLoading } = useGetMeQuery("");
   const user = userData?.data;
+  console.log("----------", user)
 
   // Format name to get first name for the welcome message
   const firstName = user?.name ? user.name.split(' ')[0] : "User";
@@ -34,10 +35,10 @@ export function SiteHeader() {
             <h2 className="text-lg md:text-2xl font-extrabold text-[#1E293B] truncate">
               Welcome back, {firstName}!
             </h2>
-            <div className="hidden sm:flex items-center gap-1 bg-[#FFF1F2] text-[#E11D48] px-2 md:px-3 py-0.5 md:py-1 rounded-full border border-[#FFE4E6] shrink-0">
+            {/* <div className="hidden sm:flex items-center gap-1 bg-[#FFF1F2] text-[#E11D48] px-2 md:px-3 py-0.5 md:py-1 rounded-full border border-[#FFE4E6] shrink-0">
               <Star className="h-2.5 md:h-3 w-2.5 md:w-3 fill-[#E11D48]" />
               <span className="text-[8px] md:text-[10px] font-bold tracking-wider uppercase">Pro Member</span>
-            </div>
+            </div> */}
           </div>
           <p className="hidden md:block text-sm text-slate-400 font-medium">
             Here is what is happening with your account today.
@@ -47,10 +48,10 @@ export function SiteHeader() {
       
       <div className="flex items-center gap-2 md:gap-4 shrink-0">
         {/* Notification Bell */}
-        <div className="relative flex items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-xl border border-slate-200 bg-white shadow-sm cursor-pointer hover:bg-slate-50 transition-colors">
+        {/* <div className="relative flex items-center justify-center h-10 w-10 md:h-11 md:w-11 rounded-xl border border-slate-200 bg-white shadow-sm cursor-pointer hover:bg-slate-50 transition-colors">
           <Bell className="h-5 w-5 text-slate-600" />
           <span className="absolute top-2.5 right-2.5 h-2 w-2 md:h-2.5 md:w-2.5 bg-[#FACC15] rounded-full border-2 border-white"></span>
-        </div>
+        </div> */}
         
         {/* User Profile */}
         <div className="flex items-center gap-2 md:gap-3 bg-white pl-1 md:pl-1.5 pr-2 md:pr-4 py-1 md:py-1.5 rounded-xl border border-slate-200 shadow-sm cursor-pointer hover:bg-slate-50 transition-colors">
