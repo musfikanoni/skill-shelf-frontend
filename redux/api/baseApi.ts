@@ -4,8 +4,8 @@ import Cookies from "js-cookie";
 
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: `http://localhost:7000/api/v1`,
-    // baseUrl: `https://skill-shelf-backend.vercel.app/api/v1/`,
+    // baseUrl: `http://localhost:7000/api/v1`,
+    baseUrl: `https://skill-shelf-backend.vercel.app/api/v1/`,
 
     credentials: "include",
     prepareHeaders: (headers) => {
