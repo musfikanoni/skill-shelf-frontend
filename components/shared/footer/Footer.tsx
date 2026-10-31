@@ -179,7 +179,7 @@ export default function Footer() {
 
           {/* bottom */}
           <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between text-xs text-white/70">
-            <p>© 2026 PLR Store. All rights reserved.</p>
+            <p>© 2026 SkillShelf. All rights reserved.</p>
 
             <div className="flex gap-5">
               {["Privacy", "Terms", "Refund Policy"].map((item) => (

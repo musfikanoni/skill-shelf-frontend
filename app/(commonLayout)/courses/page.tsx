@@ -3,8 +3,10 @@ import FeaturedCourses from "@/components/pages/home/FeaturedCourses";
 import PageHeader from "@/components/shared/pageHeader/PageHeader";
 import UpgradeBanner from "@/components/shared/upgradeBanner/UpgradeBanner";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const CoursesPage = () => {
+  const router = useRouter();
   return (
     <div>
       <PageHeader
@@ -25,7 +27,7 @@ const CoursesPage = () => {
         title="Get Unlimited Course Access"
         subtitle="VIP members get access to all current and future courses"
         buttonText="Upgrade to VIP"
-        onClick={() => console.log("click")}
+       onClick={() => router.push("/membership")}
       />
     </div>
   );

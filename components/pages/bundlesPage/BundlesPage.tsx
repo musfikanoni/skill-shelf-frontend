@@ -3,8 +3,10 @@ import PopulaProductSection from "@/components/pages/home/PopulaProductSection";
 import PageHeader from "@/components/shared/pageHeader/PageHeader";
 import UpgradeBanner from "@/components/shared/upgradeBanner/UpgradeBanner";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function BundlesPage() {
+  const router = useRouter();
   return (
     <div>
       <PageHeader
@@ -24,7 +26,7 @@ export default function BundlesPage() {
         title="Want Everything?"
         subtitle="Get unlimited access to all bundles with VIP membership"
         buttonText="Explore VIP Membership"
-        onClick={() => console.log("click")}
+        onClick={() => router.push("/membership")}
       />
     </div>
   );

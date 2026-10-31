@@ -6,25 +6,25 @@ import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useSignUpMutation } from "@/redux/api/auth/AuthApi";
 import CustomInput from "@/ui/CustomeInput";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
-const formSchema = z
-  .object({
-    name: z.string().min(1, { message: "Name is required" }),
-    email: z
-      .string()
-      .email({ message: "Please enter a valid company email address" })
-      .min(1, { message: "Company email is required" }),
-    password: z
-      .string()
-      .min(6, { message: "Password should be at least 6 characters long" })
-      .min(1, { message: "Password is required" }),
-    referredByCode: z.string().optional(),
-  });
+const formSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z
+    .string()
+    .email({ message: "Please enter a valid company email address" })
+    .min(1, { message: "Company email is required" }),
+  password: z
+    .string()
+    .min(6, { message: "Password should be at least 6 characters long" })
+    .min(1, { message: "Password is required" }),
+  referredByCode: z.string().optional(),
+});
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -48,14 +48,14 @@ export default function SignUpPage() {
 
   const onSubmit = async (data: FormValues) => {
     localStorage.setItem("email", data.email);
-    console.log("Form Data:", data);  
+    console.log("Form Data:", data);
 
-    const payload = { 
+    const payload = {
       name: data.name,
       email: data.email,
       password: data.password,
       referredByCode: data.referredByCode,
-    };  
+    };
 
     try {
       const response = await signUp(payload).unwrap();
@@ -71,17 +71,30 @@ export default function SignUpPage() {
   return (
     <AuthBackground>
       <div className="max-w-[540px] lg:w-[540px] h-auto mx-auto bg-[#FFF] p-6 rounded-2xl">
+        <button
+          type="button"
+          onClick={() => router.push("/")}
+          className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-red-50 hover:text-red-500 transition-all duration-200"
+          aria-label="Close login"
+        >
+          <X size={20} />
+        </button>
         <Logo />
         <h3 className="font-bold text-3xl mb-6 bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] bg-clip-text text-transparent text-center mt-4">
           Welcome
         </h3>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
-
           <CustomInput
             id="name"
             label="Full Name"
             placeholder="Enter your Full Name"
-            leftIcon={<img src="/images/authImage/man.png" alt="icon" className="w-5 h-5" />}
+            leftIcon={
+              <img
+                src="/images/authImage/man.png"
+                alt="icon"
+                className="w-5 h-5"
+              />
+            }
             error={errors.name?.message}
             {...register("name")}
           />
@@ -91,7 +104,13 @@ export default function SignUpPage() {
             type="email"
             label="Email"
             placeholder="Enter your Email"
-            leftIcon={<img src="/images/authImage/mailIcon.png" alt="icon" className="w-5 h-5" />}
+            leftIcon={
+              <img
+                src="/images/authImage/mailIcon.png"
+                alt="icon"
+                className="w-5 h-5"
+              />
+            }
             error={errors.email?.message}
             {...register("email")}
           />
@@ -101,7 +120,13 @@ export default function SignUpPage() {
             type="password"
             label="Password"
             placeholder="Enter your password"
-            leftIcon={<img src="/images/authImage/passwordIcon.png" alt="icon" className="w-5 h-5" />}
+            leftIcon={
+              <img
+                src="/images/authImage/passwordIcon.png"
+                alt="icon"
+                className="w-5 h-5"
+              />
+            }
             showPasswordToggle={true}
             error={errors.password?.message}
             {...register("password")}
@@ -120,10 +145,15 @@ export default function SignUpPage() {
 
         <div className="text-center mb-3 mt-3 text-[16px] text-[#1E1E1E]">
           Already have an account?{" "}
-          <Link href="/signIn" className="bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] bg-clip-text text-transparent text-[16px] font-semibold hover:underline">
+          <Link
+            href="/signIn"
+            className="bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] bg-clip-text text-transparent text-[16px] font-semibold hover:underline"
+          >
             Sign In!
           </Link>
-          <p className="mt-4">© 2026 PLR Store. All rights reserved.</p>
+          <p className="mt-4 text-sm">
+            © 2026 SkillShelf. All rights reserved.
+          </p>
         </div>
       </div>
     </AuthBackground>

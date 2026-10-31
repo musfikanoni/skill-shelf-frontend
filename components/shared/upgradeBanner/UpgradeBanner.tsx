@@ -27,12 +27,12 @@ const UpgradeBanner: React.FC<UpgradeBannerProps> = ({
                 <p className="text-purple-200 text-sm mb-6">
                     {subtitle}
                 </p>
-
-                <SecondaryButton
-                    label={buttonText}
-                    onClick={onClick}
-                    iconPosition="right"
-                />
+         
+                    <SecondaryButton
+                        label={buttonText}
+                        onClick={onClick}
+                        iconPosition="right"
+                    />
 
                 <div className="absolute bottom-0 left-0 w-full h-[2px] 
                  bg-gradient-to-r from-transparent via-cyan-400
