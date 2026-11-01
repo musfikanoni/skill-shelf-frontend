@@ -7,7 +7,6 @@ export default function Success() {
   return (
     <AuthBackground>
       <div className="max-w-[540px] lg:w-[540px] h-auto mx-auto bg-[#FFF] p-8 md:p-12 rounded-2xl flex flex-col items-center">
-        
         {/* Yellow Circle with Shield */}
         <div className="relative mb-8 mt-4">
           {/* Main yellow circle */}
@@ -21,7 +20,7 @@ export default function Success() {
               <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm4.7 8.7l-5.7 5.7c-.4.4-1 .4-1.4 0l-2.6-2.6c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0l1.9 1.9 5-5c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4z" />
             </svg>
           </div>
-          
+
           {/* Decorative yellow dots */}
           <div className="absolute top-[-5px] right-[-15px] w-2.5 h-2.5 bg-[#F5C518] rounded-full"></div>
           <div className="absolute top-[5px] left-[-20px] w-3 h-3 bg-[#F5C518] rounded-full"></div>
@@ -37,18 +36,35 @@ export default function Success() {
             Congratulations!
           </h1>
           <p className="text-[15px] md:text-[16px] text-[#6B7280]">
-            You have successfully Sign Up .
+            Your payment has been successful.
           </p>
         </div>
 
-        {/* Spinner */}
-        <div className="mb-4">
-          <div className="w-12 h-12 rounded-full animate-spin border-[4px] border-solid border-[#F5C518] border-t-transparent"></div>
+        {/* Success Checkmark */}
+        <div className="mb-4 w-12 h-12 rounded-full bg-green-500 flex items-center justify-center shadow-[0_4px_14px_0_rgba(34,197,94,0.3)] animate-[bounce_1s_ease-in-out_1]">
+          <svg
+            className="w-7 h-7 text-white"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeDasharray="30"
+              strokeDashoffset="30"
+              className="animate-[checkmark_0.5s_ease-out_0.3s_forwards]"
+              d="M5 12l5 5L20 7"
+            />
+          </svg>
         </div>
+        
         <Link href="/">
-        <button className="text-black rounded-lg bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] px-6 py-2 cursor-pointer">Go to Home</button>
+          <button className="text-black rounded-lg bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] px-6 py-2 cursor-pointer">
+            Go to Home
+          </button>
         </Link>
-
       </div>
     </AuthBackground>
   );

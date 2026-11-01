@@ -15,18 +15,23 @@ import { toast } from "sonner";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import AuthBackground from "@/components/shared/auth/AuthBackground";
 import Logo from "@/components/shared/Logo";
+import { X } from "lucide-react";
 
 interface OtpFormValues {
   otp: string[];
 }
 
 export default function OtpVerification() {
-  const { register, handleSubmit, setValue, formState: { errors } } =
-    useForm<OtpFormValues>({
-      defaultValues: {
-        otp: ["", "", "", ""],
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<OtpFormValues>({
+    defaultValues: {
+      otp: ["", "", "", ""],
+    },
+  });
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -34,9 +39,11 @@ export default function OtpVerification() {
 
   const [activeInput, setActiveInput] = useState(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [verifyEmail, { isLoading: isVerifyLoading }] = useVerifyEmailMutation();
+  const [verifyEmail, { isLoading: isVerifyLoading }] =
+    useVerifyEmailMutation();
   const [resendCode] = useResendCodeMutation();
-  const [resetVerifyOtp, { isLoading: isForgetLoading }] = useResetVerifyOtpMutation();
+  const [resetVerifyOtp, { isLoading: isForgetLoading }] =
+    useResetVerifyOtpMutation();
   const [forgetResendOtp] = useForgetResendOtpMutation();
 
   const [timeLeft, setTimeLeft] = useState(() => {
@@ -68,17 +75,16 @@ export default function OtpVerification() {
 
   const handleResendOTP = () => {
     const email = localStorage.getItem("email");
-    localStorage.setItem("otpTimer", "120"); 
-    setTimeLeft(120); 
+    localStorage.setItem("otpTimer", "120");
+    setTimeLeft(120);
     console.log("Resending OTP...");
-    
+
     if (type === "forget-password") {
       forgetResendOtp({ email });
     } else {
       resendCode({ email });
     }
   };
-
 
   useEffect(() => {
     if (inputRefs.current[0]) {
@@ -116,14 +122,14 @@ export default function OtpVerification() {
       }
     } catch (error: any) {
       toast.error(
-        error?.data?.message || "Verification failed. Please try again."
+        error?.data?.message || "Verification failed. Please try again.",
       );
     }
   };
 
   const handleInputChange = (
     index: number,
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const value = e.target.value;
     if (value.length > 1) return;
@@ -137,7 +143,7 @@ export default function OtpVerification() {
 
   const handleKeyDown = (
     index: number,
-    e: React.KeyboardEvent<HTMLInputElement>
+    e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
     if (
       e.key === "Backspace" &&
@@ -172,13 +178,21 @@ export default function OtpVerification() {
 
       setActiveInput(3);
       inputRefs.current[3]?.focus();
-
     }
   };
 
   return (
     <AuthBackground>
       <div className="max-w-[540px] lg:w-[540px] h-auto mx-auto bg-[#FFF] p-8 rounded-2xl flex flex-col items-center">
+        {/* Close Button */}
+        <button
+          type="button"
+          onClick={() => router.push("/")}
+          className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-red-50 hover:text-red-500 transition-all duration-200"
+          aria-label="Close login"
+        >
+          <X size={20} />
+        </button>
         {/* Logo */}
         <Logo />
         <div className="flex flex-col items-center w-full mb-8">
@@ -206,14 +220,15 @@ export default function OtpVerification() {
                   maxLength={1}
                   className={`h-14 w-14 md:h-[60px] md:w-[60px] rounded-md border text-center text-xl md:text-2xl font-bold text-[#F5C518] bg-transparent
                    focus:border-[#F5C518] focus:outline-none focus:ring-1 focus:ring-[#F5C518] transition-colors
-                   ${activeInput === index || errors.otp?.[index]
-                      ? "border-[#F5C518] ring-1 ring-[#F5C518]"
-                      : "border-gray-200"
-                    }`}
+                   ${
+                     activeInput === index || errors.otp?.[index]
+                       ? "border-[#F5C518] ring-1 ring-[#F5C518]"
+                       : "border-gray-200"
+                   }`}
                   {...rest}
                   ref={(el) => {
-                    ref(el); 
-                    inputRefs.current[index] = el; 
+                    ref(el);
+                    inputRefs.current[index] = el;
                   }}
                   onChange={(e) => handleInputChange(index, e)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
@@ -240,7 +255,11 @@ export default function OtpVerification() {
             )}
           </div>
 
-          <PrimaryButton type="submit" loading={isVerifyLoading || isForgetLoading} text="Verify OTP" />
+          <PrimaryButton
+            type="submit"
+            loading={isVerifyLoading || isForgetLoading}
+            text="Verify OTP"
+          />
         </form>
       </div>
     </AuthBackground>
