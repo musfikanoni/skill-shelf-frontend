@@ -1,12 +1,15 @@
+
 "use client";
-import { Star, CheckCircle2 } from "lucide-react";
+
+import { Star, CheckCircle2, User } from "lucide-react";
 import { useGetReviewsQuery } from "@/redux/api/landingPageApi/LandingPageApi";
 import PageLoading from "../../Others/Loading";
+import Image from "next/image";
 
 interface Testimonial {
   name: string;
   role: string;
-  image: string;
+  image: string | null;
   rating: number;
   text: string;
   verified: boolean;
@@ -24,35 +27,23 @@ export default function OurCustomer() {
     );
   }
 
-  if (error) {
-    return null;
-  }
+  if (error) return null;
 
-  const roles = [
-    "Digital Marketer",
-    "Affiliate Marketer",
-    "Course Creator",
-    "Social Media Expert",
-    "Freelancer",
-    "Entrepreneur",
-  ];
+  const roles = ["User"];
 
-  const testimonials = (reviewsData?.data || []).map(
+  const testimonials: Testimonial[] = (reviewsData?.data || []).map(
     (review: any, index: number) => {
-      const userName = review.user?.name || "Anonymous User";
-      const userImage = `https://i.pravatar.cc/150?u=${review._id || index}`;
-
       return {
-        name: userName,
+        name: review.user?.name || "Anonymous User",
         role: roles[index % roles.length],
-        image: userImage,
-        rating: Math.round(review.rating || 5),
+        image: review.user?.photo || null,
+        rating: Math.min(5, Math.max(0, Math.round(review.rating || 5))),
         text:
           review.comment ||
           "Great products and excellent service! Highly recommended for digital entrepreneurs.",
         verified: true,
       };
-    },
+    }
   );
 
   return (
@@ -77,21 +68,28 @@ export default function OurCustomer() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {testimonials.map((t: Testimonial, index: number) => (
+          {testimonials.map((t, index) => (
             <div
               key={index}
               className="bg-[#f8fafc]/50 rounded-2xl p-8 border border-slate-200 flex flex-col shadow-sm"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="relative w-12 h-12 overflow-hidden rounded-full border-2 border-purple-200">
-                  <img
-                    src={t.image}
-                    alt={t.name}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="relative w-12 h-12 shrink-0 overflow-hidden rounded-full border-2 border-purple-200 bg-purple-50 flex items-center justify-center">
+                  {t.image ? (
+                    <Image
+                      src={t.image}
+                      alt={t.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <User className="w-7 h-7 text-purple-500" />
+                  )}
                 </div>
+
                 <div>
-                  <h4 className="font-bold text-[#0f172a] text-sm">{t.name}</h4>
+                  <h4 className="font-bold text-[#0f172a] text-sm">
+                    {t.name}
+                  </h4>
                   <p className="text-[#64748b] text-[11px] font-medium uppercase tracking-wider">
                     {t.role}
                   </p>
@@ -99,7 +97,7 @@ export default function OurCustomer() {
               </div>
 
               <div className="flex items-center gap-0.5 mb-4">
-                {[...Array(t.rating)].map((_, i: number) => (
+                {[...Array(t.rating)].map((_, i) => (
                   <Star
                     key={i}
                     className="w-4 h-4 fill-[#fbbf24] text-[#fbbf24]"
@@ -108,10 +106,10 @@ export default function OurCustomer() {
               </div>
 
               <p className="text-[#334155] text-sm leading-relaxed mb-8 flex-grow">
-                "{t.text}"
+                &quot;{t.text}&quot;
               </p>
 
-              <div className="h-[1px] bg-slate-200 w-full mb-4"></div>
+              <div className="h-[1px] bg-slate-200 w-full mb-4" />
 
               {t.verified && (
                 <div className="flex items-center gap-2 text-[#22c55e]">

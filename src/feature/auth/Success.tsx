@@ -41,7 +41,7 @@ export default function Success() {
         </div>
 
         {/* Success Checkmark */}
-        <div className="mb-4 w-12 h-12 rounded-full bg-green-500 flex items-center justify-center shadow-[0_4px_14px_0_rgba(34,197,94,0.3)] animate-[bounce_1s_ease-in-out_1]">
+        {/* <div className="mb-4 w-12 h-12 rounded-full bg-green-500 flex items-center justify-center shadow-[0_4px_14px_0_rgba(34,197,94,0.3)] animate-[bounce_1s_ease-in-out_1]">
           <svg
             className="w-7 h-7 text-white"
             fill="none"
@@ -58,7 +58,7 @@ export default function Success() {
               d="M5 12l5 5L20 7"
             />
           </svg>
-        </div>
+        </div> */}
         
         <Link href="/">
           <button className="text-black rounded-lg bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] px-6 py-2 cursor-pointer">

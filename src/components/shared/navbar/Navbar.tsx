@@ -25,7 +25,6 @@ const Navbar = () => {
   const user = userData?.data;
 
   const handleLogOut = () => {
-    toast.success("Logged out successfully");
     setTimeout(() => {
       localStorage.removeItem("persist:root");
       Cookies.remove("accessToken");

@@ -1,4 +1,3 @@
-// import ProductsPage from '@/components/pages/products/ProductsPage';
 
 import ProductsPage from "@/components/pages/adminDashboard/products/ProductsPage";
 
