@@ -39,10 +39,10 @@ export default function ProductsPage() {
     const isTiered = typeof rawPrice === 'object' && rawPrice !== null;
 
     return {
-      id: editingProduct._id,
+      id: editingProduct._id || editingProduct.id,
       name: editingProduct.name || '',
       description: editingProduct.description || '',
-      category: editingProduct.category?._id || editingProduct.category || '',
+      category: editingProduct.category?.name || editingProduct.category?._id || editingProduct.category || '',
       status: (editingProduct.status === 'active' || editingProduct.status === 'Active') ? 'Active' : 'Inactive' as "Active" | "Inactive",
       basicPrice: isTiered ? (rawPrice.basic ?? 0).toString() : (rawPrice ?? editingProduct.basicPrice ?? 0).toString(),
       proPrice: isTiered ? (rawPrice.pro ?? 0).toString() : (editingProduct.proPrice ?? 0).toString(),

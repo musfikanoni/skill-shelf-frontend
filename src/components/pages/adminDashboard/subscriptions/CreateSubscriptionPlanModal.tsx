@@ -119,9 +119,9 @@ export const CreateSubscriptionPlanModal: React.FC<CreateSubscriptionPlanModalPr
         features: data.features.map(f => f.value),
         isActive: data.status === "active",
         access: {
-          products: data.access.products,
-          courses: data.access.courses.map(c => c.value),
-          bundles: data.access.bundles.map(b => b.value)
+          products: (data.access?.products || []).filter(p => p.product && p.product.trim() !== ""),
+          courses: (data.access?.courses || []).map(c => c.value).filter(Boolean),
+          bundles: (data.access?.bundles || []).map(b => b.value).filter(Boolean)
         }
       };
 

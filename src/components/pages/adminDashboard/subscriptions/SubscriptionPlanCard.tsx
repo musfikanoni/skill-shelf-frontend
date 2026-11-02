@@ -47,7 +47,7 @@ export const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
         {features.map((feature, index) => (
           <div key={index} className="flex items-start gap-3">
             <SvgPricingCheck className="w-5 h-5 shrink-0 text-[#00BC7D]" />
-            <div className="justify-start text-primary-black-Color text-xl font-semibold font-dm-sans leading-6">
+            <div className="justify-start text-sm text-black/50 font-dm-sans leading-6">
               {feature}
             </div>
           </div>

@@ -67,8 +67,8 @@ export default function CoursesPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           <CourseStatCard label="Total Courses" value={totalCourses.toString()} variant="slate" />
           <CourseStatCard label="Published" value={publishedCourses.toString()} variant="emerald" />
-          <CourseStatCard label="Total Students" value="2,847" variant="purple" />
-          <CourseStatCard label="Avg Rating" value="4.7" variant="yellow" />
+          {/* <CourseStatCard label="Total Students" value="2,847" variant="purple" />
+          <CourseStatCard label="Avg Rating" value="4.7" variant="yellow" /> */}
         </div>
 
         {/* Create/Edit Course Form Section */}

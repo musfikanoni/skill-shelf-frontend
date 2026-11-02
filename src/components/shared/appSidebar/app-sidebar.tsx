@@ -17,6 +17,7 @@ import {
   Tag,
   BookOpen,
   Handshake,
+  Boxes,
 } from "lucide-react";
 
 import {
@@ -98,6 +99,11 @@ const data = {
         title: "Products",
         url: "/admin-dashboard/products",
         icon: Package,
+      },
+      {
+        title: "Bundles",
+        url: "/admin-dashboard/bundles",
+        icon: Boxes,
       },
       {
         title: "Orders",

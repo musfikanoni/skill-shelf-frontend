@@ -76,13 +76,15 @@ export function CreateProductForm({
   const getInitialCategory = () => {
     const category = initialData?.category;
 
-    const categoryId =
+    const rawCategory =
       typeof category === "object" && category !== null
-        ? category._id || category.id
+        ? category._id || category.id || category.name
         : category;
 
     const matchedCategory = PRODUCT_CATEGORIES.find(
-      (item) => item.id === String(categoryId || "")
+      (item) =>
+        item.id === String(rawCategory || "") ||
+        item.name.toLowerCase() === String(rawCategory || "").toLowerCase()
     );
 
     return matchedCategory?.id || PRODUCT_CATEGORIES[0].id;
@@ -109,6 +111,41 @@ export function CreateProductForm({
       ),
     },
   });
+
+  useEffect(() => {
+    if (initialData) {
+      const category = initialData?.category;
+      const rawCategory =
+        typeof category === "object" && category !== null
+          ? category._id || category.id || category.name
+          : category;
+
+      const matchedCategory = PRODUCT_CATEGORIES.find(
+        (item) =>
+          item.id === String(rawCategory || "") ||
+          item.name.toLowerCase() === String(rawCategory || "").toLowerCase()
+      );
+
+      form.reset({
+        name: initialData.name || "",
+        category: matchedCategory?.id || PRODUCT_CATEGORIES[0].id,
+        status:
+          initialData.status?.toLowerCase() === "inactive"
+            ? "Inactive"
+            : "Active",
+        quantity: String(initialData.quantity ?? 0),
+        basicPrice: String(
+          initialData.price?.basic ?? initialData.basicPrice ?? "0.00"
+        ),
+        proPrice: String(
+          initialData.price?.pro ?? initialData.proPrice ?? "0.00"
+        ),
+        vipPrice: String(
+          initialData.price?.vip ?? initialData.vipPrice ?? "0.00"
+        ),
+      });
+    }
+  }, [initialData, form]);
 
   // Populate existing assets when editing
   useEffect(() => {
@@ -338,7 +375,7 @@ export function CreateProductForm({
                         <SelectItem
                           key={category.id}
                           value={category.id}
-                          className="py-2 px-4"
+                          className="py-2 px-4 cursor-pointer"
                         >
                           {category.name}
                         </SelectItem>

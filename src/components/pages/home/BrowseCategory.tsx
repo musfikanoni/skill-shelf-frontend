@@ -13,8 +13,11 @@ import {
 import { useGetCategoriesQuery } from "@/redux/api/landingPageApi/LandingPageApi";
 import PageLoading from "../../Others/Loading";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { isProductCategory } from "@/constants/productCategory";
 
 const BrowseCategory = () => {
+  const router = useRouter();
   const { data: categoryData, isLoading, error } = useGetCategoriesQuery({});
 
   if (isLoading) {
@@ -49,11 +52,17 @@ const BrowseCategory = () => {
     { bg: "bg-teal-100", color: "text-teal-600" },
   ];
 
-  const categories = (
+  const rawCategories = (
     Array.isArray(categoryData?.data)
       ? categoryData.data
       : categoryData?.data?.data || []
-  ).map((cat: any, index: number) => ({
+  );
+
+  const courseCategories = rawCategories.filter(
+    (cat: any) => !isProductCategory(cat)
+  );
+
+  const categories = courseCategories.map((cat: any, index: number) => ({
     id: cat._id,
     name: cat.name,
     image: cat.image,
@@ -68,7 +77,7 @@ const BrowseCategory = () => {
           Browse by Category
         </h2>
         <p className="text-gray-500 mt-2">
-          Find the perfect products for your niche
+          Explore our expert-led courses across popular categories
         </p>
 
         {/* Categories */}
@@ -78,6 +87,7 @@ const BrowseCategory = () => {
             return (
               <div
                 key={item.id || index}
+                onClick={() => router.push("/courses")}
                 className="bg-white border border-gray-200 rounded-lg p-6 flex flex-col items-center justify-center hover:shadow-md transition cursor-pointer group w-[calc(50%-12px)] sm:w-40 md:w-44 lg:w-44"
               >
                 <div

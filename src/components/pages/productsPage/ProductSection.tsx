@@ -4,15 +4,12 @@ import { useRouter } from 'next/navigation';
 import React, { useState, useMemo } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetProductsQuery } from '@/redux/api/landingPageApi/LandingPageApi';
+import { getProductCategoryName } from '@/constants/productCategory';
 
 interface Product {
     _id: string;
     name: string;
-    category: {
-        _id: string;
-        name: string;
-        image?: string;
-    };
+    category: any;
     images?: string[];
     averageRating: number;
     totalReviews: number;
@@ -33,7 +30,8 @@ export default function ProductSection() {
 
     const filteredProducts = useMemo(() => {
         return products.filter((product: Product) => {
-            const categoryMatch = selectedCategory === 'all' || product.category?.name.toLowerCase() === selectedCategory.toLowerCase();
+            const catName = getProductCategoryName(product.category);
+            const categoryMatch = selectedCategory === 'all' || catName.toLowerCase() === selectedCategory.toLowerCase();
 
             const priceValue = typeof product.price === 'number'
                 ? product.price
@@ -172,7 +170,7 @@ function ProductCard({ product }: { product: Product }) {
             <div className="flex flex-col gap-1.5 px-1">
         
                 <span className="text-[10px] font-bold text-[#4F8AFF] uppercase tracking-wider">
-                    {product.category?.name || 'PLR'}
+                    {getProductCategoryName(product.category)}
                 </span>
 
                 <h3 className="text-base font-bold text-[#1E293B] leading-snug line-clamp-2 min-h-[44px]">

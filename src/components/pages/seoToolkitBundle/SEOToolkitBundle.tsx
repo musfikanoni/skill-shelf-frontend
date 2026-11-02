@@ -144,7 +144,7 @@ export default function SEOToolkitBundle() {
                     {/* Info */}
                     <div className="flex-1 min-w-0">
                         <p className="text-xs font-semibold text-violet-600 uppercase tracking-wider mb-1">
-                            {product.category?.name || 'Bundles'}
+                            {(typeof product.category === 'object' ? product.category?.name : product.category) || 'Bundles'}
                         </p>
                         <h1 className="text-2xl font-bold text-gray-900 leading-tight">{product.name}</h1>
                         <StarRating rating={product.averageRating || 5} count={product.totalReviews || 423} />

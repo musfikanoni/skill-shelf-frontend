@@ -30,6 +30,7 @@ import {
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { cn } from "@/lib/utils";
 import { useDeleteProductMutation, useGetAllProductsQuery } from '@/redux/api/userDashboardApi/productApi';
+import { getProductCategoryName } from '@/constants/productCategory';
 
 const ITEMS_PER_PAGE = 8;
 
@@ -66,7 +67,7 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
       ...p,
       id: p._id,
       name: p.name,
-      categoryName: p.category?.name || 'Uncategorized',
+      categoryName: getProductCategoryName(p.category || p.categoryId),
       basicPrice: typeof p.price === 'number' ? p.price : (p.price?.basic || 0),
       proPrice: typeof p.price === 'number' ? 0 : (p.price?.pro || 0),
       vipPrice: typeof p.price === 'number' ? 0 : (p.price?.vip || 0),

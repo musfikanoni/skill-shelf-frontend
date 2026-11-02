@@ -32,6 +32,7 @@ import {
   useUpdateCourseMutation,
 } from "../../../../redux/api/userDashboardApi/courseApi";
 import { useGetAllCategoriesQuery } from "../../../../redux/api/userDashboardApi/categoryApi";
+import { isProductCategory } from "@/constants/productCategory";
 
 const courseSchema = z.object({
   title: z.string().min(1, "Course title is required"),
@@ -55,7 +56,10 @@ export const CreateCourseForm = ({
   const [createCourse, { isLoading: isCreating }] = useCreateCourseMutation();
   const [updateCourse, { isLoading: isUpdating }] = useUpdateCourseMutation();
   const { data: categoriesData } = useGetAllCategoriesQuery();
-  const categories = categoriesData?.data || [];
+  const categories = React.useMemo(
+    () => (categoriesData?.data || []).filter((cat: any) => !isProductCategory(cat)),
+    [categoriesData]
+  );
 
   const form: UseFormReturn<CourseFormValues> = useForm<CourseFormValues>({
     resolver: zodResolver(courseSchema),

@@ -9,6 +9,7 @@ import * as XLSX from 'xlsx';
 import { Category, CategoryTable } from "@/components/shared/categories/CategoryTable";
 import CategoryModal from "./AddCategoryModal";
 import DeleteModal from "@/components/shared/modals/DeleteModal";
+import { isProductCategory } from "@/constants/productCategory";
 
 export default function CategoriesPage() {
   const { data: categoriesData, isLoading } = useGetAllCategoriesQuery();
@@ -19,7 +20,9 @@ export default function CategoriesPage() {
   const [categoryToDelete, setCategoryToDelete] = useState<Category | null>(null);
 
   const categories = useMemo(() => {
-    return categoriesData?.data?.map((cat: any) => ({
+    return categoriesData?.data
+      ?.filter((cat: any) => !isProductCategory(cat))
+      ?.map((cat: any) => ({
       id: cat._id,
       name: cat.name,
       categoryId: cat._id.slice(-6).toUpperCase(), 
@@ -143,7 +146,7 @@ export default function CategoriesPage() {
         onConfirm={handleConfirmDelete}
         isLoading={isDeleting}
         title="Delete Category"
-        description={`Are you sure you want to delete the category "${categoryToDelete?.name}"? All products under this category will be affected.`}
+        description={`Are you sure you want to delete the category "${categoryToDelete?.name}"? All courses under this category will be affected.`}
       />
     </div>
   );
