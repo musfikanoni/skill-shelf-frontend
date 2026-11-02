@@ -1,9 +1,9 @@
-import MyCoursesPage from '@/components/pages/userDashboard/myCourses/MyCoursesPage'
+import MyOrdersPage from "@/components/pages/userDashboard/myOrders/MyOrdersPage";
 
 export default function MyOrders() {
   return (
     <div>
-        <MyCoursesPage />
+      <MyOrdersPage />
     </div>
-  )
+  );
 }

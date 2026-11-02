@@ -86,6 +86,13 @@ export const landingPageApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    verifyPaymentSession: builder.mutation({
+      query: (sessionId: string) => ({
+        url: `/payment/verify-session?sessionId=${sessionId}`,
+        method: "GET",
+      }),
+      invalidatesTags: ["Orders", "Course", "Subscription", "Dashboard", "User"],
+    }),
   }),
 });
 
@@ -103,4 +110,5 @@ export const {
   useCreateBundleCheckoutMutation,
   useGetProductByIdQuery,
   useCreateOrderCheckoutMutation,
+  useVerifyPaymentSessionMutation,
 } = landingPageApi;

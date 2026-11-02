@@ -141,19 +141,14 @@ const data = {
         url: "/admin-dashboard/courses",
         icon: BookOpen,
       },
+    ],
+    navSecondary: [
       {
         title: "Settings",
         url: "/admin-dashboard/settings",
         icon: Settings,
       },
     ],
-    // navSecondary: [
-    //   {
-    //     title: "Settings",
-    //     url: "/admin-dashboard/settings",
-    //     icon: Settings,
-    //   },
-    // ],
   },
 };
 
@@ -196,9 +191,9 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
       <SidebarContent className="px-4">
         <SidebarMenu className="gap-2">
           {/* {sidebarData?.navMain.map((item) => {
-            // const isActive =
-            //   pathname === item.url ||
-            //   (item.url !== "/dashboard" && pathname.startsWith(item.url));
+           //  const isActive =
+          //     pathname === item.url ||
+         //      (item.url !== "/dashboard" && pathname.startsWith(item.url));
 
             const isDashboardRoute =
               item.url === "/dashboard" || item.url === "/admin-dashboard";
@@ -262,7 +257,7 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
         <div className="my-6 px-2">
           <SidebarSeparator className="bg-slate-100" />
         </div>
-{/* 
+
         <SidebarMenu>
           {sidebarData?.navSecondary.map((item) => {
             const isActive = pathname === item.url;
@@ -285,7 +280,7 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
               </SidebarMenuItem>
             );
           })}
-        </SidebarMenu> */}
+        </SidebarMenu>
       </SidebarContent>
 
       <SidebarFooter className="p-4 mt-auto">

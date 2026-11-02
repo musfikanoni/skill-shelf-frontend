@@ -176,9 +176,12 @@ export const CreateBundleModal: React.FC<CreateBundleModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-[760px]! w-[92vw] p-0 bg-white rounded-2xl shadow-2xl border-none overflow-hidden flex flex-col max-h-[88vh] gap-0">
+      <DialogContent
+        showCloseButton={false}
+        className="sm:max-w-[760px]! max-w-[760px]! w-[92vw]! p-0! bg-white rounded-2xl! shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[88vh] gap-0!"
+      >
         {/* Pinned Header */}
-        <DialogHeader className="px-6 sm:px-8 py-5 border-b border-slate-100 bg-white shrink-0 pr-12">
+        <DialogHeader className="px-6 sm:px-8 py-5 border-b border-slate-100 bg-white shrink-0 flex flex-row items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-2.5 bg-amber-500/10 rounded-full flex items-center justify-center shrink-0">
               <Sparkles className="w-5 h-5 text-[#F59E0B]" />
@@ -194,12 +197,20 @@ export const CreateBundleModal: React.FC<CreateBundleModalProps> = ({
               </DialogDescription>
             </div>
           </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="p-2 -mr-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </DialogHeader>
 
         {/* Form Container */}
         <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden min-h-0">
-          {/* Scrollable Form Body with internal clean scrollbar */}
-          <div className="px-6 sm:px-8 py-6 overflow-y-auto flex-1 space-y-5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-slate-50 [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-400">
+          {/* Scrollable Form Body with internal clean scrollbar strictly inside header & footer */}
+          <div className="px-6 sm:px-8 py-6 overflow-y-auto flex-1 space-y-5 [scrollbar-width:thin] [scrollbar-color:#cbd5e1_transparent] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300">
             {/* Bundle Name & Price */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="md:col-span-2 flex flex-col gap-2">
@@ -211,7 +222,7 @@ export const CreateBundleModal: React.FC<CreateBundleModalProps> = ({
                   placeholder="e.g. Ultimate Web Dev & Design Master Pack"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-100 rounded-lg outline-1 outline-gray-300 text-slate-900 text-sm font-inter focus:outline-amber-500 transition-colors"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm font-inter placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all"
                   required
                 />
               </div>
@@ -227,7 +238,7 @@ export const CreateBundleModal: React.FC<CreateBundleModalProps> = ({
                   placeholder="99.99"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-100 rounded-lg outline-1 outline-gray-300 text-slate-900 text-sm font-inter focus:outline-amber-500 transition-colors"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm font-inter placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all"
                   required
                 />
               </div>
@@ -243,7 +254,7 @@ export const CreateBundleModal: React.FC<CreateBundleModalProps> = ({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={3}
-                className="w-full px-4 py-3 bg-gray-100 rounded-lg outline-1 outline-gray-300 text-slate-900 text-sm font-inter focus:outline-amber-500 resize-none transition-colors"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm font-inter placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 resize-none transition-all"
               />
             </div>
 
@@ -260,7 +271,7 @@ export const CreateBundleModal: React.FC<CreateBundleModalProps> = ({
               </div>
 
               <Select onValueChange={(val: any) => handleAddProduct(val)}>
-                <SelectTrigger className="w-full bg-white py-5 rounded-lg border-gray-300 text-slate-700">
+                <SelectTrigger className="w-full bg-white h-11 px-4 rounded-xl border border-slate-200 text-slate-700 shadow-none hover:bg-slate-50/50">
                   <SelectValue
                     placeholder={
                       productsLoading ? "Loading products..." : "+ Add a product to bundle"
@@ -319,7 +330,7 @@ export const CreateBundleModal: React.FC<CreateBundleModalProps> = ({
               </div>
 
               <Select onValueChange={(val: any) => handleAddCourse(val)}>
-                <SelectTrigger className="w-full bg-white py-5 rounded-lg border-gray-300 text-slate-700">
+                <SelectTrigger className="w-full bg-white h-11 px-4 rounded-xl border border-slate-200 text-slate-700 shadow-none hover:bg-slate-50/50">
                   <SelectValue
                     placeholder={
                       coursesLoading ? "Loading courses..." : "+ Add a course to bundle"
