@@ -170,7 +170,7 @@ export default function UsersPage() {
               </DialogTitle>
               <DialogDescription className="text-slate-500 text-base font-medium leading-relaxed">
                 Are you sure you want to delete this user? This action is
-                permanent and cannot be reversed.
+                permanent and can't be reversed.
               </DialogDescription>
             </DialogHeader>
 

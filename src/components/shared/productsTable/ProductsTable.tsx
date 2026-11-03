@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useState, useMemo, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-import { Search, SquarePen, Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useState, useMemo, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { Search, SquarePen, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -19,7 +19,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 import {
   Dialog,
   DialogContent,
@@ -27,10 +27,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useAdminAuth } from '@/hooks/useAdminAuth';
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { cn } from "@/lib/utils";
-import { useDeleteProductMutation, useGetAllProductsQuery } from '@/redux/api/userDashboardApi/productApi';
-import { getProductCategoryName } from '@/constants/productCategory';
+import {
+  useDeleteProductMutation,
+  useGetAllProductsQuery,
+} from "@/redux/api/userDashboardApi/productApi";
+import { getProductCategoryName } from "@/constants/productCategory";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -39,8 +42,8 @@ interface ProductsTableProps {
 }
 
 export function ProductsTable({ onEdit }: ProductsTableProps) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState<string | null>(null);
@@ -50,13 +53,17 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
 
   useEffect(() => {
     if (!isAuthLoading && !isAuthorized) {
-      toast.error('Unauthorized access. Please login.');
-      router.push('/signIn');
+      toast.error("Unauthorized access. Please login.");
+      router.push("/signIn");
     }
   }, [isAuthorized, isAuthLoading, router]);
 
-  const { data: response, isLoading: isDataLoading, isError } = useGetAllProductsQuery(undefined, {
-    skip: !isAuthorized
+  const {
+    data: response,
+    isLoading: isDataLoading,
+    isError,
+  } = useGetAllProductsQuery(undefined, {
+    skip: !isAuthorized,
   });
 
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
@@ -68,10 +75,10 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
       id: p._id,
       name: p.name,
       categoryName: getProductCategoryName(p.category || p.categoryId),
-      basicPrice: typeof p.price === 'number' ? p.price : (p.price?.basic || 0),
-      proPrice: typeof p.price === 'number' ? 0 : (p.price?.pro || 0),
-      vipPrice: typeof p.price === 'number' ? 0 : (p.price?.vip || 0),
-      displayStatus: 'active'
+      basicPrice: typeof p.price === "number" ? p.price : p.price?.basic || 0,
+      proPrice: typeof p.price === "number" ? 0 : p.price?.pro || 0,
+      vipPrice: typeof p.price === "number" ? 0 : p.price?.vip || 0,
+      displayStatus: "active",
     }));
   }, [response]);
 
@@ -87,7 +94,7 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
       const matchesCategory =
-        selectedCategory === 'all' || product.categoryName === selectedCategory;
+        selectedCategory === "all" || product.categoryName === selectedCategory;
       return matchesSearch && matchesCategory;
     });
   }, [products, searchTerm, selectedCategory]);
@@ -96,14 +103,14 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
   const paginatedProducts = filteredProducts.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    currentPage * ITEMS_PER_PAGE,
   );
 
   const handleEdit = (product: any) => {
     if (onEdit) {
       onEdit(product);
     } else {
-      console.log('Edit product:', product.id);
+      console.log("Edit product:", product.id);
     }
   };
 
@@ -117,11 +124,11 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
 
     try {
       await deleteProduct(idToDelete).unwrap();
-      toast.success('Product deleted successfully');
+      toast.success("Product deleted successfully");
       setIsDeleteDialogOpen(false);
       setIdToDelete(null);
     } catch (error: any) {
-      toast.error(error?.data?.message || 'Failed to delete product');
+      toast.error(error?.data?.message || "Failed to delete product");
     }
   };
 
@@ -175,17 +182,26 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
             />
           </div>
 
-          <Select value={selectedCategory} onValueChange={(value) => {
-            setSelectedCategory(value ?? 'all');
-            setCurrentPage(1);
-          }}>
+          <Select
+            value={selectedCategory}
+            onValueChange={(value) => {
+              setSelectedCategory(value ?? "all");
+              setCurrentPage(1);
+            }}
+          >
             <SelectTrigger className="w-48 !h-14 px-3 py-2 rounded-lg border-2 border-slate-300 shadow-none focus:ring-0 flex justify-between items-center bg-white">
               <SelectValue placeholder="Category" />
             </SelectTrigger>
             <SelectContent sideOffset={6} className="rounded-lg">
-              <SelectItem value="all" className="py-2 px-4">All Categories</SelectItem>
+              <SelectItem value="all" className="py-2 px-4">
+                All Categories
+              </SelectItem>
               {categories.map((category: any) => (
-                <SelectItem key={category} value={category} className="py-2 px-4">
+                <SelectItem
+                  key={category}
+                  value={category}
+                  className="py-2 px-4"
+                >
                   {category}
                 </SelectItem>
               ))}
@@ -199,13 +215,27 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
         <Table>
           <TableHeader className="bg-slate-50 sticky top-0 z-10">
             <TableRow className="h-14 border-b border-slate-200">
-              <TableHead className="pl-6 pr-3 py-3 font-bold text-slate-900 text-start">Product Name</TableHead>
-              <TableHead className="px-6 font-bold text-slate-900 text-start">Category</TableHead>
-              <TableHead className="px-6 font-bold text-slate-900 text-start">Basic Price</TableHead>
-              <TableHead className="px-6 font-bold text-slate-900 text-start">Pro Price</TableHead>
-              <TableHead className="px-6 font-bold text-slate-900 text-start">VIP Price</TableHead>
-              <TableHead className="px-6 font-bold text-slate-900 text-start">Status</TableHead>
-              <TableHead className="px-6 font-bold text-slate-900 text-start">Actions</TableHead>
+              <TableHead className="pl-6 pr-3 py-3 font-bold text-slate-900 text-start">
+                Product Name
+              </TableHead>
+              <TableHead className="px-6 font-bold text-slate-900 text-start">
+                Category
+              </TableHead>
+              <TableHead className="px-6 font-bold text-slate-900 text-start">
+                Basic Price
+              </TableHead>
+              <TableHead className="px-6 font-bold text-slate-900 text-start">
+                Pro Price
+              </TableHead>
+              <TableHead className="px-6 font-bold text-slate-900 text-start">
+                VIP Price
+              </TableHead>
+              <TableHead className="px-6 font-bold text-slate-900 text-start">
+                Status
+              </TableHead>
+              <TableHead className="px-6 font-bold text-slate-900 text-start">
+                Actions
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -232,18 +262,24 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
                   </TableCell>
                   <TableCell className="px-6">
                     <div className="text-slate-900 text-base font-bold font-inter">
-                      {product.proPrice > 0 ? `$${product.proPrice.toLocaleString()}` : '-'}
+                      {product.proPrice > 0
+                        ? `$${product.proPrice.toLocaleString()}`
+                        : "-"}
                     </div>
                   </TableCell>
                   <TableCell className="px-6">
                     <div className="text-slate-900 text-base font-bold font-inter">
-                      {product.vipPrice > 0 ? `$${product.vipPrice.toLocaleString()}` : '-'}
+                      {product.vipPrice > 0
+                        ? `$${product.vipPrice.toLocaleString()}`
+                        : "-"}
                     </div>
                   </TableCell>
                   <TableCell className="px-6">
                     <div className="flex justify-start">
                       <div className="h-7 px-3 py-1 bg-emerald-100 rounded-[10px] flex justify-center items-center">
-                        <span className="text-emerald-700 text-sm font-bold font-inter leading-5">active</span>
+                        <span className="text-emerald-700 text-sm font-bold font-inter leading-5">
+                          active
+                        </span>
                       </div>
                     </div>
                   </TableCell>
@@ -270,7 +306,10 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={7} className="h-32 text-center text-slate-500 font-inter">
+                <TableCell
+                  colSpan={7}
+                  className="h-32 text-center text-slate-500 font-inter"
+                >
                   No products found.
                 </TableCell>
               </TableRow>
@@ -282,7 +321,12 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
       {/* Pagination Footer */}
       <div className="h-20 px-6 border-t border-slate-200 flex items-center justify-between bg-white">
         <div className="text-slate-500 text-sm font-medium font-inter">
-          Showing {paginatedProducts.length > 0 ? (currentPage - 1) * ITEMS_PER_PAGE + 1 : 0} to {Math.min(currentPage * ITEMS_PER_PAGE, filteredProducts.length)} of {filteredProducts.length} entries
+          Showing{" "}
+          {paginatedProducts.length > 0
+            ? (currentPage - 1) * ITEMS_PER_PAGE + 1
+            : 0}{" "}
+          to {Math.min(currentPage * ITEMS_PER_PAGE, filteredProducts.length)}{" "}
+          of {filteredProducts.length} entries
         </div>
 
         <div className="flex items-center gap-2">
@@ -296,16 +340,19 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
           </Button>
 
           <div className="flex gap-1">
-            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => i + 1).map((page) => (
+            {Array.from(
+              { length: Math.min(5, totalPages) },
+              (_, i) => i + 1,
+            ).map((page) => (
               <Button
                 key={page}
-                variant={currentPage === page ? 'default' : 'outline'}
+                variant={currentPage === page ? "default" : "outline"}
                 onClick={() => setCurrentPage(page)}
                 className={cn(
                   "!h-10 w-10 p-0 rounded-lg font-bold",
                   currentPage === page
                     ? "bg-[linear-gradient(180deg,_#F5C518_50%,_#D73200_222.14%)] text-black border-none"
-                    : "border-slate-300 text-slate-700"
+                    : "border-slate-300 text-slate-700",
                 )}
               >
                 {page}
@@ -333,7 +380,8 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
                 Confirm Deletion
               </DialogTitle>
               <DialogDescription className="text-slate-500 text-base font-medium leading-relaxed">
-                Are you sure you want to delete this product? This action is permanent and cannot be reversed.
+                Are you sure you want to delete this product? This action is
+                permanent and can't be reversed.
               </DialogDescription>
             </DialogHeader>
 
@@ -354,7 +402,7 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
                 {isDeleting ? (
                   <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 ) : null}
-                {isDeleting ? 'Deleting...' : 'Delete Product'}
+                {isDeleting ? "Deleting..." : "Delete Product"}
               </Button>
             </div>
           </div>

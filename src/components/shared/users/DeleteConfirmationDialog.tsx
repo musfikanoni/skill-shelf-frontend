@@ -25,7 +25,7 @@ export function DeleteConfirmationDialog({
   onClose,
   onConfirm,
   title = "Are you absolutely sure?",
-  description = "This action cannot be undone. This will permanently delete the record from our servers.",
+  description = "This action can't be undone. This will permanently delete the record from our servers.",
 }: DeleteConfirmationDialogProps) {
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
@@ -34,7 +34,7 @@ export function DeleteConfirmationDialog({
           <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center">
             <Trash2 size={32} />
           </div>
-          
+
           <div className="space-y-2">
             <AlertDialogTitle className="text-xl font-bold text-slate-900 leading-tight">
               {title}
@@ -46,7 +46,7 @@ export function DeleteConfirmationDialog({
         </div>
 
         <AlertDialogFooter className="p-6 bg-slate-50 border-t border-slate-100 flex gap-3 sm:justify-center">
-          <AlertDialogCancel 
+          <AlertDialogCancel
             onClick={onClose}
             className="flex-1 h-11 rounded-xl border-slate-200 text-slate-600 font-bold hover:bg-white transition-all m-0"
           >

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from "react";
 import {
   Search,
   SquarePen,
@@ -10,17 +10,17 @@ import {
   ChevronDown,
   ChevronsUpDown,
   Loader2,
-} from 'lucide-react';
-import { format } from 'date-fns';
+} from "lucide-react";
+import { format } from "date-fns";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
 import {
   Table,
@@ -29,9 +29,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { toast } from 'sonner';
-import { useDeleteCouponMutation } from '@/redux/api/userDashboardApi/couponApi';
+} from "@/components/ui/table";
+import { toast } from "sonner";
+import { useDeleteCouponMutation } from "@/redux/api/userDashboardApi/couponApi";
 import {
   Dialog,
   DialogContent,
@@ -44,7 +44,7 @@ import {
 interface Coupon {
   _id: string;
   code: string;
-  discountType: 'PERCENTAGE' | 'FIXED';
+  discountType: "PERCENTAGE" | "FIXED";
   discountValue: number;
   minOrderAmount: number;
   maxDiscountAmount: number;
@@ -58,10 +58,13 @@ interface CouponsTableProps {
 }
 
 export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedSearch, setDebouncedSearch] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('all');
-  const [sortConfig, setSortConfig] = useState<{ key: keyof Coupon; direction: 'asc' | 'desc' } | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("all");
+  const [sortConfig, setSortConfig] = useState<{
+    key: keyof Coupon;
+    direction: "asc" | "desc";
+  } | null>(null);
 
   // Debounce search
   useEffect(() => {
@@ -78,10 +81,9 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
         .toLowerCase()
         .includes(debouncedSearch.toLowerCase());
 
-      const status = coupon.isActive ? 'active' : 'expired';
+      const status = coupon.isActive ? "active" : "expired";
       const matchesStatus =
-        selectedStatus === 'all' ||
-        status === selectedStatus;
+        selectedStatus === "all" || status === selectedStatus;
 
       return matchesSearch && matchesStatus;
     });
@@ -91,8 +93,8 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
         const aValue = a[sortConfig.key];
         const bValue = b[sortConfig.key];
 
-        if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
-        if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+        if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
+        if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
         return 0;
       });
     }
@@ -103,9 +105,9 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
   const handleSort = (key: keyof Coupon) => {
     setSortConfig((prev) => {
       if (prev?.key === key) {
-        return { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' };
+        return { key, direction: prev.direction === "asc" ? "desc" : "asc" };
       }
-      return { key, direction: 'asc' };
+      return { key, direction: "asc" };
     });
   };
 
@@ -117,7 +119,7 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
     if (onEdit) {
       onEdit(coupon);
     } else {
-      console.log('Edit coupon:', coupon._id);
+      console.log("Edit coupon:", coupon._id);
     }
   };
 
@@ -166,14 +168,23 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
           </div>
 
           {/* Filter */}
-          <Select value={selectedStatus} onValueChange={(value) => setSelectedStatus(value ?? 'all')}>
+          <Select
+            value={selectedStatus}
+            onValueChange={(value) => setSelectedStatus(value ?? "all")}
+          >
             <SelectTrigger className="w-36 !h-14 px-3 py-2 rounded-lg border-2 border-slate-300 shadow-none focus:ring-0 flex justify-between items-center bg-white">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
             <SelectContent sideOffset={6} className="rounded-lg">
-              <SelectItem value="all" className="py-2 px-4">All Status</SelectItem>
-              <SelectItem value="active" className="py-2 px-4">Active</SelectItem>
-              <SelectItem value="expired" className="py-2 px-4">Expired</SelectItem>
+              <SelectItem value="all" className="py-2 px-4">
+                All Status
+              </SelectItem>
+              <SelectItem value="active" className="py-2 px-4">
+                Active
+              </SelectItem>
+              <SelectItem value="expired" className="py-2 px-4">
+                Expired
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -186,12 +197,16 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
             <TableRow className="h-14 bg-slate-50 border-b border-slate-200 hover:bg-slate-50">
               <TableHead
                 className="px-6 text-slate-700 text-base font-bold font-inter leading-6 whitespace-nowrap cursor-pointer hover:bg-slate-100 transition-colors"
-                onClick={() => handleSort('code')}
+                onClick={() => handleSort("code")}
               >
                 <div className="flex items-center gap-2">
                   Code
-                  {sortConfig?.key === 'code' ? (
-                    sortConfig.direction === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                  {sortConfig?.key === "code" ? (
+                    sortConfig.direction === "asc" ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )
                   ) : (
                     <ChevronsUpDown className="w-4 h-4 text-slate-400" />
                   )}
@@ -199,12 +214,16 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
               </TableHead>
               <TableHead
                 className="px-6 text-slate-700 text-base font-bold font-inter leading-6 whitespace-nowrap cursor-pointer hover:bg-slate-100 transition-colors"
-                onClick={() => handleSort('discountType')}
+                onClick={() => handleSort("discountType")}
               >
                 <div className="flex items-center gap-2">
                   Type
-                  {sortConfig?.key === 'discountType' ? (
-                    sortConfig.direction === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                  {sortConfig?.key === "discountType" ? (
+                    sortConfig.direction === "asc" ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )
                   ) : (
                     <ChevronsUpDown className="w-4 h-4 text-slate-400" />
                   )}
@@ -212,12 +231,16 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
               </TableHead>
               <TableHead
                 className="px-6 text-slate-700 text-base font-bold font-inter leading-6 whitespace-nowrap text-center cursor-pointer hover:bg-slate-100 transition-colors"
-                onClick={() => handleSort('discountValue')}
+                onClick={() => handleSort("discountValue")}
               >
                 <div className="flex items-center justify-center gap-2">
                   Discount
-                  {sortConfig?.key === 'discountValue' ? (
-                    sortConfig.direction === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                  {sortConfig?.key === "discountValue" ? (
+                    sortConfig.direction === "asc" ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )
                   ) : (
                     <ChevronsUpDown className="w-4 h-4 text-slate-400" />
                   )}
@@ -225,12 +248,16 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
               </TableHead>
               <TableHead
                 className="px-6 text-slate-700 text-base font-bold font-inter leading-6 whitespace-nowrap text-center cursor-pointer hover:bg-slate-100 transition-colors"
-                onClick={() => handleSort('minOrderAmount')}
+                onClick={() => handleSort("minOrderAmount")}
               >
                 <div className="flex items-center justify-center gap-2">
                   Min/Max Amount
-                  {sortConfig?.key === 'minOrderAmount' ? (
-                    sortConfig.direction === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                  {sortConfig?.key === "minOrderAmount" ? (
+                    sortConfig.direction === "asc" ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )
                   ) : (
                     <ChevronsUpDown className="w-4 h-4 text-slate-400" />
                   )}
@@ -238,12 +265,16 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
               </TableHead>
               <TableHead
                 className="px-6 text-slate-700 text-base font-bold font-inter leading-6 whitespace-nowrap text-center cursor-pointer hover:bg-slate-100 transition-colors"
-                onClick={() => handleSort('expiresAt')}
+                onClick={() => handleSort("expiresAt")}
               >
                 <div className="flex items-center justify-center gap-2">
                   Expiry Date
-                  {sortConfig?.key === 'expiresAt' ? (
-                    sortConfig.direction === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                  {sortConfig?.key === "expiresAt" ? (
+                    sortConfig.direction === "asc" ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )
                   ) : (
                     <ChevronsUpDown className="w-4 h-4 text-slate-400" />
                   )}
@@ -251,24 +282,33 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
               </TableHead>
               <TableHead
                 className="px-6 text-slate-700 text-base font-bold font-inter leading-6 whitespace-nowrap text-center cursor-pointer hover:bg-slate-100 transition-colors"
-                onClick={() => handleSort('isActive')}
+                onClick={() => handleSort("isActive")}
               >
                 <div className="flex items-center justify-center gap-2">
                   Status
-                  {sortConfig?.key === 'isActive' ? (
-                    sortConfig.direction === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                  {sortConfig?.key === "isActive" ? (
+                    sortConfig.direction === "asc" ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )
                   ) : (
                     <ChevronsUpDown className="w-4 h-4 text-slate-400" />
                   )}
                 </div>
               </TableHead>
-              <TableHead className="px-6 text-slate-700 text-base font-bold font-inter leading-6 whitespace-nowrap text-center">Actions</TableHead>
+              <TableHead className="px-6 text-slate-700 text-base font-bold font-inter leading-6 whitespace-nowrap text-center">
+                Actions
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredCoupons.length > 0 ? (
               filteredCoupons.map((coupon) => (
-                <TableRow key={coupon._id} className="h-16 border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                <TableRow
+                  key={coupon._id}
+                  className="h-16 border-b border-slate-200 hover:bg-slate-50 transition-colors"
+                >
                   <TableCell className="px-6">
                     <div className="flex items-center gap-2">
                       <span className="text-slate-900 text-sm font-semibold font-dm-sans leading-4 tracking-wide">
@@ -292,26 +332,36 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
                     <div className="flex justify-center">
                       <div className="h-7 px-3 py-1 bg-purple-100 rounded-[10px] flex justify-center items-center">
                         <span className="text-purple-700 text-sm font-bold font-inter leading-5">
-                          {coupon.discountType === 'PERCENTAGE' ? `${coupon.discountValue}%` : `$${coupon.discountValue}`}
+                          {coupon.discountType === "PERCENTAGE"
+                            ? `${coupon.discountValue}%`
+                            : `$${coupon.discountValue}`}
                         </span>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell className="px-6">
                     <div className="text-center text-slate-900 text-base font-semibold font-inter leading-6">
-                      Min: ${coupon.minOrderAmount} / Max: ${coupon.maxDiscountAmount}
+                      Min: ${coupon.minOrderAmount} / Max: $
+                      {coupon.maxDiscountAmount}
                     </div>
                   </TableCell>
                   <TableCell className="px-6">
                     <div className="text-center text-slate-600 text-base font-normal font-inter leading-6 whitespace-nowrap">
-                      {format(new Date(coupon.expiresAt), 'MMM dd, yyyy')}
+                      {format(new Date(coupon.expiresAt), "MMM dd, yyyy")}
                     </div>
                   </TableCell>
                   <TableCell className="px-6">
                     <div className="flex justify-center">
-                      <div className={`h-7 px-3 py-1 rounded-[10px] flex justify-center items-center ${coupon.isActive ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-700'
-                        }`}>
-                        <span className="text-sm font-bold font-inter leading-5">{coupon.isActive ? 'Active' : 'Expired'}</span>
+                      <div
+                        className={`h-7 px-3 py-1 rounded-[10px] flex justify-center items-center ${
+                          coupon.isActive
+                            ? "bg-emerald-100 text-emerald-700"
+                            : "bg-slate-100 text-slate-700"
+                        }`}
+                      >
+                        <span className="text-sm font-bold font-inter leading-5">
+                          {coupon.isActive ? "Active" : "Expired"}
+                        </span>
                       </div>
                     </div>
                   </TableCell>
@@ -337,7 +387,10 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={7} className="h-32 text-center text-slate-500 font-inter">
+                <TableCell
+                  colSpan={7}
+                  className="h-32 text-center text-slate-500 font-inter"
+                >
                   No coupons found matching your criteria.
                 </TableCell>
               </TableRow>
@@ -357,7 +410,11 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
                 Confirm Deletion
               </DialogTitle>
               <DialogDescription className="text-[#64748B] text-base font-medium leading-relaxed">
-                Are you sure you want to delete the coupon <span className="text-slate-900 font-bold">"{couponToDelete?.code}"</span>? This action cannot be undone.
+                Are you sure you want to delete the coupon{" "}
+                <span className="text-slate-900 font-bold">
+                  "{couponToDelete?.code}"
+                </span>
+                ? This action can't be undone.
               </DialogDescription>
             </DialogHeader>
           </div>

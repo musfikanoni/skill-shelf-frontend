@@ -126,7 +126,10 @@ export const CoursesTable = ({
             />
           </div>
 
-          <Select value={statusFilter} onValueChange={(value) => setStatusFilter(value ?? "all")}>
+          <Select
+            value={statusFilter}
+            onValueChange={(value) => setStatusFilter(value ?? "all")}
+          >
             <SelectTrigger className="w-40! h-11! px-4 py-2 rounded-xl outline-2! outline-offset-[-2px]! outline-slate-300! border-none! bg-white! focus:ring-0! text-slate-900 text-lg font-medium leading-6">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
@@ -267,7 +270,7 @@ export const CoursesTable = ({
               <span className="font-bold text-slate-900">
                 "{courseToDelete?.title}"
               </span>
-              ? This action cannot be undone and all course data will be
+              ? This action can't be undone and all course data will be
               permanently removed.
             </DialogDescription>
           </div>

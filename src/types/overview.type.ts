@@ -1,4 +1,3 @@
-
 export interface Order {
   _id: string;
   user: string;
@@ -15,10 +14,15 @@ export interface Order {
   __v: number;
 }
 
+export interface ActivePlanInfo {
+  name?: string;
+  expireAt?: string;
+}
+
 export interface UserOverviewData {
   totalOrders: number;
   totalPurchasedCourses: number;
-  activePlan: string | null;
+  activePlan: string | ActivePlanInfo | null;
   lastThreeOrders: Order[];
 }
 

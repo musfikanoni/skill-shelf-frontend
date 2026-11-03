@@ -209,7 +209,7 @@ export default function SubscriptionsPage() {
               </DialogTitle>
               <DialogDescription className="text-slate-500 text-base font-normal font-roboto leading-relaxed text-center">
                 Are you sure you want to delete this subscription plan? This
-                action cannot be undone.
+                action can't be undone.
               </DialogDescription>
             </div>
 

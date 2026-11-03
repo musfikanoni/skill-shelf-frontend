@@ -4,9 +4,16 @@ import { useState, useMemo } from "react";
 import { toast } from "sonner";
 import { useDebounce } from "@/hooks/useDebounce";
 // import { DeleteConfirmationDialog } from "@/components/shared/DeleteConfirmationDialog";
-import { useDeleteAffiliateMutation, useGetAffiliatesQuery, useUpdateAffiliateMutation } from "@/redux/api/userDashboardApi/affiliateApi";
+import {
+  useDeleteAffiliateMutation,
+  useGetAffiliatesQuery,
+  useUpdateAffiliateMutation,
+} from "@/redux/api/userDashboardApi/affiliateApi";
 import { AffiliateDetailsModal } from "./AffiliateDetailsModal";
-import { Affiliate, AffiliateTable } from "@/components/shared/affiliate/AffiliateTable";
+import {
+  Affiliate,
+  AffiliateTable,
+} from "@/components/shared/affiliate/AffiliateTable";
 import { AffiliateStatCard } from "@/components/shared/affiliate/AffiliateStatCard";
 import { DeleteConfirmationDialog } from "@/components/shared/users/DeleteConfirmationDialog";
 
@@ -16,8 +23,12 @@ export default function AffiliatePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [selectedAffiliate, setSelectedAffiliate] = useState<Affiliate | null>(null);
-  const [affiliateToDelete, setAffiliateToDelete] = useState<Affiliate | null>(null);
+  const [selectedAffiliate, setSelectedAffiliate] = useState<Affiliate | null>(
+    null,
+  );
+  const [affiliateToDelete, setAffiliateToDelete] = useState<Affiliate | null>(
+    null,
+  );
   const pageSize = 10;
 
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
@@ -48,7 +59,9 @@ export default function AffiliatePage() {
       await updateAffiliate({ id: item._id, status: "APPROVED" }).unwrap();
       toast.success("Affiliate approved successfully!", { id: toastId });
     } catch (error: any) {
-      toast.error(error?.data?.message || "Failed to approve affiliate", { id: toastId });
+      toast.error(error?.data?.message || "Failed to approve affiliate", {
+        id: toastId,
+      });
     }
   };
 
@@ -58,7 +71,9 @@ export default function AffiliatePage() {
       await updateAffiliate({ id: item._id, status: "REJECT" }).unwrap();
       toast.success("Affiliate rejected successfully!", { id: toastId });
     } catch (error: any) {
-      toast.error(error?.data?.message || "Failed to reject affiliate", { id: toastId });
+      toast.error(error?.data?.message || "Failed to reject affiliate", {
+        id: toastId,
+      });
     }
   };
 
@@ -76,7 +91,9 @@ export default function AffiliatePage() {
       toast.success("Affiliate deleted successfully!", { id: toastId });
       setIsDeleteDialogOpen(false);
     } catch (error: any) {
-      toast.error(error?.data?.message || "Failed to delete affiliate", { id: toastId });
+      toast.error(error?.data?.message || "Failed to delete affiliate", {
+        id: toastId,
+      });
     }
   };
 
@@ -95,14 +112,18 @@ export default function AffiliatePage() {
   // Frontend-side filtering for search
   const filteredAffiliates = useMemo(() => {
     if (!searchTerm.trim()) return affiliates;
-    
+
     const query = searchTerm.toLowerCase();
     return affiliates.filter((item: Affiliate) => {
       const name = item.user?.name?.toLowerCase() || "";
       const email = item.user?.email?.toLowerCase() || "";
       const referredName = item.referredUser?.name?.toLowerCase() || "";
-      
-      return name.includes(query) || email.includes(query) || referredName.includes(query);
+
+      return (
+        name.includes(query) ||
+        email.includes(query) ||
+        referredName.includes(query)
+      );
     });
   }, [affiliates, searchTerm]);
 
@@ -118,10 +139,22 @@ export default function AffiliatePage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:py-6 lg:py-8 md:gap-6">
-        <AffiliateStatCard label="Total Earnings" value={`$${meta.total * 50}`} color="emerald" />
-        <AffiliateStatCard label="Active Affiliates" value={meta.total.toString()} color="purple" />
+        <AffiliateStatCard
+          label="Total Earnings"
+          value={`$${meta.total * 50}`}
+          color="emerald"
+        />
+        <AffiliateStatCard
+          label="Active Affiliates"
+          value={meta.total.toString()}
+          color="purple"
+        />
         <AffiliateStatCard label="Pending Approval" value="0" color="yellow" />
-        <AffiliateStatCard label="Total Sales" value={meta.total.toString()} color="blue" />
+        <AffiliateStatCard
+          label="Total Sales"
+          value={meta.total.toString()}
+          color="blue"
+        />
       </div>
 
       <div className="py-6 lg:py-8">
@@ -134,7 +167,9 @@ export default function AffiliatePage() {
           onViewDetails={handleViewDetails}
           onSearch={handleSearch}
           onStatusFilter={handleStatusFilter}
-          totalItems={searchTerm.trim() ? filteredAffiliates.length : meta.total}
+          totalItems={
+            searchTerm.trim() ? filteredAffiliates.length : meta.total
+          }
           currentPage={currentPage}
           pageSize={pageSize}
           onPageChange={handlePageChange}
@@ -153,7 +188,7 @@ export default function AffiliatePage() {
         onClose={() => setIsDeleteDialogOpen(false)}
         onConfirm={handleConfirmDelete}
         title="Delete Affiliate?"
-        description={`Are you sure you want to delete ${affiliateToDelete?.user?.name}? This action cannot be undone.`}
+        description={`Are you sure you want to delete ${affiliateToDelete?.user?.name}? This action can't be undone.`}
       />
     </div>
   );

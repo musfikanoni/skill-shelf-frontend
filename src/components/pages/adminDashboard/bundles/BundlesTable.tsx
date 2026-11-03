@@ -56,14 +56,14 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
       result = result.filter(
         (b: any) =>
           b.name?.toLowerCase().includes(term) ||
-          b.description?.toLowerCase().includes(term)
+          b.description?.toLowerCase().includes(term),
       );
     }
 
     if (statusFilter !== "all") {
       const isActive = statusFilter === "active";
       result = result.filter((b: any) =>
-        b.isActive === undefined ? isActive : b.isActive === isActive
+        b.isActive === undefined ? isActive : b.isActive === isActive,
       );
     }
 
@@ -106,7 +106,10 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
         </div>
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
-          <Select value={statusFilter} onValueChange={(val: any) => setStatusFilter(val ?? "all")}>
+          <Select
+            value={statusFilter}
+            onValueChange={(val: any) => setStatusFilter(val ?? "all")}
+          >
             <SelectTrigger className="w-full sm:w-40 h-10 rounded-xl bg-slate-50 border-slate-200">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
@@ -124,21 +127,38 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
         <Table>
           <TableHeader>
             <TableRow className="bg-slate-50/70 hover:bg-slate-50/70 border-b border-slate-200">
-              <TableHead className="font-bold text-slate-700 py-4 px-6">Bundle Details</TableHead>
-              <TableHead className="font-bold text-slate-700 py-4 px-6">Price</TableHead>
-              <TableHead className="font-bold text-slate-700 py-4 px-6">Products Included</TableHead>
-              <TableHead className="font-bold text-slate-700 py-4 px-6">Courses Included</TableHead>
-              <TableHead className="font-bold text-slate-700 py-4 px-6">Status</TableHead>
-              <TableHead className="font-bold text-slate-700 py-4 px-6 text-right">Actions</TableHead>
+              <TableHead className="font-bold text-slate-700 py-4 px-6">
+                Bundle Details
+              </TableHead>
+              <TableHead className="font-bold text-slate-700 py-4 px-6">
+                Price
+              </TableHead>
+              <TableHead className="font-bold text-slate-700 py-4 px-6">
+                Products Included
+              </TableHead>
+              <TableHead className="font-bold text-slate-700 py-4 px-6">
+                Courses Included
+              </TableHead>
+              <TableHead className="font-bold text-slate-700 py-4 px-6">
+                Status
+              </TableHead>
+              <TableHead className="font-bold text-slate-700 py-4 px-6 text-right">
+                Actions
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredBundles.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-12 text-slate-400">
+                <TableCell
+                  colSpan={6}
+                  className="text-center py-12 text-slate-400"
+                >
                   <div className="flex flex-col items-center justify-center gap-2">
                     <Layers className="w-10 h-10 text-slate-300" />
-                    <p className="font-semibold text-slate-600">No bundles found</p>
+                    <p className="font-semibold text-slate-600">
+                      No bundles found
+                    </p>
                     <p className="text-sm text-slate-400">
                       {searchTerm
                         ? "Try adjusting your search criteria"
@@ -154,9 +174,14 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
                 const isActive = bundle.isActive !== false;
 
                 return (
-                  <TableRow key={bundle._id} className="hover:bg-slate-50/50 transition-colors border-b border-slate-100">
+                  <TableRow
+                    key={bundle._id}
+                    className="hover:bg-slate-50/50 transition-colors border-b border-slate-100"
+                  >
                     <TableCell className="py-4 px-6 max-w-xs">
-                      <div className="font-bold text-slate-900 line-clamp-1">{bundle.name}</div>
+                      <div className="font-bold text-slate-900 line-clamp-1">
+                        {bundle.name}
+                      </div>
                       {bundle.description && (
                         <div className="text-xs text-slate-500 line-clamp-2 mt-0.5">
                           {bundle.description}
@@ -175,7 +200,8 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
                           className="bg-blue-50 text-blue-700 hover:bg-blue-100 flex items-center gap-1 font-semibold"
                         >
                           <Package className="w-3 h-3" />
-                          {productsCount} Product{productsCount !== 1 ? "s" : ""}
+                          {productsCount} Product
+                          {productsCount !== 1 ? "s" : ""}
                         </Badge>
                       </div>
                       {productsCount > 0 && (
@@ -184,7 +210,9 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
                             ?.map((p: any) => p.name || "Product")
                             .slice(0, 2)
                             .join(", ")}
-                          {productsCount > 2 ? ` +${productsCount - 2} more` : ""}
+                          {productsCount > 2
+                            ? ` +${productsCount - 2} more`
+                            : ""}
                         </div>
                       )}
                     </TableCell>
@@ -266,7 +294,7 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
               <span className="font-bold text-slate-900">
                 "{bundleToDelete?.name}"
               </span>
-              ? This action cannot be undone and this bundle package will be
+              ? This action can't be undone and this bundle package will be
               permanently removed.
             </DialogDescription>
           </div>

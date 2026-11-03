@@ -74,11 +74,10 @@ const stats = [
   },
   {
     title: "Active Membership",
-    value: dashboardData.activePlan 
-      ? typeof dashboardData.activePlan === 'string' 
-        ? dashboardData.activePlan.charAt(0).toUpperCase() + dashboardData.activePlan.slice(1)
-        : "None"
-      : "None",
+    value: (() => {
+      const planName = typeof dashboardData.activePlan === 'string' ? dashboardData.activePlan : dashboardData.activePlan?.name;
+      return planName ? planName.charAt(0).toUpperCase() + planName.slice(1).toLowerCase() : "None";
+    })(),
     change: "",
     changeColor: "text-emerald-500",
     icon: Star,

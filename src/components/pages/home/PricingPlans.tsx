@@ -8,6 +8,7 @@ import {
 } from "../../../redux/api/landingPageApi/LandingPageApi";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
+import { useGetMySubscriptionQuery } from "@/redux/api/userDashboardApi/subscriptionApi";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import LoginRequiredModal from "../../shared/payment/LoginRequiredModal";
@@ -65,6 +66,7 @@ interface Plan {
   interval: string;
   features: string[];
   isPopular?: boolean;
+  isCurrentPlan?: boolean;
 }
 
 interface PlanCardProps {
@@ -81,7 +83,8 @@ const PlanCard: React.FC<PlanCardProps> = ({
   const [hovered, setHovered] = useState(false);
   const isPopular = plan.name.toLowerCase().includes("pro") || plan.isPopular;
   const isProcessing = processingId === plan._id;
-  const isDisabled = processingId !== null;
+  const isCurrent = !!plan.isCurrentPlan;
+  const isDisabled = processingId !== null || isCurrent;
 
   return (
     <div
@@ -133,18 +136,23 @@ const PlanCard: React.FC<PlanCardProps> = ({
         onClick={() => onSelect(plan._id)}
         disabled={isDisabled}
         className={`
-          flex justify-center items-center gap-2 w-full py-3.5 rounded-xl font-extrabold text-sm tracking-widest transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed
+          flex justify-center items-center gap-2 w-full py-3.5 rounded-xl font-extrabold text-sm tracking-widest transition-all duration-200
           ${
-            isPopular
-              ? "bg-gradient-to-b from-[#6C3FC5] to-[#341E5F] text-white shadow-md hover:shadow-lg active:scale-95"
-              : "bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 shadow-md hover:shadow-lg active:scale-95"
+            isCurrent
+              ? "bg-slate-200 text-slate-500 cursor-not-allowed"
+              : isPopular
+                ? "bg-gradient-to-b from-[#6C3FC5] to-[#341E5F] text-white shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+                : "bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
           }
+          ${isDisabled && !isCurrent ? "opacity-50 cursor-not-allowed" : ""}
         `}
       >
         {isProcessing ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" /> PROCESSING...
           </>
+        ) : isCurrent ? (
+          "CURRENT PLAN"
         ) : (
           "SELECT PLAN"
         )}
@@ -157,16 +165,50 @@ const PricingPlans: React.FC = () => {
   const pathName = usePathname();
   const { data: plansData, isLoading, error } = useGetPlansQuery({});
   const { data: userData } = useGetMeQuery({});
+  const isLoggedIn = !!userData?.data || !!userData?.success;
+
+  const { data: subscriptionData } = useGetMySubscriptionQuery(undefined, {
+    skip: !isLoggedIn,
+  });
+
   const [createCheckoutSession] = useCreateCheckoutSessionMutation();
 
   const [processingId, setProcessingId] = useState<string | null>(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const isLoggedIn = userData?.success;
+  const activeSubscription = subscriptionData?.data;
+  const isSubscriptionActive =
+    activeSubscription?.status?.toUpperCase() === "ACTIVE";
+  const activePlanName = isSubscriptionActive
+    ? (activeSubscription?.plan?.name || "").toLowerCase()
+    : null;
 
   const handlePurchase = async (id: string) => {
     if (!isLoggedIn) {
       setShowLoginModal(true);
+      return;
+    }
+
+    // Check if user is clicking on their current active plan
+    const selectedPlan = plans.find((p) => p._id === id);
+    if (
+      selectedPlan &&
+      activePlanName &&
+      selectedPlan.name.toLowerCase() === activePlanName
+    ) {
+      const expiry = activeSubscription?.currentPeriodEnd
+        ? new Date(activeSubscription.currentPeriodEnd).toLocaleDateString(
+            "en-US",
+            {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            },
+          )
+        : "its renewal date";
+      toast.info(
+        `You already have an active subscription for this plan until ${expiry}. You can't purchase the same plan again before it expires.`,
+      );
       return;
     }
 
@@ -209,7 +251,16 @@ const PricingPlans: React.FC = () => {
     );
   }
 
-  const plans: Plan[] = plansData?.data || [];
+  const rawPlans: Plan[] = plansData?.data || [];
+  const plans: Plan[] = rawPlans.map((plan) => {
+    const isCurrentPlan = activePlanName
+      ? plan.name.toLowerCase() === activePlanName
+      : false;
+    return {
+      ...plan,
+      isCurrentPlan,
+    };
+  });
 
   return (
     <>
