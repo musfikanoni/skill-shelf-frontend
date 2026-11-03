@@ -1,15 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   useGetCourseByIdQuery,
   useCreateEnrollmentCheckoutMutation,
 } from "@/redux/api/landingPageApi/LandingPageApi";
+import { useGetMyEnrollmentsQuery } from "@/redux/api/userDashboardApi/courseApi";
 import PageLoading from "../../Others/Loading";
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, PlayCircle, CheckCircle2 } from "lucide-react";
 import React, { useState } from "react";
 import LoginRequiredModal from "../../shared/payment/LoginRequiredModal";
 
@@ -64,6 +66,14 @@ export default function CourseDetails({ id }: { id: string }) {
 
   const course = courseData?.data?.data || courseData?.data;
   const isLoggedIn = !!userData?.data;
+
+  // Check if current user is already enrolled
+  const { data: myEnrollments } = useGetMyEnrollmentsQuery(undefined, {
+    skip: !isLoggedIn,
+  });
+  const isEnrolled = !!myEnrollments?.data?.some(
+    (e: any) => e.course?._id === id || e.course === id || e._id === id
+  );
 
   const handlePurchase = async () => {
     if (!isLoggedIn) {
@@ -161,28 +171,48 @@ export default function CourseDetails({ id }: { id: string }) {
             </div>
 
             <div className="mt-8">
-              <div className="flex items-baseline gap-2 mb-4">
-                <span className="text-4xl font-black text-violet-600">
-                  ${course.price}
-                </span>
-                <span className="text-sm text-gray-400 line-through">
-                  ${course.price + 100}
-                </span>
-              </div>
+              {!isEnrolled && (
+                <div className="flex items-baseline gap-2 mb-4">
+                  <span className="text-4xl font-black text-violet-600">
+                    ${course.price}
+                  </span>
+                  <span className="text-sm text-gray-400 line-through">
+                    ${course.price + 100}
+                  </span>
+                </div>
+              )}
 
-              <button
-                onClick={handlePurchase}
-                disabled={isProcessing}
-                className="cursor-pointer flex justify-center items-center gap-2 w-full py-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-extrabold text-sm tracking-widest transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed uppercase"
-              >
-                {isProcessing ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" /> PROCESSING...
-                  </>
-                ) : (
-                  `Enroll Now · $${course.price}`
-                )}
-              </button>
+              {isEnrolled ? (
+                <div className="space-y-3">
+                  <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2">
+                    <CheckCircle2 className="text-emerald-600 w-4 h-4 shrink-0" />
+                    You are enrolled in this course!
+                  </div>
+                  <Link
+                    href={`/user-dashboard/my-courses/${course._id || id}`}
+                    className="w-full block"
+                  >
+                    <button className="cursor-pointer flex justify-center items-center gap-2 w-full py-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-extrabold text-sm tracking-widest transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 uppercase">
+                      <PlayCircle className="h-5 w-5" />
+                      Continue Learning
+                    </button>
+                  </Link>
+                </div>
+              ) : (
+                <button
+                  onClick={handlePurchase}
+                  disabled={isProcessing}
+                  className="cursor-pointer flex justify-center items-center gap-2 w-full py-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-extrabold text-sm tracking-widest transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed uppercase"
+                >
+                  {isProcessing ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" /> PROCESSING...
+                    </>
+                  ) : (
+                    `Enroll Now · $${course.price}`
+                  )}
+                </button>
+              )}
 
               <div className="flex items-center gap-6 mt-4 justify-center">
                 {[

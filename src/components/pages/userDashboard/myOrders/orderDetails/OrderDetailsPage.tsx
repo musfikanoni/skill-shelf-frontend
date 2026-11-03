@@ -353,13 +353,20 @@ export default function OrderDetailsPage() {
                           className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors"
                         >
                           <div className="flex items-center gap-3">
-                            <div className="h-12 w-12 bg-purple-50 border border-purple-100 flex items-center justify-center rounded-xl shrink-0">
+                            <Link
+                              href={isPaid ? `/user-dashboard/my-courses/${course._id}` : "#"}
+                              className={`h-12 w-12 bg-purple-50 border border-purple-100 flex items-center justify-center rounded-xl shrink-0 transition-transform ${isPaid ? "hover:scale-105 cursor-pointer" : ""}`}
+                              title={isPaid ? "Play Video" : "Payment pending"}
+                            >
                               <PlayCircle className="h-6 w-6 text-purple-600" />
-                            </div>
+                            </Link>
                             <div>
-                              <h5 className="font-bold text-[#1E293B] text-sm">
+                              <Link
+                                href={isPaid ? `/user-dashboard/my-courses/${course._id}` : "#"}
+                                className={`font-bold text-[#1E293B] text-sm ${isPaid ? "hover:text-[#6C3FC5] cursor-pointer" : ""}`}
+                              >
                                 {course.title}
-                              </h5>
+                              </Link>
                               <p className="text-xs text-slate-400 font-medium">
                                 {course.instructor ? `Instructor: ${course.instructor} • ` : ""}Video Lessons
                               </p>
@@ -367,7 +374,7 @@ export default function OrderDetailsPage() {
                           </div>
 
                           {isPaid ? (
-                            <Link href="/user-dashboard/my-courses">
+                            <Link href={`/user-dashboard/my-courses/${course._id}`}>
                               <Button
                                 size="sm"
                                 className="bg-[#6C3FC5] hover:bg-[#5b32aa] text-white font-bold rounded-lg h-9 px-4 gap-2 text-xs shrink-0 cursor-pointer shadow-sm"
@@ -446,7 +453,7 @@ export default function OrderDetailsPage() {
 
                 {isPaid ? (
                   order.itemType === "COURSE" ? (
-                    <Link href="/user-dashboard/my-courses">
+                    <Link href={`/user-dashboard/my-courses/${order.itemId || (order.product as any)?._id || ""}`}>
                       <Button className="bg-[#6C3FC5] hover:bg-[#5b32aa] text-white font-bold rounded-lg h-11 px-6 shadow-sm gap-2 shrink-0 cursor-pointer">
                         <PlayCircle className="h-4 w-4" />
                         Watch Videos

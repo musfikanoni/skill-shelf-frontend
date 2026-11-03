@@ -58,6 +58,7 @@ export default function MyCoursesPage() {
       <div className="space-y-4 md:space-y-6">
         {enrolledCourses.map((enrolledCourse) => {
           const courseData = enrolledCourse.course;
+          const targetCourseId = courseData?._id || enrolledCourse._id;
           const formatDuration = (seconds: number) => {
             if (!seconds) return "0 mins";
             const h = Math.floor(seconds / 3600);
@@ -72,16 +73,19 @@ export default function MyCoursesPage() {
             >
               <div className="flex flex-col lg:flex-row gap-6 lg:items-center">
                 {/* Course Image */}
-                <div className="h-48 sm:h-56 lg:h-48 lg:w-72 shrink-0 rounded-xl md:rounded-2xl overflow-hidden shadow-sm">
+                <Link
+                  href={`/user-dashboard/my-courses/${targetCourseId}`}
+                  className="h-48 sm:h-56 lg:h-48 lg:w-72 shrink-0 rounded-xl md:rounded-2xl overflow-hidden shadow-sm block group cursor-pointer"
+                >
                   <img
                     src={
                       courseData?.thumbnail ||
                       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
                     }
                     alt={courseData?.title?.replace(/(^"|"$)/g, "") || "Course"}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                </div>
+                </Link>
 
                 {/* Course Details */}
                 <div className="flex-1 space-y-4">
@@ -91,10 +95,12 @@ export default function MyCoursesPage() {
                     >
                       Course
                     </Badge>
-                    <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold text-[#1E293B] leading-tight">
-                      {courseData?.title?.replace(/(^"|"$)/g, "") ||
-                        "Untitled Course"}
-                    </h3>
+                    <Link href={`/user-dashboard/my-courses/${targetCourseId}`}>
+                      <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold text-[#1E293B] leading-tight hover:text-[#6C3FC5] transition-colors cursor-pointer">
+                        {courseData?.title?.replace(/(^"|"$)/g, "") ||
+                          "Untitled Course"}
+                      </h3>
+                    </Link>
                     <p className="text-slate-400 font-medium text-xs md:text-sm">
                       {courseData?.description?.replace(/(^"|"$)/g, "") ||
                         "No description available"}
@@ -135,10 +141,12 @@ export default function MyCoursesPage() {
 
                   {/* CTA Button */}
                   <div className="pt-2">
-                    <Button className="w-full sm:w-auto bg-[linear-gradient(180deg,_#F5C518_0%,_#EFA00B_100%)] hover:opacity-90 text-black font-extrabold rounded-xl h-11 px-6 shadow-sm shadow-yellow-100 gap-2">
-                      <PlayCircle className="h-5 w-5" />
-                      Continue Learning
-                    </Button>
+                    <Link href={`/user-dashboard/my-courses/${targetCourseId}`}>
+                      <Button className="w-full sm:w-auto bg-[linear-gradient(180deg,_#F5C518_0%,_#EFA00B_100%)] hover:opacity-90 text-black font-extrabold rounded-xl h-11 px-6 shadow-sm shadow-yellow-100 gap-2 cursor-pointer transition-transform active:scale-95">
+                        <PlayCircle className="h-5 w-5" />
+                        Continue Learning
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
