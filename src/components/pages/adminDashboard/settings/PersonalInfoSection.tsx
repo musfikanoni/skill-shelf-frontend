@@ -3,12 +3,11 @@ import { SvgProfileInfo } from '@/lib/icons';
 
 interface PersonalInfoSectionProps {
     profile: {
-        firstName: string;
-        lastName: string;
+        name: string;
         email: string;
         phoneNumber?: string;
     };
-    onProfileChange: (updates: any) => void;
+    onProfileChange: (updates: { name?: string; phoneNumber?: string }) => void;
     onSubmit: (e: React.FormEvent) => void;
 }
 
@@ -26,32 +25,24 @@ export const PersonalInfoSection = ({ profile, onProfileChange, onSubmit }: Pers
                     <label className="text-slate-700 text-lg font-medium font-poppins">Name</label>
                     <input 
                         type="text"
-                        value={`${profile.firstName} ${profile.lastName}`}
-                        onChange={(e) => {
-                            const name = e.target.value;
-                            const splitIndex = name.indexOf(' ');
-                            if (splitIndex === -1) {
-                                onProfileChange({ firstName: name, lastName: "" });
-                            } else {
-                                onProfileChange({ 
-                                    firstName: name.substring(0, splitIndex), 
-                                    lastName: name.substring(splitIndex + 1) 
-                                });
-                            }
-                        }}
+                        value={profile.name}
+                        onChange={(e) => onProfileChange({ name: e.target.value })}
                         className="w-full h-14 px-5 py-2 bg-white rounded-lg shadow-sm border border-slate-200 flex items-center text-slate-900 text-lg font-normal font-poppins outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-100 transition-all"
                         placeholder="Enter your name"
                     />
                 </div>
 
-                {/* Email Field */}
+                {/* Email Field (Disabled) */}
                 <div className="flex flex-col gap-3">
-                    <label className="text-slate-700 text-lg font-medium font-poppins">Email</label>
+                    <div className="flex items-center justify-between">
+                        <label className="text-slate-700 text-lg font-medium font-poppins">Email</label>
+                        <span className="text-xs text-slate-400 font-medium">Cannot be changed</span>
+                    </div>
                     <input 
                         type="email"
                         value={profile.email}
                         disabled
-                        className="w-full h-14 px-5 py-2 bg-slate-50/50 rounded-lg shadow-sm border border-slate-200 flex items-center text-slate-400 text-lg font-normal font-poppins outline-none cursor-not-allowed transition-all"
+                        className="w-full h-14 px-5 py-2 bg-slate-50/70 rounded-lg shadow-sm border border-slate-200 flex items-center text-slate-500 text-lg font-normal font-poppins outline-none cursor-not-allowed transition-all select-none"
                         placeholder="Enter your email"
                     />
                 </div>

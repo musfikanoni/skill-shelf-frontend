@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useGetMeQuery, useUpdateProfileMutation } from '@/redux/api/getMe/getMeApi';
@@ -17,8 +17,7 @@ import { useChangePasswordMutation } from '@/redux/api/auth/AuthApi';
 const DEFAULT_AVATAR = "https://placehold.co/128x128";
 
 interface UserProfile {
-    firstName: string;
-    lastName: string;
+    name: string;
     email: string;
     avatarUrl?: string;
     phoneNumber?: string;
@@ -31,21 +30,18 @@ const SettingsPage = () => {
     const [deleteUser] = useDeleteUserMutation();
     const [changePassword] = useChangePasswordMutation();
     
-    const [profile, setProfile] = React.useState<UserProfile>({
-        firstName: "",
-        lastName: "",
+    const [profile, setProfile] = useState<UserProfile>({
+        name: "",
         email: "",
         avatarUrl: DEFAULT_AVATAR,
         phoneNumber: ""
     });
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (userData?.data) {
             const user = userData.data;
-            const [first, ...last] = (user.name || "").split(' ');
             setProfile({
-                firstName: first || "",
-                lastName: last.join(' ') || "",
+                name: user.name || "",
                 email: user.email || "",
                 avatarUrl: user.picture || DEFAULT_AVATAR,
                 phoneNumber: user.phoneNumber || ""
@@ -70,7 +66,7 @@ const SettingsPage = () => {
 
     const handleRemoveImage = (e: React.MouseEvent) => {
         e.stopPropagation();
-        setProfile({ ...profile, avatarUrl: DEFAULT_AVATAR });
+        setProfile((prev) => ({ ...prev, avatarUrl: DEFAULT_AVATAR }));
         setSelectedFile(null);
         toast.info("Profile picture removed");
         if (fileInputRef.current) fileInputRef.current.value = '';
@@ -82,7 +78,7 @@ const SettingsPage = () => {
             setSelectedFile(file);
             const reader = new FileReader();
             reader.onloadend = () => {
-                setProfile({ ...profile, avatarUrl: reader.result as string });
+                setProfile((prev) => ({ ...prev, avatarUrl: reader.result as string }));
                 toast.success("Profile picture preview updated!");
             };
             reader.readAsDataURL(file);
@@ -94,9 +90,9 @@ const SettingsPage = () => {
         const toastId = toast.loading("Updating profile...");
         try {
             const formData = new FormData();
-            formData.append('name', `${profile.firstName} ${profile.lastName}`.trim());
+            formData.append('name', profile.name.trim());
             if (profile.phoneNumber) {
-                formData.append('phoneNumber', profile.phoneNumber);
+                formData.append('phoneNumber', profile.phoneNumber.trim());
             }
             if (selectedFile) {
                 formData.append('files', selectedFile);
@@ -112,6 +108,11 @@ const SettingsPage = () => {
 
     const handlePasswordUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!passwords.current || !passwords.new || !passwords.confirm) {
+            toast.error("Please fill in all password fields!");
+            return;
+        }
+
         if (passwords.new !== passwords.confirm) {
             toast.error("Passwords do not match!");
             return;
@@ -174,8 +175,8 @@ const SettingsPage = () => {
                 onRemoveImage={handleRemoveImage}
                 onImageChange={handleImageChange}
                 fileInputRef={fileInputRef}
-                role={userData?.data?.role || "User"}
-                status={userData?.data?.isActive || "INACTIVE"}
+                role={userData?.data?.role || "Admin"}
+                status={userData?.data?.isActive || "ACTIVE"}
             />
 
             {/* Main Content Sections */}
@@ -183,7 +184,7 @@ const SettingsPage = () => {
                 <div className="p-8 space-y-12">
                     <PersonalInfoSection 
                         profile={profile}
-                        onProfileChange={(updates) => setProfile({ ...profile, ...updates })}
+                        onProfileChange={(updates) => setProfile((prev) => ({ ...prev, ...updates }))}
                         onSubmit={handleProfileSubmit}
                     />
                     
@@ -197,7 +198,7 @@ const SettingsPage = () => {
 
                     <hr className="border-gray-100" />
                     
-                    <PaymentMethodsSection />
+                    {/* <PaymentMethodsSection /> */}
                 </div>
 
                 <DangerZone onDeleteClick={() => setIsDeleteDialogOpen(true)} />

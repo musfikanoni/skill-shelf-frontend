@@ -4,8 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface ProfileCardProps {
     profile: {
-        firstName: string;
-        lastName: string;
+        name: string;
         avatarUrl?: string;
     };
     defaultAvatar: string;
@@ -31,16 +30,19 @@ export const ProfileCard = ({
     const displayRole = role === "SUPER_ADMIN" ? "Super Admin" : role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
 
     // Generate initials for the fallback
-    const getInitials = (firstName: string, lastName: string) => {
-        if (firstName && lastName) return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
-        if (firstName) return firstName.charAt(0).toUpperCase();
-        return "U";
+    const getInitials = (name: string) => {
+        if (!name) return "U";
+        const parts = name.trim().split(/\s+/);
+        if (parts.length >= 2) {
+            return `${parts[0].charAt(0)}${parts[1].charAt(0)}`.toUpperCase();
+        }
+        return name.charAt(0).toUpperCase();
     };
 
-    const initials = getInitials(profile.firstName, profile.lastName);
+    const initials = getInitials(profile.name);
 
     return (
-        <div className="self-stretch h-48 p-8 bg-white rounded-xl shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-slate-200 flex justify-start items-center gap-6">
+        <div className="self-stretch h-auto sm:h-48 p-6 sm:p-8 bg-white rounded-xl shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-slate-200 flex flex-col sm:flex-row justify-start items-start sm:items-center gap-6">
             <input
                 type="file"
                 ref={fileInputRef}
@@ -52,7 +54,7 @@ export const ProfileCard = ({
                 className="relative inline-flex flex-col justify-start items-start cursor-pointer group"
                 onClick={onImageClick}
             >
-                <Avatar className="w-32 h-32 relative rounded-2xl shadow-[0px_2px_4px_-2px_rgba(0,0,0,0.10)] shadow-md border-4 border-white overflow-hidden group-hover:brightness-90 transition-all after:rounded-2xl">
+                <Avatar className="w-28 h-28 sm:w-32 sm:h-32 relative rounded-2xl shadow-[0px_2px_4px_-2px_rgba(0,0,0,0.10)] shadow-md border-4 border-white overflow-hidden group-hover:brightness-90 transition-all after:rounded-2xl">
                     <AvatarImage
                         src={profile.avatarUrl}
                         className="object-cover rounded-none"
@@ -92,8 +94,8 @@ export const ProfileCard = ({
 
             <div className="flex-1 inline-flex flex-col justify-start items-start gap-1">
                 <div className="self-stretch flex flex-col justify-start items-start">
-                    <div className="self-stretch justify-center text-slate-900 text-2xl font-bold font-inter leading-8 capitalize">
-                        {profile.firstName} {profile.lastName}
+                    <div className="self-stretch justify-center text-slate-900 text-2xl font-bold font-inter leading-8">
+                        {profile.name || "User"}
                     </div>
                 </div>
                 <div className="self-stretch flex flex-col justify-start items-start">
@@ -113,16 +115,16 @@ export const ProfileCard = ({
                 </div>
             </div>
 
-            <div className="flex justify-start items-start gap-3">
+            {/* <div className="flex justify-start items-start gap-3">
                 <button
-                    className="px-5 py-2.5 rounded-[8px]! flex justify-center items-center text-black text-sm font-semibold font-inter leading-5 hover:brightness-105 transition-all shadow-md border-none!"
+                    className="px-5 py-2.5 rounded-[8px]! flex justify-center items-center text-black text-sm font-semibold font-inter leading-5 hover:brightness-105 transition-all shadow-md border-none! cursor-pointer"
                     style={{
                         background: "linear-gradient(180deg, #F5C518 50%, #D73200 222.14%)"
                     }}
                 >
                     Send Message
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 };
