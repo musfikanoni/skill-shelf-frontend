@@ -1,4 +1,3 @@
-
 "use client";
 
 import { FC } from "react";
@@ -8,10 +7,12 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import Loading from "../../Others/Loading";
 import { useGetProductsQuery } from "@/redux/api/landingPageApi/LandingPageApi";
+import { getProductCategoryName } from "@/constants/productCategory";
 
 interface Product {
   _id: string;
   name: string;
+  category?: any;
   averageRating: number;
   totalReviews: number;
   price:
@@ -75,6 +76,14 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const image =
     product.images?.[0] || "/images/bestSellingImg/3d-one.png";
 
+  const rawCategory = getProductCategoryName(product.category);
+  const categoryName =
+    rawCategory &&
+    !rawCategory.toLowerCase().includes("digital") &&
+    rawCategory.toLowerCase() !== "uncategorized"
+      ? rawCategory
+      : "";
+
   return (
     <div
       className="
@@ -105,10 +114,12 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
           />
         </div>
 
-        {/* Product Badge */}
-        <span className="absolute top-4 left-4 bg-purple-100 text-purple-700 text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
-          Featured
-        </span>
+        {/* Category Badge */}
+        {categoryName && (
+          <span className="absolute top-4 left-4 bg-purple-100 text-purple-700 text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+            {categoryName}
+          </span>
+        )}
       </div>
 
       {/* Product Information */}
@@ -126,20 +137,14 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
           />
 
           {/* Price */}
-          <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-            <div>
-              <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider mb-1">
-                Starting at
-              </p>
+          <div className="pt-2 border-t border-gray-100">
+            <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider mb-1">
+              Starting at
+            </p>
 
-              <p className="text-2xl font-extrabold text-purple-600">
-                ${displayPrice}
-              </p>
-            </div>
-
-            <span className="text-[10px] font-semibold text-green-600 bg-green-50 px-2.5 py-1.5 rounded-full">
-              Digital Product
-            </span>
+            <p className="text-2xl font-extrabold text-purple-600">
+              ${displayPrice}
+            </p>
           </div>
         </div>
 
@@ -200,7 +205,7 @@ const BestSellingProducts: FC = () => {
         <div className="text-center mb-5">
           <span className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full">
             <span>🔥</span>
-            Featured Digital Products
+            Featured Products
           </span>
         </div>
 

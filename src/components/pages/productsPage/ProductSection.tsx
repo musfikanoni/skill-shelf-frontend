@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useState, useMemo } from 'react';
+import Image from 'next/image';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetProductsQuery } from '@/redux/api/landingPageApi/LandingPageApi';
 import { getProductCategoryName } from '@/constants/productCategory';
@@ -19,6 +20,34 @@ interface Product {
         vip: number;
     };
 }
+
+const StarRating = ({ rating, reviews }: { rating: number; reviews: number }) => {
+    const safeRating = Math.min(5, Math.max(0, Number(rating) || 0));
+    const reviewCount = Number(reviews) || 0;
+
+    return (
+        <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-0.5">
+                {[1, 2, 3, 4, 5].map((star) => (
+                    <svg
+                        key={star}
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill={safeRating >= star ? "#FBBF24" : "#E5E7EB"}
+                        stroke="none"
+                    >
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                ))}
+            </div>
+
+            <span className="text-xs text-gray-500 font-medium">
+                {safeRating > 0 ? safeRating.toFixed(1) : "0.0"} ({reviewCount})
+            </span>
+        </div>
+    );
+};
 
 export default function ProductSection() {
     const { data: productsData, isLoading, error } = useGetProductsQuery({});
@@ -62,7 +91,7 @@ export default function ProductSection() {
             <div className="max-w-6xl mx-auto">
                 <header className="mb-12">
                     <h1 className="text-4xl font-extrabold text-[#0F172A] tracking-tight">Best Selling Products</h1>
-                    <p className="mt-3 text-lg text-slate-500">Browse our collection of high-quality PLR products</p>
+                    <p className="mt-3 text-lg text-slate-500">Browse our collection of high-quality SkillShelf products</p>
                 </header>
 
                 <div className="flex flex-col lg:flex-row gap-8">
@@ -102,19 +131,26 @@ export default function ProductSection() {
 
                     <section className="flex-1">
                         <div className="mb-6">
-                            <span className="text-slate-500 font-medium text-center md:text-left">Showing {filteredProducts.length} products</span>
+                            <span className="text-slate-500 font-medium text-center md:text-left">
+                                Showing {filteredProducts.length} products
+                            </span>
                         </div>
 
-                        <div className="flex gap-4 justify-center flex-wrap mb-10">
+                        {/* Product Cards Grid - styled identically to Home Page */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
                             {isLoading ? (
-                                Array(8).fill(0).map((_, i) => (
-                                    <div key={i} className="bg-white rounded-2xl p-4 flex flex-col gap-3 flex-1 min-w-[220px] max-w-[220px]">
-                                        <Skeleton className="w-full aspect-[4/5] rounded-xl" />
-                                        <Skeleton className="h-4 w-2/3" />
-                                        <Skeleton className="h-6 w-full" />
-                                        <Skeleton className="h-4 w-1/2" />
-                                        <Skeleton className="h-10 w-full rounded-lg" />
-                                </div>
+                                Array(6).fill(0).map((_, i) => (
+                                    <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm flex flex-col h-full">
+                                        <Skeleton className="h-[220px] w-full rounded-none" />
+                                        <div className="p-5 flex flex-col gap-3 flex-1">
+                                            <Skeleton className="h-5 w-3/4 rounded" />
+                                            <Skeleton className="h-4 w-1/3 rounded" />
+                                            <div className="pt-2 border-t border-gray-100">
+                                                <Skeleton className="h-7 w-20 rounded" />
+                                            </div>
+                                            <Skeleton className="h-10 w-full rounded-xl mt-5" />
+                                        </div>
+                                    </div>
                                 ))
                             ) : (
                                 filteredProducts.map((product: Product) => (
@@ -123,9 +159,9 @@ export default function ProductSection() {
                             )}
                         </div>
 
-                        {filteredProducts.length === 0 && (
+                        {filteredProducts.length === 0 && !isLoading && (
                             <div className="text-center py-20 bg-white rounded-2xl border-2 border-dashed border-slate-200">
-                                <p className="text-slate-400">No products match your current filters.</p>
+                                <p className="text-slate-400 font-medium">No products match your current filters.</p>
                             </div>
                         )}
                     </section>
@@ -135,69 +171,105 @@ export default function ProductSection() {
     );
 }
 
-
 function ProductCard({ product }: { product: Product }) {
-    const [hovered, setHovered] = useState(false);
     const router = useRouter();
 
     const buyNow = () => {
         router.push(`/seo-toolkit?id=${product._id}`);
-    }
+    };
 
-    const productThumbnail = product.images?.[0] || "/images/bestSellingImg/3d-one.png";
     const displayPrice = typeof product.price === 'number'
         ? product.price
         : (product.price?.basic || 0);
 
+    const image = product.images?.[0] || "/images/bestSellingImg/3d-one.png";
+    const rawCategory = getProductCategoryName(product.category);
+    const categoryName =
+        rawCategory &&
+        !rawCategory.toLowerCase().includes("digital") &&
+        rawCategory.toLowerCase() !== "uncategorized"
+            ? rawCategory
+            : "";
+
     return (
         <div
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            className={`bg-white rounded-2xl p-4 flex flex-col gap-3 flex-1 min-w-[180px] max-w-[220px] transition-all duration-300 cursor-pointer ${hovered
-                ? "shadow-lg shadow-purple-500/15 -translate-y-1"
-                : "shadow-md shadow-black/6"
-                }`}
+            className="
+                group bg-white rounded-2xl
+                border border-gray-100
+                flex flex-col h-full
+                overflow-hidden
+                shadow-sm hover:shadow-xl
+                hover:shadow-purple-500/10
+                hover:-translate-y-1.5
+                transition-all duration-300
+            "
         >
-            <div className="relative aspect-square overflow-hidden rounded-2xl bg-[#F0F4F9] p-3">
-                <img
-                    src={productThumbnail}
-                    alt={product.name}
-                    className="w-full h-full object-cover rounded-xl shadow-sm"
-                />
-            </div>
-
-            {/* Content Section */}
-            <div className="flex flex-col gap-1.5 px-1">
-        
-                <span className="text-[10px] font-bold text-[#4F8AFF] uppercase tracking-wider">
-                    {getProductCategoryName(product.category)}
-                </span>
-
-                <h3 className="text-base font-bold text-[#1E293B] leading-snug line-clamp-2 min-h-[44px]">
-                    {product.name}
-                </h3>
-
-                <div className="flex items-center gap-1.5 mt-1">
-                    <div className="flex text-amber-400">
-                        {[...Array(5)].map((_, i) => (
-                            <StarIcon key={i} filled={i < 4} /> 
-                        ))}
-                    </div>
-                    <span className="text-slate-400 text-xs font-bold">
-                        {product.averageRating || '4.7'} <span className="font-medium">({product.totalReviews || '189'})</span>
-                    </span>
+            {/* Product Image Container */}
+            <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 px-5 pt-5 pb-3">
+                <div className="relative h-[220px] w-full flex items-center justify-center">
+                    <Image
+                        src={image}
+                        alt={product.name}
+                        width={300}
+                        height={400}
+                        className="
+                            h-full w-full
+                            object-contain
+                            transition-transform duration-500
+                            group-hover:scale-105
+                        "
+                    />
                 </div>
 
-                <p className="text-2xl font-black text-[#A855F7] mt-1">
-                    ${displayPrice}
-                </p>
+                {/* Category Badge */}
+                {categoryName && (
+                    <span className="absolute top-4 left-4 bg-purple-100 text-purple-700 text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+                        {categoryName}
+                    </span>
+                )}
+            </div>
 
+            {/* Product Information */}
+            <div className="p-5 flex flex-col flex-1">
+                <div className="flex flex-col gap-3 flex-1">
+                    {/* Product Name */}
+                    <h3 className="text-base font-bold text-gray-900 leading-snug line-clamp-2 min-h-[44px] group-hover:text-purple-700 transition-colors">
+                        {product.name}
+                    </h3>
+
+                    {/* Real Star Rating & Review Count */}
+                    <StarRating
+                        rating={product.averageRating}
+                        reviews={product.totalReviews}
+                    />
+
+                    {/* Price */}
+                    <div className="pt-2 border-t border-gray-100">
+                        <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider mb-1">
+                            Starting at
+                        </p>
+
+                        <p className="text-2xl font-extrabold text-purple-600">
+                            ${displayPrice}
+                        </p>
+                    </div>
+                </div>
+
+                {/* View Details Button */}
                 <button
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        buyNow();
-                    }}
-                    className="w-full py-2.5 bg-gradient-to-b from-[#6C3FC5] to-[#341E5F] text-white text-xs font-bold uppercase tracking-widest rounded-lg transition-colors cursor-pointer mt-3"
+                    onClick={buyNow}
+                    className="
+                        w-full mt-5 py-3
+                        bg-gradient-to-r from-[#713FCB] to-[#341E5F]
+                        hover:from-[#5D2EB0] hover:to-[#251447]
+                        text-white text-xs font-bold
+                        uppercase tracking-widest
+                        rounded-xl
+                        shadow-md shadow-purple-500/20
+                        hover:shadow-lg hover:shadow-purple-500/30
+                        transition-all duration-300
+                        cursor-pointer
+                    "
                 >
                     View Details
                 </button>
@@ -232,15 +304,6 @@ function RadioButton({ label, name, checked, onChange }: { label: string; name: 
                 {label.replace(/([A-Z])/g, ' $1').trim()}
             </span>
         </label>
-    );
-}
-
-
-function StarIcon({ filled }: { filled: boolean }) {
-    return (
-        <svg className={`w-4 h-4 ${filled ? 'fill-current' : 'text-slate-200 fill-current'}`} viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
     );
 }
 

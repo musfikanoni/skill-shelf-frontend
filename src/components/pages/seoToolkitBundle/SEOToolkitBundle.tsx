@@ -23,12 +23,13 @@ import {
 import Loading from "@/components/Others/Loading";
 import LoginRequiredModal from "@/components/shared/payment/LoginRequiredModal";
 import PlanRestrictionModal from "@/components/shared/payment/PlanRestrictionModal";
+import { getProductCategoryName } from "@/constants/productCategory";
 
 const packages = [
   {
     id: "basic",
     name: "Basic",
-    description: "Product Files • Basic PLR Rights • Email Support",
+    description: "Product Files • Basic Commercial Rights • Email Support",
     priceKey: "basic",
   },
   {
@@ -48,12 +49,15 @@ const packages = [
 ];
 
 function StarRating({ rating, count }: { rating: number; count: number }) {
+  const safeRating = Math.min(5, Math.max(0, Number(rating) || 0));
+  const reviewCount = Number(count) || 0;
+
   return (
     <div className="flex items-center gap-1 mt-1">
       {[1, 2, 3, 4, 5].map((i) => (
         <svg
           key={i}
-          className={`w-4 h-4 ${i <= rating ? "text-yellow-400" : "text-gray-300"}`}
+          className={`w-4 h-4 ${i <= Math.round(safeRating) && safeRating > 0 ? "text-yellow-400" : "text-gray-300"}`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -61,7 +65,7 @@ function StarRating({ rating, count }: { rating: number; count: number }) {
         </svg>
       ))}
       <span className="text-xs text-gray-500 ml-1">
-        {rating} ({count} reviews)
+        {safeRating > 0 ? safeRating.toFixed(1) : "0.0"} ({reviewCount} reviews)
       </span>
     </div>
   );
@@ -362,17 +366,21 @@ export default function SEOToolkitBundle() {
 
           {/* Info */}
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-violet-600 uppercase tracking-wider mb-1">
-              {(typeof product.category === "object"
-                ? product.category?.name
-                : product.category) || "Bundles"}
-            </p>
+            {(() => {
+              const catName = getProductCategoryName(product.category);
+              if (!catName || catName.toLowerCase().includes("digital") || catName.toLowerCase() === "uncategorized") return null;
+              return (
+                <p className="text-xs font-semibold text-violet-600 uppercase tracking-wider mb-1">
+                  {catName}
+                </p>
+              );
+            })()}
             <h1 className="text-2xl font-bold text-gray-900 leading-tight">
               {product.name}
             </h1>
             <StarRating
-              rating={product.averageRating || 5}
-              count={product.totalReviews || 423}
+              rating={product.averageRating || 0}
+              count={product.totalReviews || 0}
             />
 
             {/* Already Purchased Notice */}
@@ -554,7 +562,7 @@ export default function SEOToolkitBundle() {
                 </span>
                 <div>
                   <p className="text-sm font-bold text-gray-900">
-                    Full PLR Rights Included
+                    Full Commercial Rights Included
                   </p>
                   <p className="text-xs text-gray-500">
                     Use these products to build your business

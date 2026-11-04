@@ -239,7 +239,7 @@ export default function MembershipPage() {
               Choose Your Membership Plan
             </h2>
             <p className="text-indigo-100 text-lg opacity-90">
-              Get unlimited access to premium PLR products and courses
+              Get unlimited access to premium SkillShelf products and courses
             </p>
           </div>
           {/* Decorative background circle */}

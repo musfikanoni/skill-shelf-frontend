@@ -1,5 +1,5 @@
 "use client";
-import { Flame, Palette, Rocket } from "lucide-react";
+import { Flame, Palette, Rocket, BookOpen, Package } from "lucide-react";
 import SecondaryButton from "../../shared/secondaryButton/SecondaryButton";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import SectionHeader from "../../shared/sectionHeader/SectionHeader";
@@ -8,6 +8,12 @@ import { useGetBundlesQuery } from "@/redux/api/landingPageApi/LandingPageApi";
 import PageLoading from "../../Others/Loading";
 
 // Types for our Bundle data
+interface BundleItem {
+  name: string;
+  type: "product" | "course";
+  price: number;
+}
+
 interface Bundle {
   id: string;
   badge: {
@@ -21,12 +27,12 @@ interface Bundle {
   };
   title: string;
   description: string;
-  tags: string[];
+  items: BundleItem[];
   originalPrice: number;
   currentPrice: number;
   discountPercent: number;
   savings: number;
-  buttonColor: string;
+  buttonColor?: string;
 }
 
 export default function PopulaProductSection() {
@@ -47,7 +53,7 @@ export default function PopulaProductSection() {
     return null;
   }
 
-  const bundles = (bundlesData?.data || []).map(
+  const bundles: Bundle[] = (bundlesData?.data || []).map(
     (bundle: any, index: number) => {
       const badges = [
         {
@@ -74,14 +80,40 @@ export default function PopulaProductSection() {
       ];
 
       const currentPrice = bundle.price || 0;
+
+      // Extract products with their basic/pro/vip price
+      const productItems: BundleItem[] = (bundle.products || []).map((p: any) => ({
+        name: p.name || p.title || "Product",
+        type: "product" as const,
+        price:
+          typeof p.price === "number"
+            ? p.price
+            : p.price?.basic || p.price?.pro || p.price?.vip || 0,
+      }));
+
+      // Extract courses with their individual price
+      const courseItems: BundleItem[] = (bundle.courses || []).map((c: any) => ({
+        name: c.title || c.name || "Course",
+        type: "course" as const,
+        price: typeof c.price === "number" ? c.price : 0,
+      }));
+
+      // Combined items (both products and courses)
+      const allItems = [...productItems, ...courseItems];
+
+      // Sum all individual item prices (both courses and products)
+      const sumIndividualPrices = allItems.reduce(
+        (acc: number, item: BundleItem) => acc + (Number(item.price) || 0),
+        0
+      );
+
+      // Determine true original price based on individual items sum
       const originalPrice =
-        bundle.products?.reduce((acc: number, prod: any) => {
-          const price =
-            typeof prod.price === "number"
-              ? prod.price
-              : prod.price?.basic || 0;
-          return acc + price;
-        }, 0) || currentPrice * 1.5;
+        sumIndividualPrices > currentPrice
+          ? sumIndividualPrices
+          : sumIndividualPrices > 0
+          ? Math.round(currentPrice * 1.3)
+          : Math.round(currentPrice * 1.5);
 
       const savings = Math.max(0, originalPrice - currentPrice);
       const discountPercent =
@@ -91,7 +123,7 @@ export default function PopulaProductSection() {
         id: bundle._id,
         title: bundle.name,
         description: bundle.description,
-        tags: bundle.products?.map((p: any) => p.name) || [],
+        items: allItems,
         originalPrice,
         currentPrice,
         savings,
@@ -113,7 +145,7 @@ export default function PopulaProductSection() {
       )}
 
       <div className="max-w-6xl mx-auto space-y-6">
-        {bundles.map((bundle: any) => (
+        {bundles.map((bundle: Bundle) => (
           <div
             key={bundle.id}
             className="relative border border-gray-200 rounded-3xl p-8 md:p-10 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row justify-between gap-8 overflow-hidden"
@@ -144,13 +176,19 @@ export default function PopulaProductSection() {
                 {bundle.description}
               </p>
 
+              {/* Items / Badges (both courses and products) */}
               <div className="flex flex-wrap gap-2">
-                {bundle.tags.map((tag: string) => (
+                {bundle.items.map((item: BundleItem, i: number) => (
                   <span
-                    key={tag}
-                    className="bg-purple-50 text-purple-600 px-3 py-1 rounded-md text-xs font-semibold"
+                    key={`${item.name}-${i}`}
+                    className="bg-purple-50 text-[#6C3FC5] px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 border border-purple-100/60"
                   >
-                    {tag}
+                    {item.type === "course" ? (
+                      <BookOpen className="w-3.5 h-3.5 text-[#8B5CF6] shrink-0" />
+                    ) : (
+                      <Package className="w-3.5 h-3.5 text-[#8B5CF6] shrink-0" />
+                    )}
+                    <span>{item.name}</span>
                   </span>
                 ))}
               </div>
@@ -164,12 +202,12 @@ export default function PopulaProductSection() {
                 <p className="text-4xl font-black text-gray-900">
                   ${bundle.currentPrice}
                 </p>
-                <div className="mt-2 bg-green-50 text-green-500 text-[11px] font-bold px-2 py-1 rounded-md border border-green-100">
+                <div className="mt-2 bg-green-50 text-green-600 text-[11px] font-bold px-2.5 py-1 rounded-md border border-green-100 inline-block">
                   You save ${bundle.savings.toFixed(0)} (
                   {bundle.discountPercent}% OFF)
                 </div>
               </div>
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-center mt-4 md:mt-0">
                 <SecondaryButton
                   label="VIEW BUNDLE"
                   onClick={() => router.push(`/bundles/${bundle.id}`)}

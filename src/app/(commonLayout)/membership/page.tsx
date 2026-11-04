@@ -16,7 +16,7 @@ const MembershipPage = () => {
           />
         }
         title="Choose Your Membership Plan"
-        description="Get unlimited access to premium PLR products and courses"
+        description="Get unlimited access to premium SkillShelf products and courses"
       />
       <PricingPlans />
       {/* <CurrentSubscription /> */}

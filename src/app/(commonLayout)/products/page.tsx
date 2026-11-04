@@ -14,8 +14,8 @@ const ProductsPage = () => {
             height={40}
           />
         }
-        title="PLR Products"
-        description="Browse our collection of high-quality PLR products"
+        title="SkillShelf Products"
+        description="Browse our collection of high-quality SkillShelf products"
       />
 
       <ProductSection />

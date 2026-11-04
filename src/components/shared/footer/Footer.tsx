@@ -127,7 +127,7 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2.5">
                 {[
-                  { name: "PLR Products", href: "/products" },
+                  { name: "Products", href: "/products" },
                   { name: "Online Courses", href: "/courses" },
                   { name: "Product Bundles", href: "/bundles" },
                   { name: "Membership Plans", href: "/membership" },
