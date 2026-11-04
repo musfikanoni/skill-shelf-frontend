@@ -181,7 +181,7 @@ export default function DownloadsPage() {
 
       {/* Downloads Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        {products.map((item) => {
+        {products.map((item: any) => {
           const canReview = reviewStatusMap[item._id] || false;
 
           return (
@@ -190,17 +190,19 @@ export default function DownloadsPage() {
               className="bg-white border border-slate-100 shadow-sm overflow-hidden rounded-2xl flex flex-col h-full group"
             >
               {/* Image Section with Badges */}
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={
-                    item.images?.[0] ||
-                    "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80"
-                  }
-                  alt={item.name}
-                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+              <div className="relative bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 p-4 border-b border-slate-100/80">
+                <div className="relative h-48 sm:h-52 w-full flex items-center justify-center overflow-hidden">
+                  <img
+                    src={
+                      item.images?.[0] ||
+                      "/images/bestSellingImg/3d-one.png"
+                    }
+                    alt={item.name}
+                    className="h-full w-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
                 <div className="absolute top-3 right-3 flex gap-2">
-                  <Badge className="bg-white/90 backdrop-blur-sm text-[#1E293B] hover:bg-white border-none font-bold px-2 py-0.5 text-[10px] rounded-md shadow-sm">
+                  <Badge className="bg-white/95 backdrop-blur-sm text-[#1E293B] hover:bg-white border border-slate-200/60 font-bold px-2.5 py-0.5 text-[10px] rounded-md shadow-xs">
                     {item.category?.name || "Ebook"}
                   </Badge>
                 </div>
@@ -229,10 +231,9 @@ export default function DownloadsPage() {
                   </div>
                 </div>
 
-                <div className="pt-4 mt-auto">
-                  <div className="h-px bg-slate-100 w-full mb-6" />
-                  <div className="flex items-end justify-betwee gap-3">
-                    <div className="flex flex-col gap-2 w-full">
+                <div className="pt-4 border-t border-slate-50 mt-auto">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex-1 flex gap-2">
                       {item.files?.basic && (
                         <a
                           href={item.files.basic}
@@ -241,7 +242,7 @@ export default function DownloadsPage() {
                           className="w-full border-0 bg-[linear-gradient(180deg,_#F5C518_0%,_#EFA00B_100%)] hover:opacity-90 text-black font-extrabold rounded-xl h-11 shadow-md shadow-yellow-100 gap-2 cursor-pointer inline-flex items-center justify-center text-sm"
                         >
                           <Download className="h-5 w-5" />
-                          Download Basic
+                          Download
                         </a>
                       )}
                       {item.files?.pro && (

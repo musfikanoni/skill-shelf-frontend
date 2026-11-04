@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import Loading from "@/components/Others/Loading";
 
 // Custom hook for debouncing
 function useDebounce<T>(value: T, delay: number): T {
@@ -101,8 +102,8 @@ export const CoursesTable = ({
 
   if (isLoading) {
     return (
-      <div className="w-full h-64 bg-white rounded-2xl shadow-lg flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+      <div className="w-full min-h-64 bg-white rounded-2xl shadow-sm border border-slate-200 flex items-center justify-center p-6">
+        <Loading size="sm" title="Loading Courses" message="Fetching course catalog..." />
       </div>
     );
   }

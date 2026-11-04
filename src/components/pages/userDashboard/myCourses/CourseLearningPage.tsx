@@ -561,7 +561,13 @@ export default function CourseLearningPage() {
     : enrolledCourse?.progress || 0;
 
   if (isLoadingEnrollments || isLoadingCourse || isLoadingMilestones) {
-    return <Loading />;
+    return (
+      <Loading
+        size="lg"
+        title="Loading Course Classroom"
+        message="Preparing your video lessons and curriculum..."
+      />
+    );
   }
 
   if (!course) {

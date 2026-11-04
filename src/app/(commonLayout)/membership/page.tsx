@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import PricingPlans from "@/components/pages/home/PricingPlans";
-// import CurrentSubscription from "@/components/shared/currentSubscription/CurrentSubscription";
 import PageHeader from "@/components/shared/pageHeader/PageHeader";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Membership Plans",
+  description: "Get unlimited access to premium SkillShelf products and courses with our membership tiers",
+};
 
 const MembershipPage = () => {
   return (
@@ -10,7 +15,7 @@ const MembershipPage = () => {
         icon={
           <Image
             src="/images/pageHeaderImg/membership.png"
-            alt="product"
+            alt="membership"
             width={40}
             height={40}
           />
@@ -19,7 +24,6 @@ const MembershipPage = () => {
         description="Get unlimited access to premium SkillShelf products and courses"
       />
       <PricingPlans />
-      {/* <CurrentSubscription /> */}
     </div>
   );
 };

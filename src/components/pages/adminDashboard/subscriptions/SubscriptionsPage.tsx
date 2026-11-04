@@ -25,6 +25,7 @@ import { SubscriptionsStatCard } from "./SubscriptionsStatCard";
 import { SubscriptionPlanCard } from "./SubscriptionPlanCard";
 import { CreateSubscriptionPlanModal } from "./CreateSubscriptionPlanModal";
 import { SubscriptionsTable } from "@/components/shared/subscriptionsTable/SubscriptionsTable";
+import Loading from "@/components/Others/Loading";
 
 export default function SubscriptionsPage() {
   const { data: subscriptionsData, isLoading: subLoading } =
@@ -85,7 +86,7 @@ export default function SubscriptionsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="w-10 h-10 animate-spin text-amber-500" />
+        <Loading title="Loading Subscriptions" message="Fetching subscription plans..." />
       </div>
     );
   }

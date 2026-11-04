@@ -12,6 +12,7 @@ import { StatCard } from '@/components/shared/statCard/state-card';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { FaCheckSquare } from 'react-icons/fa';
 import { AccessDenied } from '@/components/shared/auth/AccessDenied';
+import Loading from '@/components/Others/Loading';
 
 export function AdminDashboardPage () {
 
@@ -31,11 +32,11 @@ export function AdminDashboardPage () {
 
   if (isAuthLoading || (isAuthorized && isOverviewLoading)) {
     return (
-      <div className="flex items-center justify-center h-screen -mt-20">
-        <div className="flex flex-col items-center gap-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-          <p className="text-slate-500 font-medium animate-pulse">Verifying Authorization...</p>
-        </div>
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <Loading
+          title="Verifying Authorization"
+          message="Loading Super Admin dashboard..."
+        />
       </div>
     );
   }

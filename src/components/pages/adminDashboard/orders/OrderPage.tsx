@@ -8,6 +8,7 @@ import { OrdersTable } from "@/components/shared/orders/Table";
 import { useGetAllOrdersQuery } from "@/redux/api/userDashboardApi/ordersApi";
 import { OrderDetailsModal } from "./OrderDetailsModal";
 import { useDebounce } from "@/hooks/useDebounce";
+import Loading from "@/components/Others/Loading";
 
 export default function OrdersPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -83,11 +84,11 @@ export default function OrdersPage() {
 
   if (isAuthLoading) {
     return (
-      <div className="flex items-center justify-center h-screen -mt-20">
-        <div className="flex flex-col items-center gap-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-          <p className="text-slate-500 font-medium animate-pulse">Verifying Authorization...</p>
-        </div>
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <Loading
+          title="Verifying Authorization"
+          message="Loading customer orders..."
+        />
       </div>
     );
   }

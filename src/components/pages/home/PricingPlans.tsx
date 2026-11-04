@@ -6,12 +6,12 @@ import {
   useGetPlansQuery,
   useCreateCheckoutSessionMutation,
 } from "../../../redux/api/landingPageApi/LandingPageApi";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 import { useGetMySubscriptionQuery } from "@/redux/api/userDashboardApi/subscriptionApi";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import LoginRequiredModal from "../../shared/payment/LoginRequiredModal";
+import Loading from "../../Others/Loading";
 
 const CheckIcon: React.FC = () => (
   <svg
@@ -234,11 +234,10 @@ const PricingPlans: React.FC = () => {
   if (isLoading) {
     return (
       <section className="flex flex-col items-center justify-center py-16 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl items-center">
-          <Skeleton className="h-[450px] rounded-2xl" />
-          <Skeleton className="h-[480px] rounded-2xl" />
-          <Skeleton className="h-[450px] rounded-2xl" />
-        </div>
+        <Loading
+          title="Loading Membership Plans"
+          message="Fetching available tiers and pricing..."
+        />
       </section>
     );
   }

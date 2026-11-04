@@ -29,7 +29,10 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "SkillShelf",
+  title: {
+    default: "SkillShelf - Learn · Watch · Grow",
+    template: "%s | SkillShelf",
+  },
   description: "Learn &middot; watch &middot; grow",
   icons: {
     icon: "/logo.png",

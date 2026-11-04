@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { Loader2, PlayCircle, CheckCircle2 } from "lucide-react";
 import React, { useState } from "react";
 import LoginRequiredModal from "../../shared/payment/LoginRequiredModal";
+import PageTitle from "@/components/shared/PageTitle";
 
 function StarRating({ rating, count }: { rating: number; count: number }) {
   return (
@@ -133,6 +134,7 @@ export default function CourseDetails({ id }: { id: string }) {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-start justify-center py-6 sm:py-10 px-3 sm:px-4 font-sans">
+      <PageTitle title={course.title} />
       <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md overflow-hidden">
         {/* TOP SECTION */}
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 p-4 sm:p-6 md:p-8 border-b border-gray-100">

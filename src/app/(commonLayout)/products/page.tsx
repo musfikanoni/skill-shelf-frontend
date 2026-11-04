@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import ProductSection from "@/components/pages/productsPage/ProductSection";
 import PageHeader from "@/components/shared/pageHeader/PageHeader";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Digital Products",
+  description: "Browse our collection of high-quality SkillShelf digital products and templates",
+};
 
 const ProductsPage = () => {
   return (

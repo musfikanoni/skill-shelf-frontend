@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
 import BundlesPage from "@/components/pages/adminDashboard/bundles/BundlesPage";
 
-export const metadata = {
-  title: "Manage Bundles | Admin Dashboard",
-  description: "Create and manage product bundles",
+export const metadata: Metadata = {
+  title: "Manage Bundles",
+  description: "Create and manage product bundles on SkillShelf",
 };
 
 export default function Bundles() {
@@ -12,4 +13,3 @@ export default function Bundles() {
     </div>
   );
 }
-

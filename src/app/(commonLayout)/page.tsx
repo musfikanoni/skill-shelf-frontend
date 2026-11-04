@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import BestSellingProducts from "@/components/pages/home/BestSellingSection";
 import BrowseCategory from "@/components/pages/home/BrowseCategory";
 import FeaturedCourses from "@/components/pages/home/FeaturedCourses";
@@ -8,6 +9,11 @@ import PricingPlans from "@/components/pages/home/PricingPlans";
 import StatsSection from "@/components/pages/home/StatsSection";
 import TrustBadgeBanner from "@/components/pages/home/TrustBadgeBanner";
 import VipBundlePage from "@/components/pages/home/VipBundlePage";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "SkillShelf - Learn, watch, and grow your digital business with premium products and courses.",
+};
 
 const page = () => {
   return (

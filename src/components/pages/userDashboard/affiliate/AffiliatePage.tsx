@@ -13,6 +13,7 @@ import {
   Video,
 } from "lucide-react";
 import { useCreateAffiliateMutation, useGetMyCommissionQuery } from "@/redux/api/userDashboardApi/affiliateApi";
+import Loading from "@/components/Others/Loading";
 
 // --- Types & Mock Data ---
 interface StatCardProps {
@@ -338,8 +339,8 @@ export default function Affiliate() {
         </div>
         <div className="overflow-x-auto">
           {isLoading ? (
-            <div className="p-8 text-center text-gray-500">
-              Loading commissions...
+            <div className="p-4 flex items-center justify-center">
+              <Loading size="sm" title="Loading Commissions" message="Fetching your sales activity..." />
             </div>
           ) : error ? (
             <div className="p-8 text-center text-red-500">
@@ -347,7 +348,7 @@ export default function Affiliate() {
             </div>
           ) : !affiliateCommissionData ||
             affiliateCommissionData.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">
+            <div className="p-4 flex items-center justify-center">
               No commissions found
             </div>
           ) : (

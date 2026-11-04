@@ -9,6 +9,7 @@ import { Loader2 } from "lucide-react";
 import React, { useState } from "react";
 import LoginRequiredModal from "@/components/shared/payment/LoginRequiredModal";
 import Loading from "@/components/Others/Loading";
+import PageTitle from "@/components/shared/PageTitle";
 
 
 function StarRating({ rating, count }: { rating: number; count: number }) {
@@ -104,6 +105,7 @@ export default function BundleDetails({ id }: { id: string }) {
 
     return (
         <div className="min-h-screen bg-gray-50 flex items-start justify-center py-10 px-4 font-sans">
+            <PageTitle title={bundle.name} />
             <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md overflow-hidden">
 
                 {/* TOP SECTION */}

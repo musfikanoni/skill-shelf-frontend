@@ -24,6 +24,7 @@ import Loading from "@/components/Others/Loading";
 import LoginRequiredModal from "@/components/shared/payment/LoginRequiredModal";
 import PlanRestrictionModal from "@/components/shared/payment/PlanRestrictionModal";
 import { getProductCategoryName } from "@/constants/productCategory";
+import PageTitle from "@/components/shared/PageTitle";
 
 const packages = [
   {
@@ -355,6 +356,7 @@ export default function SEOToolkitBundle() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-start justify-center py-10 px-4 font-sans">
+      <PageTitle title={product.name} />
       <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md overflow-hidden">
         {/* TOP SECTION */}
         <div className="flex flex-col md:flex-row gap-6 lg:gap-8 p-4 sm:p-6 md:p-8 border-b border-gray-100">

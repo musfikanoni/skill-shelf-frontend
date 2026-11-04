@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
+import AffiliateApplication from "@/components/pages/affiliateApplication/AffiliateApplication";
+import PageHeader from "@/components/shared/pageHeader/PageHeader";
+import Image from "next/image";
 
-import AffiliateApplication from '@/components/pages/affiliateApplication/AffiliateApplication'
-import PageHeader from '@/components/shared/pageHeader/PageHeader'
-import Image from 'next/image'
+export const metadata: Metadata = {
+  title: "Affiliate Program",
+  description: "Join our affiliate program and earn up to 50% commission referring SkillShelf products and courses",
+};
 
 const AffiliatePage = () => {
   return (
@@ -10,7 +15,7 @@ const AffiliatePage = () => {
         icon={
           <Image
             src="/images/pageHeaderImg/affiliate.png"
-            alt="product"
+            alt="affiliate"
             width={40}
             height={40}
           />
@@ -21,7 +26,7 @@ const AffiliatePage = () => {
 
       <AffiliateApplication />
     </div>
-  )
-}
+  );
+};
 
-export default AffiliatePage        
+export default AffiliatePage;

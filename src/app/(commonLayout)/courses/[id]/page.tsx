@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import CourseDetails from "@/components/pages/productsPage/CourseDetails";
+
+export const metadata: Metadata = {
+  title: "Course Details",
+  description: "Learn more about this online course and start your learning journey",
+};
 
 const CourseDetailsPage = async ({
   params,
@@ -8,19 +14,6 @@ const CourseDetailsPage = async ({
   const { id } = await params;
   return (
     <div>
-      {/* <PageHeader
-        icon={
-          <Image
-            src="/images/pageHeaderImg/courseImg.png"
-            alt="course"
-            width={40}
-            height={40}
-          />
-        }
-        title="Course Details"
-        description="Learn more about this course and start your journey"
-      /> */}
-
       <CourseDetails id={id} />
     </div>
   );
