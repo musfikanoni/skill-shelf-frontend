@@ -109,7 +109,7 @@ export default function MyOrdersPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 w-full md:w-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
           {/* Search Box */}
           <div className="relative flex-1 md:w-72">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -122,12 +122,12 @@ export default function MyOrdersPage() {
           </div>
 
           {/* Status Filter */}
-          <div className="w-40 shrink-0">
+          <div className="w-full sm:w-40 shrink-0">
             <Select
               value={filter}
               onValueChange={(val: any) => setFilter(val || "all")}
             >
-              <SelectTrigger className="h-11 border border-slate-200 rounded-xl bg-white px-3 font-semibold text-slate-700 shadow-sm hover:bg-slate-50 cursor-pointer">
+              <SelectTrigger className="py-5 border border-slate-200 rounded-xl bg-white px-3 font-semibold text-slate-700 shadow-sm hover:bg-slate-50 cursor-pointer">
                 <div className="flex items-center gap-2">
                   <Filter className="h-3.5 w-3.5 text-slate-400" />
                   <SelectValue placeholder="All Orders" />

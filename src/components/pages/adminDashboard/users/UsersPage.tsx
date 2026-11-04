@@ -162,7 +162,7 @@ export default function UsersPage() {
         open={!!deletingUserId}
         onOpenChange={(open) => !open && setDeletingUserId(null)}
       >
-        <DialogContent className="sm:max-w-[440px] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white">
+        <DialogContent className="w-[92vw] max-w-[440px] p-0 overflow-hidden border-none shadow-2xl rounded-2xl bg-white">
           <div className="p-8 space-y-6">
             <DialogHeader className="space-y-3">
               <DialogTitle className="text-2xl font-bold text-[#0F172A] leading-tight">

@@ -26,7 +26,7 @@ export function AffiliateDetailsModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] bg-white rounded-2xl border-none shadow-2xl p-0 overflow-hidden">
+      <DialogContent className="w-[92vw] max-w-[500px] bg-white rounded-2xl border-none shadow-2xl p-0 overflow-hidden">
         <DialogHeader className="p-6 border-b border-slate-100 flex flex-row items-center justify-between">
           <DialogTitle className="text-xl font-bold text-slate-900">
             Affiliate Details

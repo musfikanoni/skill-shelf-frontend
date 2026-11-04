@@ -132,15 +132,15 @@ export default function CourseDetails({ id }: { id: string }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-start justify-center py-10 px-4 font-sans">
+    <div className="min-h-screen bg-gray-50 flex items-start justify-center py-6 sm:py-10 px-3 sm:px-4 font-sans">
       <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md overflow-hidden">
         {/* TOP SECTION */}
-        <div className="flex flex-col sm:flex-row gap-8 p-8 border-b border-gray-100">
-          <div className="w-full sm:w-[400px] aspect-video sm:aspect-square bg-slate-100 rounded-2xl overflow-hidden flex items-center justify-center shadow-inner">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8 p-4 sm:p-6 md:p-8 border-b border-gray-100">
+          <div className="w-full md:w-[420px] lg:w-[460px] aspect-video shrink-0 bg-slate-900 rounded-2xl overflow-hidden flex items-center justify-center border border-gray-100 shadow-sm">
             <Image
               src={course.thumbnail || "/images/pageHeaderImg/courseImg.png"}
-              width={400}
-              height={400}
+              width={600}
+              height={338}
               alt={course.title}
               className="w-full h-full object-cover"
             />
@@ -151,7 +151,7 @@ export default function CourseDetails({ id }: { id: string }) {
               <p className="text-xs font-semibold text-violet-600 uppercase tracking-widest mb-2">
                 {course.category?.name || "Online Course"}
               </p>
-              <h1 className="text-3xl font-extrabold text-gray-900 leading-tight mb-2">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight mb-2">
                 {course.title}
               </h1>
               <StarRating
@@ -159,7 +159,7 @@ export default function CourseDetails({ id }: { id: string }) {
                 count={course.totalReviews || 0}
               />
 
-              <div className="mt-6">
+              <div className="mt-4 sm:mt-6">
                 <h3 className="text-sm font-bold text-gray-800 mb-2 uppercase tracking-wide">
                   About this course
                 </h3>
@@ -170,14 +170,17 @@ export default function CourseDetails({ id }: { id: string }) {
               </div>
             </div>
 
-            <div className="mt-8">
+            <div className="mt-6 sm:mt-8">
               {!isEnrolled && (
-                <div className="flex items-baseline gap-2 mb-4">
-                  <span className="text-4xl font-black text-violet-600">
+                <div className="flex items-baseline gap-2 mb-3 flex-wrap">
+                  <span className="text-3xl sm:text-4xl font-black text-violet-600">
                     ${course.price}
                   </span>
                   <span className="text-sm text-gray-400 line-through">
                     ${course.price + 100}
+                  </span>
+                  <span className="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                    Save $100 Today!
                   </span>
                 </div>
               )}
@@ -192,9 +195,9 @@ export default function CourseDetails({ id }: { id: string }) {
                     href={`/user-dashboard/my-courses/${course._id || id}`}
                     className="w-full block"
                   >
-                    <button className="cursor-pointer flex justify-center items-center gap-2 w-full py-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-extrabold text-sm tracking-widest transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 uppercase">
-                      <PlayCircle className="h-5 w-5" />
-                      Continue Learning
+                    <button className="cursor-pointer flex justify-center items-center gap-2 w-full py-3.5 sm:py-4 px-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-extrabold text-xs sm:text-sm tracking-wide sm:tracking-wider transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 uppercase text-center">
+                      <PlayCircle className="h-5 w-5 shrink-0" />
+                      <span>Continue Learning</span>
                     </button>
                   </Link>
                 </div>
@@ -202,11 +205,11 @@ export default function CourseDetails({ id }: { id: string }) {
                 <button
                   onClick={handlePurchase}
                   disabled={isProcessing}
-                  className="cursor-pointer flex justify-center items-center gap-2 w-full py-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-extrabold text-sm tracking-widest transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed uppercase"
+                  className="cursor-pointer flex justify-center items-center gap-2 w-full py-3.5 sm:py-4 px-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-extrabold text-xs sm:text-sm tracking-wide sm:tracking-wider transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed uppercase text-center"
                 >
                   {isProcessing ? (
                     <>
-                      <Loader2 className="h-4 w-4 animate-spin" /> PROCESSING...
+                      <Loader2 className="h-4 w-4 animate-spin shrink-0" /> PROCESSING...
                     </>
                   ) : (
                     `Enroll Now · $${course.price}`
@@ -214,7 +217,7 @@ export default function CourseDetails({ id }: { id: string }) {
                 </button>
               )}
 
-              <div className="flex items-center gap-6 mt-4 justify-center">
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-6 mt-4">
                 {[
                   { icon: "🔒", text: "Secure Payment" },
                   { icon: "↩️", text: "Life-time Access" },
@@ -222,7 +225,7 @@ export default function CourseDetails({ id }: { id: string }) {
                 ].map(({ icon, text }) => (
                   <span
                     key={text}
-                    className="flex items-center gap-1.5 text-[11px] font-bold text-gray-400 uppercase"
+                    className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-gray-400 uppercase whitespace-nowrap shrink-0"
                   >
                     <span>{icon}</span> {text}
                   </span>
@@ -233,7 +236,7 @@ export default function CourseDetails({ id }: { id: string }) {
         </div>
 
         {/* BOTTOM SECTION */}
-        <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="p-4 sm:p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10">
           <div>
             <h2 className="text-xl font-bold text-gray-900 mb-1">
               Course Highlights

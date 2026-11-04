@@ -19,7 +19,7 @@ export const DeleteAccountDialog = ({ isOpen, onClose, onConfirm }: DeleteAccoun
             />
             
             {/* Dialog Box */}
-            <div className="w-[440px] relative bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+            <div className="w-[92vw] max-w-[440px] relative bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
                 {/* Close Button */}
                 <button 
                     onClick={onClose}
@@ -28,7 +28,7 @@ export const DeleteAccountDialog = ({ isOpen, onClose, onConfirm }: DeleteAccoun
                     <X size={16} className="text-zinc-400 group-hover:text-zinc-800" />
                 </button>
 
-                <div className="px-10 py-10 flex flex-col items-center justify-center gap-8">
+                <div className="px-6 py-8 sm:px-10 sm:py-10 flex flex-col items-center justify-center gap-6 sm:gap-8">
                     <h3 className="text-center text-zinc-600 text-xl font-semibold font-['Figtree',_sans-serif] leading-normal tracking-tight">
                         Do you want to delete your account?
                     </h3>

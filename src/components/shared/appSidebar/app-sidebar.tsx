@@ -237,14 +237,14 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
                   className={`h-12 rounded-lg transition-all duration-200 px-4 gap-3 ${
                     isActive
                       ? "bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black shadow-md hover:from-[#F9C32C] hover:to-[#EFA00B] hover:text-black"
-                      : "bg-[#F8FAFC] text-slate-500 hover:bg- hover:text-[#B77900] hover:shadow-sm"
+                      : "bg-[#F8FAFC] text-slate-600 hover:bg-[#F8FAFC] hover:text-[#B77900] hover:shadow-sm"
                   }`}
                 >
                   <item.icon
                     className={`h-5 w-5 ${
                       isActive
                         ? "text-black"
-                        : "text-slate-500 group-hover:text-[#B77900]"
+                        : "text-slate-500 group-hover/menu-item:text-[#B77900]"
                     }`}
                   />
                   <span className="font-semibold">{item.title}</span>
@@ -269,11 +269,11 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
                   className={`h-12 rounded-lg transition-all duration-200 px-4 gap-3 ${
                     isActive
                       ? "bg-linear-to-r from-[#F9C32C] to-[#EFA00B] text-black shadow-md"
-                      : "bg-[#F8FAFC] text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                      : "bg-[#F8FAFC] text-slate-500 hover:bg-[#F8FAFC] hover:text-[#B77900] hover:shadow-sm"
                   }`}
                 >
                   <item.icon
-                    className={`h-5 w-5 ${isActive ? "text-black" : "text-slate-500"}`}
+                    className={`h-5 w-5 ${isActive ? "text-black" : "text-slate-500 group-hover/menu-item:text-[#B77900]"}`}
                   />
                   <span className="font-semibold">{item.title}</span>
                 </SidebarMenuButton>

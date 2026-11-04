@@ -183,7 +183,7 @@ export default function OtpVerification() {
 
   return (
     <AuthBackground>
-      <div className="max-w-[540px] lg:w-[540px] h-auto mx-auto bg-[#FFF] p-8 rounded-2xl flex flex-col items-center">
+      <div className="relative w-full max-w-[540px] h-auto mx-auto bg-[#FFF] p-6 sm:p-8 rounded-2xl flex flex-col items-center shadow-xl">
         {/* Close Button */}
         <button
           type="button"

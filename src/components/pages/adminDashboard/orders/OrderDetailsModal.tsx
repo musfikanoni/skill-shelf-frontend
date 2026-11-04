@@ -28,8 +28,8 @@ export function OrderDetailsModal({ orderId, isOpen, onClose }: OrderDetailsModa
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[850px] p-0 overflow-hidden rounded-xl border border-slate-200 shadow-2xl bg-[#F8FAFC]">
-        <DialogHeader className="px-8 py-6 border-b border-slate-200 bg-white">
+      <DialogContent className="w-[95vw] max-w-[850px] p-0 overflow-y-auto max-h-[90vh] rounded-xl border border-slate-200 shadow-2xl bg-[#F8FAFC]">
+        <DialogHeader className="px-4 sm:px-8 py-4 sm:py-6 border-b border-slate-200 bg-white">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-2xl font-bold text-[#0F172A] flex items-center gap-3">
               Order Details
@@ -40,7 +40,7 @@ export function OrderDetailsModal({ orderId, isOpen, onClose }: OrderDetailsModa
           </div>
         </DialogHeader>
 
-        <div className="p-8">
+        <div className="p-4 sm:p-8">
           {isLoading ? (
             <div className="grid grid-cols-2 gap-6">
               <Skeleton className="h-32 w-full rounded-xl" />

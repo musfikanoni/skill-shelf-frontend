@@ -29,21 +29,29 @@ const packages = [
   {
     id: "basic",
     name: "Basic",
-    description: "Product Files • Basic Commercial Rights • Email Support",
+    features: ["Product Files", "Basic Commercial Rights", "Email Support"],
     priceKey: "basic",
   },
   {
     id: "pro",
     name: "Pro",
-    description:
-      "Everything In Basic • Premium Templates • Priority Support • Commercial License",
+    features: [
+      "Everything In Basic",
+      "Premium Templates",
+      "Priority Support",
+      "Commercial License",
+    ],
     priceKey: "pro",
   },
   {
     id: "vip",
     name: "VIP",
-    description:
-      "Everything In Pro • Done-For-You Marketing • Private Coaching • Reseller Rights",
+    features: [
+      "Everything In Pro",
+      "Done-For-You Marketing",
+      "Private Coaching",
+      "Reseller Rights",
+    ],
     priceKey: "vip",
   },
 ];
@@ -349,16 +357,16 @@ export default function SEOToolkitBundle() {
     <div className="min-h-screen bg-gray-50 flex items-start justify-center py-10 px-4 font-sans">
       <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md overflow-hidden">
         {/* TOP SECTION */}
-        <div className="flex flex-col sm:flex-row gap-5 p-6 border-b border-gray-100">
+        <div className="flex flex-col md:flex-row gap-6 lg:gap-8 p-4 sm:p-6 md:p-8 border-b border-gray-100">
           {/* Image */}
-          <div className="w-[300px] h-[300px] bg-slate-50 rounded-2xl overflow-hidden flex items-center justify-center">
+          <div className="w-full sm:w-[320px] md:w-[380px] lg:w-[420px] aspect-square max-w-[320px] sm:max-w-none mx-auto md:mx-0 bg-slate-50 rounded-2xl overflow-hidden flex items-center justify-center shrink-0">
             <Image
               src={
                 product.images?.[0] ||
                 "/images/seoToolkitImg/seoToolkitImg1.png"
               }
-              width={300}
-              height={300}
+              width={450}
+              height={450}
               alt={product.name}
               className="w-full h-full object-cover"
             />
@@ -385,19 +393,19 @@ export default function SEOToolkitBundle() {
 
             {/* Already Purchased Notice */}
             {isAlreadyPurchased && (
-              <div className="mt-3 flex items-center justify-between p-3.5 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl text-xs font-semibold">
-                <div className="flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0" />
-                  <span>
+              <div className="mt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 p-3 sm:p-3.5 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl text-xs font-semibold">
+                <div className="flex items-start sm:items-center gap-2 min-w-0">
+                  <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5 sm:mt-0" />
+                  <span className="leading-snug">
                     You have already purchased this product. You can't purchase
                     it again.
                   </span>
                 </div>
                 <button
                   onClick={() => router.push("/user-dashboard/downloads")}
-                  className="text-amber-800 underline hover:text-amber-950 font-bold ml-2 cursor-pointer whitespace-nowrap"
+                  className="text-amber-800 underline hover:text-amber-950 font-bold cursor-pointer whitespace-nowrap shrink-0 self-end sm:self-auto"
                 >
-                  Downloads
+                  Downloads &rarr;
                 </button>
               </div>
             )}
@@ -466,9 +474,19 @@ export default function SEOToolkitBundle() {
                               </span>
                             )}
                           </div>
-                          <p className="text-xs text-gray-500 mt-0.5 leading-snug">
-                            {pkg.description}
-                          </p>
+                          <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 mt-1">
+                            {pkg.features.map((feature, idx) => (
+                              <span
+                                key={idx}
+                                className="inline-flex items-center gap-1.5 text-xs text-gray-500 whitespace-nowrap"
+                              >
+                                {idx > 0 && (
+                                  <span className="text-gray-300 select-none">•</span>
+                                )}
+                                <span>{feature}</span>
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
                       <span
@@ -485,21 +503,23 @@ export default function SEOToolkitBundle() {
             {/* CTA */}
             {isAlreadyPurchased ? (
               <button
-                onClick={handlePurchase}
-                className="cursor-pointer flex justify-center items-center gap-2 mt-4 w-full py-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-extrabold text-sm tracking-widest transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed uppercase"
+                onClick={() => router.push("/user-dashboard/downloads")}
+                className="cursor-pointer flex items-center justify-center gap-2 mt-4 w-full py-3.5 px-3 sm:px-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-black text-[11px] min-[390px]:text-xs md:text-sm tracking-tight min-[390px]:tracking-normal transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 uppercase text-center"
               >
-                <Download className="h-4 w-4" /> Already Purchased · Access in
-                Dashboard
+                <Download className="h-4 w-4 shrink-0" />
+                <span className="text-center leading-tight">
+                  Already Purchased · Access in Dashboard
+                </span>
               </button>
             ) : (
               <button
                 onClick={handlePurchase}
                 disabled={isProcessing}
-                className="cursor-pointer flex justify-center items-center gap-2 mt-4 w-full py-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-extrabold text-sm tracking-widest transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed uppercase"
+                className="cursor-pointer flex items-center justify-center gap-2 mt-4 w-full py-3.5 px-4 rounded-xl bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-gray-900 font-extrabold text-xs sm:text-sm tracking-wide sm:tracking-wider transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed uppercase text-center"
               >
                 {isProcessing ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin" /> PROCESSING...
+                    <Loader2 className="h-4 w-4 animate-spin shrink-0" /> PROCESSING...
                   </>
                 ) : (
                   `Buy Now · $${selectedPkgPrice}`
@@ -508,7 +528,7 @@ export default function SEOToolkitBundle() {
             )}
 
             {/* Trust Badges */}
-            <div className="flex items-center gap-4 mt-3 justify-center">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-3 justify-center">
               {[
                 { icon: "🔒", text: "Secure Payment" },
                 { icon: "↩️", text: "30-Day Money Back" },
@@ -526,7 +546,7 @@ export default function SEOToolkitBundle() {
         </div>
 
         {/* BOTTOM SECTION */}
-        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Product Overview */}
           <div>
             <h2 className="text-lg font-bold text-gray-900">
@@ -538,7 +558,7 @@ export default function SEOToolkitBundle() {
             <p className="text-sm font-semibold text-gray-700 mb-2">
               Key Features
             </p>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
               {(
                 product.features || [
                   "10 SEO Tools",
@@ -556,20 +576,20 @@ export default function SEOToolkitBundle() {
 
             {/* Full PLR Rights */}
             <div className="mt-5 bg-green-50 border border-green-100 rounded-xl p-4">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                  <CheckIcon className="text-white w-3 h-3" />
+              <div className="flex items-start gap-3 mb-3">
+                <span className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                  <CheckIcon className="text-white w-3.5 h-3.5" />
                 </span>
-                <div>
-                  <p className="text-sm font-bold text-gray-900">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold text-gray-900 leading-snug">
                     Full Commercial Rights Included
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-600 mt-0.5 leading-relaxed">
                     Use these products to build your business
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
                 {[
                   "Resell with 100% profit",
                   "Edit and rebrand",

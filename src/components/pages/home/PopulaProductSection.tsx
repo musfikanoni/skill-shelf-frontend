@@ -148,11 +148,11 @@ export default function PopulaProductSection() {
         {bundles.map((bundle: Bundle) => (
           <div
             key={bundle.id}
-            className="relative border border-gray-200 rounded-3xl p-8 md:p-10 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row justify-between gap-8 overflow-hidden"
+            className="relative border border-gray-200 rounded-3xl p-5 sm:p-8 md:p-10 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row justify-between gap-6 md:gap-8 overflow-hidden"
           >
             {bundle.sideLabel && (
               <div
-                className={`absolute left-0 h-24 w-8 rounded-sm top-1/2 -translate-y-1/2 flex items-center justify-center ${bundle.sideLabel.colorClass}`}
+                className={`absolute left-0 h-24 w-8 rounded-sm top-1/2 -translate-y-1/2 hidden sm:flex items-center justify-center ${bundle.sideLabel.colorClass}`}
               >
                 <span className="text-white text-[10px] font-bold tracking-widest uppercase -rotate-90 whitespace-nowrap">
                   {bundle.sideLabel.text}
@@ -160,7 +160,7 @@ export default function PopulaProductSection() {
               </div>
             )}
 
-            <div className={`${bundle.sideLabel ? "pl-6" : ""} flex-1`}>
+            <div className={`${bundle.sideLabel ? "sm:pl-6" : ""} flex-1`}>
               <div
                 className={`flex items-center gap-2 mb-3 text-xs font-bold uppercase tracking-wider ${bundle.badge.colorClass}`}
               >
@@ -168,7 +168,7 @@ export default function PopulaProductSection() {
                 {bundle.badge.text}
               </div>
 
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">
                 {bundle.title}
               </h3>
 
@@ -194,12 +194,12 @@ export default function PopulaProductSection() {
               </div>
             </div>
 
-            <div className="flex flex-col items-end justify-between min-w-[200px]">
-              <div className="text-right">
+            <div className="flex flex-col items-start md:items-end justify-between min-w-0 md:min-w-[200px] border-t md:border-t-0 pt-4 md:pt-0 border-gray-100">
+              <div className="text-left md:text-right">
                 <p className="text-gray-400 text-sm line-through">
                   ${bundle.originalPrice.toFixed(0)} individually
                 </p>
-                <p className="text-4xl font-black text-gray-900">
+                <p className="text-3xl sm:text-4xl font-black text-gray-900">
                   ${bundle.currentPrice}
                 </p>
                 <div className="mt-2 bg-green-50 text-green-600 text-[11px] font-bold px-2.5 py-1 rounded-md border border-green-100 inline-block">
@@ -207,7 +207,7 @@ export default function PopulaProductSection() {
                   {bundle.discountPercent}% OFF)
                 </div>
               </div>
-              <div className="flex justify-center items-center mt-4 md:mt-0">
+              <div className="flex justify-start md:justify-center items-center mt-4 w-full md:w-auto">
                 <SecondaryButton
                   label="VIEW BUNDLE"
                   onClick={() => router.push(`/bundles/${bundle.id}`)}

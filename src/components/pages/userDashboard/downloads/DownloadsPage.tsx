@@ -287,7 +287,7 @@ export default function DownloadsPage() {
 
       {/* Review Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-[420px] rounded-3xl p-0 overflow-hidden border-none shadow-2xl">
+        <DialogContent className="w-[92vw] max-w-[420px] rounded-3xl p-0 overflow-hidden border-none shadow-2xl">
           <div className="relative p-8 space-y-6">
             {/* Header Content */}
             <div className="flex flex-col items-center text-center space-y-4 pt-4">

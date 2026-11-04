@@ -282,7 +282,7 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
         open={!!bundleToDelete}
         onOpenChange={(open) => !open && setBundleToDelete(null)}
       >
-        <DialogContent className="sm:max-w-[480px] bg-white rounded-[24px]! p-0 overflow-hidden border-none shadow-2xl">
+        <DialogContent className="w-[92vw] max-w-[480px] bg-white rounded-[24px]! p-0 overflow-hidden border-none shadow-2xl">
           <div className="p-6 pb-5">
             <div className="flex justify-between items-center mb-3">
               <DialogTitle className="text-[22px] font-bold text-[#0F172A] font-inter">

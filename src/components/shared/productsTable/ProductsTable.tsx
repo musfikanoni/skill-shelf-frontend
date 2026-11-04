@@ -161,14 +161,14 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
   return (
     <div className="w-full bg-white rounded-lg shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.10)] outline-2 outline-offset-[-2px] outline-slate-200 flex flex-col w-full overflow-hidden">
       {/* Header */}
-      <div className="self-stretch h-24 border-b border-slate-200 flex items-center justify-between px-6 bg-white z-20">
+      <div className="self-stretch min-h-24 py-4 border-b border-slate-200 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 px-4 sm:px-6 bg-white z-20">
         <div className="text-slate-900 text-xl font-bold font-inter leading-7">
           All Products
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
           {/* Search */}
-          <div className="w-[400px] !h-14 px-4 py-2 rounded-lg outline-2 outline-offset-[-2px] outline-slate-300 flex items-center gap-2 bg-white">
+          <div className="w-full md:w-[320px] lg:w-[400px] !h-14 px-4 py-2 rounded-lg outline-2 outline-offset-[-2px] outline-slate-300 flex items-center gap-2 bg-white">
             <Search className="w-5 h-5 text-slate-500" />
             <input
               type="text"

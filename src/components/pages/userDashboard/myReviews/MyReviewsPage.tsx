@@ -64,7 +64,7 @@ export default function MyReviewsPage() {
   return (
     <div className="space-y-8 pb-10">
       {/* Banner */}
-      <div className="bg-[#6C3FC5] rounded-2xl p-8 shadow-sm">
+      <div className="bg-[#6C3FC5] rounded-2xl p-6 sm:p-8 shadow-sm">
         <h1 className="text-2xl md:text-3xl font-extrabold text-white">My Reviews</h1>
         <p className="text-white/80 font-medium mt-1">Manage your course reviews and ratings</p>
       </div>
@@ -89,7 +89,7 @@ export default function MyReviewsPage() {
       </div>
 
       {/* Reviews List */}
-      <Card className="bg-white border border-slate-100 shadow-sm rounded-2xl p-8">
+      <Card className="bg-white border border-slate-100 shadow-sm rounded-2xl p-4 sm:p-8">
         <h2 className="text-xl font-extrabold text-[#1E293B] mb-8">Your Reviews</h2>
         <div className="space-y-6">
           {reviews.map((review) => (
@@ -149,7 +149,7 @@ export default function MyReviewsPage() {
 
       {/* Edit Review Modal */}
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-        <DialogContent className="sm:max-w-[420px] rounded-3xl p-0 overflow-hidden border-none shadow-2xl">
+        <DialogContent className="w-[92vw] max-w-[420px] rounded-3xl p-0 overflow-hidden border-none shadow-2xl">
           <div className="relative p-8 space-y-6">
             {/* <DialogClose className="absolute right-6 top-6 h-8 w-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
               <X className="h-4 w-4" />

@@ -91,10 +91,10 @@ const PlanCard: React.FC<PlanCardProps> = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={`
-        relative flex flex-col rounded-2xl px-8 py-8 transition-all duration-300
+        relative flex flex-col rounded-2xl px-5 sm:px-8 py-8 transition-all duration-300
         ${
           isPopular
-            ? "border-2 border-purple-500 shadow-2xl shadow-purple-200 scale-[1.03] bg-white z-10"
+            ? "border-2 border-purple-500 shadow-2xl shadow-purple-200 md:scale-[1.03] bg-white z-10"
             : "border border-gray-200 bg-white shadow-md"
         }
         ${hovered && !isPopular ? "shadow-xl -translate-y-1" : ""}

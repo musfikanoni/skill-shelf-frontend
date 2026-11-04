@@ -68,13 +68,13 @@ export default function FeaturedCourses() {
     return (
       <section className="bg-gray-50 py-16 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Skeleton className="h-[550px] rounded-3xl" />
+          <Skeleton className="h-[450px] sm:h-[550px] rounded-3xl" />
           <div className="flex flex-col gap-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Skeleton className="aspect-square rounded-3xl" />
-              <Skeleton className="aspect-square rounded-3xl" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <Skeleton className="h-64 sm:aspect-square rounded-3xl" />
+              <Skeleton className="h-64 sm:aspect-square rounded-3xl" />
             </div>
-            <Skeleton className="h-[250px] rounded-3xl" />
+            <Skeleton className="h-[220px] rounded-3xl" />
           </div>
         </div>
       </section>
@@ -95,7 +95,7 @@ export default function FeaturedCourses() {
   if (courses.length === 0) return null;
 
   return (
-    <section className="bg-gray-50 py-16 px-4">
+    <section className="bg-gray-50 py-12 md:py-16 px-4">
       {pathName === "/" && (
         <SectionHeader
           badge="🌿 Learn & Grow"
@@ -109,7 +109,7 @@ export default function FeaturedCourses() {
         {courses[0] && (
           <div
             onClick={() => handleViewDetails(courses[0]._id)}
-            className="relative rounded-3xl overflow-hidden group cursor-pointer h-full min-h-[550px] flex flex-col shadow-xl"
+            className="relative rounded-3xl overflow-hidden group cursor-pointer h-full min-h-[280px] sm:min-h-[320px] lg:min-h-[550px] flex flex-col shadow-xl"
           >
             <img
               src={courses[0].thumbnail}
@@ -118,27 +118,30 @@ export default function FeaturedCourses() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
-            <span className="absolute top-6 left-6 bg-purple-600 text-white text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full">
+            <span className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-purple-600 text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 sm:px-4 sm:py-1.5 rounded-full">
               {courses[0].category?.name || "COURSE"}
             </span>
 
-            <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-              <h3 className="text-3xl font-bold mb-2">{courses[0].title}</h3>
-              <p className="text-gray-300 mb-4 max-w-md line-clamp-2">
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 text-white">
+              <h3 className="text-base sm:text-xl lg:text-3xl font-bold mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-2">
+                {courses[0].title}
+              </h3>
+              <p className="hidden sm:block text-gray-300 mb-4 max-w-md line-clamp-2 text-sm sm:text-base">
                 {courses[0].description.replace(/"/g, "")}
               </p>
               <StarRating
                 rating={courses[0].averageRating}
                 reviews={courses[0].totalReviews}
+                size="sm"
               />
-              <div className="border-t border-white/20 mt-4 pt-4 flex items-center justify-between text-sm mb-6">
-                <span className="flex items-center gap-2">
-                  <BookIcon /> {courses[0].lessons || 12} lessons
+              <div className="border-t border-white/20 mt-3 sm:mt-4 pt-3 sm:pt-4 flex items-center justify-between text-[11px] sm:text-sm mb-3 sm:mb-6">
+                <span className="flex items-center gap-1.5 sm:gap-2">
+                  <BookIcon size="sm" /> {courses[0].lessons || 12} lessons
                 </span>
                 <span>{courses[0].hours || 6} hours</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-3xl font-black text-yellow-400">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-black text-yellow-400">
                   ${courses[0].price}
                 </span>
                 <button
@@ -146,7 +149,7 @@ export default function FeaturedCourses() {
                     e.stopPropagation();
                     handleViewDetails(courses[0]._id);
                   }}
-                  className="bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black font-black px-6 py-2 rounded-md transition-all active:scale-95 uppercase text-sm"
+                  className="bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black font-black px-3.5 sm:px-6 py-1.5 sm:py-2 rounded-md transition-all active:scale-95 uppercase text-[10px] sm:text-xs lg:text-sm"
                 >
                   View Details
                 </button>
@@ -158,12 +161,12 @@ export default function FeaturedCourses() {
         {/* Right Side Column */}
         <div className="flex flex-col gap-6">
           {/* Two Small Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {courses.slice(1, 3).map((course: any) => (
               <div
                 key={course._id}
                 onClick={() => handleViewDetails(course._id)}
-                className="relative rounded-3xl overflow-hidden group cursor-pointer aspect-square shadow-lg"
+                className="relative rounded-3xl overflow-hidden group cursor-pointer aspect-auto sm:aspect-square min-h-[280px] sm:min-h-0 shadow-lg"
               >
                 <img
                   src={course.thumbnail}
@@ -177,7 +180,7 @@ export default function FeaturedCourses() {
                 </span>
 
                 <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-                  <h3 className="text-lg font-bold mb-1 line-clamp-1">
+                  <h3 className="text-base sm:text-lg font-bold mb-1 line-clamp-1">
                     {course.title}
                   </h3>
                   <StarRating
@@ -192,7 +195,7 @@ export default function FeaturedCourses() {
                     <span>{course.hours || 4}h</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold text-yellow-400">
+                    <span className="text-lg sm:text-xl font-bold text-yellow-400">
                       ${course.price}
                     </span>
                     <button
@@ -200,7 +203,7 @@ export default function FeaturedCourses() {
                         e.stopPropagation();
                         handleViewDetails(course._id);
                       }}
-                      className="bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black font-bold text-[10px] px-4 py-2 rounded-md uppercase"
+                      className="bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black font-bold text-[10px] px-3.5 py-1.5 rounded-md uppercase"
                     >
                       View Details
                     </button>
@@ -214,7 +217,7 @@ export default function FeaturedCourses() {
           {courses[3] && (
             <div
               onClick={() => handleViewDetails(courses[3]._id)}
-              className="relative rounded-3xl overflow-hidden group cursor-pointer flex-1 min-h-[250px] shadow-lg"
+              className="relative rounded-3xl overflow-hidden group cursor-pointer flex-1 min-h-[280px] sm:min-h-[250px] shadow-lg"
             >
               <img
                 src={courses[3].thumbnail}
@@ -227,13 +230,13 @@ export default function FeaturedCourses() {
                 {courses[3].category?.name || "COURSE"}
               </span>
 
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <h3 className="text-2xl font-bold mb-1">{courses[3].title}</h3>
-                <p className="text-sm text-gray-400 mb-3 line-clamp-1">
+              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-white">
+                <h3 className="text-lg sm:text-2xl font-bold mb-1">{courses[3].title}</h3>
+                <p className="text-xs sm:text-sm text-gray-400 mb-3 line-clamp-1">
                   {courses[3].description.replace(/"/g, "")}
                 </p>
-                <div className="border-t border-white/20 mt-4 pt-4 flex items-center justify-between text-sm mb-4">
-                  <div className="flex gap-6">
+                <div className="border-t border-white/20 mt-3 sm:mt-4 pt-3 sm:pt-4 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm mb-3 sm:mb-4">
+                  <div className="flex gap-4 sm:gap-6">
                     <span className="flex items-center gap-2">
                       <BookIcon /> {courses[3].lessons || 24} lessons
                     </span>
@@ -246,7 +249,7 @@ export default function FeaturedCourses() {
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-black text-yellow-400">
+                  <span className="text-xl sm:text-2xl font-black text-yellow-400">
                     ${courses[3].price}
                   </span>
                   <button
@@ -254,7 +257,7 @@ export default function FeaturedCourses() {
                       e.stopPropagation();
                       handleViewDetails(courses[3]._id);
                     }}
-                    className="bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black font-black px-6 py-2 rounded-md transition-all active:scale-95 uppercase text-sm"
+                    className="bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black font-black px-4 sm:px-6 py-2 rounded-md transition-all active:scale-95 uppercase text-xs sm:text-sm"
                   >
                     View Details
                   </button>

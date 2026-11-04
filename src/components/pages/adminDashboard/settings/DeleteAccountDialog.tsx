@@ -19,7 +19,7 @@ export const DeleteAccountDialog = ({ isOpen, onClose, onConfirm }: DeleteAccoun
             />
             
             {/* Dialog Box */}
-            <div className="w-[440px] relative bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+            <div className="w-[92vw] max-w-[440px] relative bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
                 {/* Close Button */}
                 <button 
                     onClick={onClose}

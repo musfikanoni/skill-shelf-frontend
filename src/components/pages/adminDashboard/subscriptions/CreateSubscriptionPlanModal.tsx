@@ -141,7 +141,7 @@ export const CreateSubscriptionPlanModal: React.FC<CreateSubscriptionPlanModalPr
 
   return (
     <Dialog open={true} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-[750px]! p-6 bg-white rounded-2xl shadow-[0px_0px_10px_0px_rgba(0,0,0,0.10)] border-none gap-6 overflow-y-auto max-h-[90vh] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300">
+      <DialogContent className="w-[92vw]! max-w-[750px]! p-4 sm:p-6 bg-white rounded-2xl shadow-[0px_0px_10px_0px_rgba(0,0,0,0.10)] border-none gap-6 overflow-y-auto max-h-[90vh] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300">
         <DialogHeader className="gap-3">
           <div className="flex items-center gap-2">
             <div className="p-2.5 bg-amber-500/10 rounded-full flex items-center justify-center">

@@ -79,35 +79,35 @@ export default function VipBundlePage() {
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-center px-4 py-16"
+      className="min-h-screen flex flex-col items-center justify-center px-4 py-12 md:py-16"
       style={{
         background:
           "radial-gradient(ellipse at top left, #3b1a6e 0%, #1a0a3c 40%, #0f0626 100%)",
       }}
     >
       <div
-        className="mb-6 px-5 py-2 rounded-full text-sm font-bold tracking-wide flex items-center gap-2"
+        className="mb-6 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide flex items-center justify-center gap-2 text-center max-w-[95vw]"
         style={{
           background: "linear-gradient(90deg, #f5a623 0%, #f0c040 100%)",
           color: "#1a0a3c",
         }}
       >
         <span>👑</span>
-        <span>VIP ALL-ACCESS BUNDLE – SAVE $2,000+</span>
+        <span className="truncate">VIP ALL-ACCESS BUNDLE – SAVE $2,000+</span>
       </div>
 
       {/* Heading */}
-      <h1 className="text-3xl md:text-6xl font-extrabold text-white text-center mb-4 leading-tight">
+      <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white text-center mb-4 leading-tight">
         Get Everything in One Bundle
       </h1>
-      <p className="text-lg text-purple-200 text-center mb-12 max-w-xl">
+      <p className="text-base sm:text-lg text-purple-200 text-center mb-8 md:mb-12 max-w-xl">
         Unlock unlimited access to 500+ products, all courses, and exclusive VIP
         content
       </p>
 
       {/* Card */}
       <div
-        className="w-full max-w-2xl rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-8"
+        className="w-full max-w-2xl rounded-2xl p-5 sm:p-8 flex flex-col md:flex-row gap-6 md:gap-8"
         style={{
           background: "rgba(255,255,255,0.06)",
           border: "1px solid rgba(255,255,255,0.10)",
@@ -115,7 +115,7 @@ export default function VipBundlePage() {
       >
         {/* Left: Features */}
         <div className="flex-1">
-          <h2 className="text-white font-bold text-xl mb-5">
+          <h2 className="text-white font-bold text-lg sm:text-xl mb-4 sm:mb-5">
             What&apos;s Included:
           </h2>
           <ul className="space-y-3">
@@ -149,16 +149,13 @@ export default function VipBundlePage() {
           <p className="text-purple-100 text-sm font-medium mb-1">
             Total Value:
           </p>
-          <p className="text-white text-2xl font-bold line-through opacity-70 mb-1">
+          <p className="text-white text-xl sm:text-2xl font-bold line-through opacity-70 mb-1">
             ${originalPrice}
           </p>
           <p className="text-purple-100 text-sm font-medium mb-1">
             Your Price:
           </p>
-          <p
-            className="text-white font-extrabold leading-none mb-1"
-            style={{ fontSize: "4rem" }}
-          >
+          <p className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-none mb-1">
             ${currentPrice}
           </p>
           <p className="text-purple-100 text-sm mb-4">/{interval}</p>
@@ -170,7 +167,7 @@ export default function VipBundlePage() {
             You Save ${savings}!
           </div>
 
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center w-full">
             <SecondaryButton
               label={isProcessing ? "Processing..." : "Get the Bundle Now"}
               onClick={handlePurchase}

@@ -180,7 +180,7 @@ const Navbar = () => {
               }
             />
 
-            <DropdownMenuContent className="-ml-16">
+            <DropdownMenuContent align="end" className="w-52 bg-zinc-900 border-zinc-800 text-white mt-2">
               <DropdownMenuItem
                 render={<Link href="/products">Products</Link>}
               />

@@ -47,7 +47,7 @@ export default function OurCustomer() {
   );
 
   return (
-    <div className="bg-white py-20 px-4 font-sans">
+    <div className="bg-white py-12 sm:py-16 md:py-20 px-4 font-sans">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-center mb-6">
           <div className="inline-flex items-center gap-1.5 bg-[#f3e8ff] rounded-md px-4 py-1.5 border border-purple-100">
@@ -58,11 +58,11 @@ export default function OurCustomer() {
           </div>
         </div>
 
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#111827] mb-4 tracking-tight">
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-[#111827] mb-3 sm:mb-4 tracking-tight">
             What Our Customers Say
           </h2>
-          <p className="text-xl text-[#64748b]">
+          <p className="text-base sm:text-lg md:text-xl text-[#64748b]">
             Real success stories from digital entrepreneurs
           </p>
         </div>
@@ -71,7 +71,7 @@ export default function OurCustomer() {
           {testimonials.map((t, index) => (
             <div
               key={index}
-              className="bg-[#f8fafc]/50 rounded-2xl p-8 border border-slate-200 flex flex-col shadow-sm"
+              className="bg-[#f8fafc]/50 rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col shadow-sm"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="relative w-12 h-12 shrink-0 overflow-hidden rounded-full border-2 border-purple-200 bg-purple-50 flex items-center justify-center">

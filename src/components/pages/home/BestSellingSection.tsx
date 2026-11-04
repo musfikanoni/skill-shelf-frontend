@@ -198,7 +198,7 @@ const BestSellingProducts: FC = () => {
   if (error) return null;
 
   return (
-    <section className="bg-gray-50 py-20 px-5 md:px-8">
+    <section className="bg-gray-50 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Badge */}
@@ -210,8 +210,8 @@ const BestSellingProducts: FC = () => {
         </div>
 
         {/* Section Heading */}
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
+        <div className="text-center mb-8 sm:mb-14">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-gray-900 mb-3 sm:mb-4 tracking-tight">
             Best Selling Products
           </h2>
 
@@ -238,7 +238,7 @@ const BestSellingProducts: FC = () => {
         )}
 
         {/* View All Button */}
-        <div className="flex justify-center items-center mt-14">
+        <div className="flex justify-center items-center mt-8 sm:mt-14">
           <SecondaryButton
             label="View All Products"
             onClick={viewAllProducts}

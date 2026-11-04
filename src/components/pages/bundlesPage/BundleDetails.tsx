@@ -107,9 +107,9 @@ export default function BundleDetails({ id }: { id: string }) {
             <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md overflow-hidden">
 
                 {/* TOP SECTION */}
-                <div className="flex flex-col sm:flex-row gap-8 p-8 border-b border-gray-100">
+                <div className="flex flex-col sm:flex-row gap-8 p-5 sm:p-8 border-b border-gray-100">
                     {/* Image */}
-                    <div className="w-full sm:w-[350px] aspect-square bg-slate-50 rounded-2xl overflow-hidden flex items-center justify-center border border-gray-100 shadow-inner">
+                    <div className="w-full sm:w-[300px] md:w-[350px] aspect-square mx-auto sm:mx-0 shrink-0 bg-slate-50 rounded-2xl overflow-hidden flex items-center justify-center border border-gray-100 shadow-inner">
                         <Image
                             src={bundle.products?.[0]?.images?.[0] || bundle.courses?.[0]?.thumbnail || "/images/pageHeaderImg/courseImg.png"}
                             width={350}
@@ -125,7 +125,7 @@ export default function BundleDetails({ id }: { id: string }) {
                             <p className="text-xs font-semibold text-violet-600 uppercase tracking-widest mb-1">
                                 Premium Digital Bundle
                             </p>
-                            <h1 className="text-3xl font-extrabold text-gray-900 leading-tight mb-2">{bundle.name}</h1>
+                            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight mb-2">{bundle.name}</h1>
                             <StarRating rating={avgRating || 0} count={totalReviews || 0} />
 
                             <div className="mt-6">
@@ -156,7 +156,7 @@ export default function BundleDetails({ id }: { id: string }) {
                             </button>
 
                             {/* Trust Badges */}
-                            <div className="flex items-center gap-6 mt-4 justify-center">
+                            <div className="flex flex-wrap items-center gap-3 sm:gap-6 mt-4 justify-center">
                                 {[
                                     { icon: "🔒", text: "Secure Payment" },
                                     { icon: "↩️", text: "Life-time Access" },
@@ -172,7 +172,7 @@ export default function BundleDetails({ id }: { id: string }) {
                 </div>
 
                 {/* BOTTOM SECTION */}
-                <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="p-5 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
 
                     <div>
                         <h2 className="text-xl font-bold text-gray-900 mb-1">What&apos;s Included</h2>

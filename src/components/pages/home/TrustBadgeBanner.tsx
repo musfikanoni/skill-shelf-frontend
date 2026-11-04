@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -13,152 +12,154 @@ export default function TrustBadgeBanner() {
   }, []);
 
   return (
-    <>
+    <div
+      className="relative w-full overflow-hidden border-y py-8 sm:py-10 md:py-14"
+      style={{
+        background: "linear-gradient(135deg, #0a0d1a 0%, #0d1228 40%, #0a0f20 70%, #080b18 100%)",
+        borderColor: "rgba(212,175,55,0.2)",
+        fontFamily: "'Barlow', sans-serif",
+      }}
+    >
       <div
-        className="relative w-full overflow-hidden border-y py-[60px]"
+        className="pointer-events-none absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, #0a0d1a 0%, #0d1228 40%, #0a0f20 70%, #080b18 100%)",
-          borderColor: "rgba(212,175,55,0.2)",
-          fontFamily: "'Barlow', sans-serif",
+          background:
+            "radial-gradient(ellipse 50% 80% at 15% 50%, rgba(212,175,55,0.05) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 85% 50%, rgba(212,175,55,0.04) 0%, transparent 60%)",
         }}
-      >
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 50% 80% at 15% 50%, rgba(212,175,55,0.05) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 85% 50%, rgba(212,175,55,0.04) 0%, transparent 60%)",
-          }}
-        />
+      />
 
-        <div className="relative z-10 mx-auto flex max-w-6xl flex-wrap items-center justify-around gap-6 px-6 py-5">
-
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="flex flex-col md:flex-row items-center justify-around gap-6 md:gap-8">
+          
           {/* ── Section 1: Premium Quality ── */}
           <div
-            className={`flex items-center gap-4 transition-all duration-500 ${visible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
-              }`}
+            className={`flex items-center gap-4 sm:gap-5 w-full max-w-[320px] md:max-w-none md:w-auto transition-all duration-500 ${
+              visible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+            }`}
           >
-            <Image className="w-[120px] h-[120px] md:w-[160px] md:h-[160px]"
-              src="/images/trustBadgeBanner/quality.png"
-              alt="Warranty Badge"
-              width={180}
-              height={180}
-            />
+            <div className="w-[100px] h-[100px] sm:w-[110px] sm:h-[110px] md:w-[140px] md:h-[140px] shrink-0 flex items-center justify-center">
+              <Image
+                src="/images/trustBadgeBanner/quality.png"
+                alt="Warranty Badge"
+                width={140}
+                height={140}
+                className="w-full h-full object-contain drop-shadow-[0_0_12px_rgba(245,197,24,0.3)]"
+              />
+            </div>
 
-            <div className="flex flex-col gap-[2px]">
-              <p className="text-[17px] font-bold text-gray-100">Trusted by Thousands</p>
-              <div className="flex gap-[2px]">
+            <div className="flex flex-col gap-0.5">
+              <p className="text-[17px] font-bold text-gray-100 whitespace-nowrap">
+                Trusted by Thousands
+              </p>
+              <div className="flex gap-0.5 my-0.5">
                 {[0, 1, 2, 3, 4].map((i) => (
                   <span
                     key={i}
-                    className="text-xl"
+                    className="text-lg text-[#f5c518] leading-none"
                     style={{
-                      color: "#f5c518",
                       textShadow: "0 0 10px rgba(245,197,24,0.7)",
-                      animation: "starPulse 2s ease-in-out infinite",
-                      animationDelay: `${i * 0.1}s`,
                     }}
                   >
                     ★
                   </span>
                 ))}
               </div>
-              <p className="text-[13px]" style={{ color: "rgba(200,200,220,0.65)" }}>
+              <p className="text-[13px] text-gray-400 font-medium">
                 4.9/5 Average Rating
               </p>
             </div>
           </div>
 
-          <div
-            className="hidden h-20 w-px md:block"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent, rgba(212,175,55,0.4) 20%, rgba(212,175,55,0.4) 80%, transparent)",
-            }}
-          />
+          {/* Divider 1 */}
+          <div className="w-full max-w-[320px] h-px bg-amber-500/20 md:hidden" />
+          <div className="hidden md:block h-20 w-px bg-gradient-to-b from-transparent via-amber-500/30 to-transparent" />
 
           {/* ── Section 2: 30-Day Money Back ── */}
           <div
-            className={`flex items-center gap-4 transition-all duration-500 ${visible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
-              }`}
+            className={`flex items-center gap-4 sm:gap-5 w-full max-w-[320px] md:max-w-none md:w-auto transition-all duration-500 ${
+              visible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+            }`}
             style={{ transitionDelay: "120ms" }}
           >
-            <Image className="w-[120px] h-[120px] md:w-[150px] md:h-[150px]"
-              src="/images/trustBadgeBanner/guaranty.png"
-              alt="Warranty Badge"
-              width={150}
-              height={150}
-            />
+            <div className="w-[100px] h-[100px] sm:w-[110px] sm:h-[110px] md:w-[140px] md:h-[140px] shrink-0 flex items-center justify-center">
+              <Image
+                src="/images/trustBadgeBanner/guaranty.png"
+                alt="Warranty Badge"
+                width={140}
+                height={140}
+                className="w-full h-full object-contain drop-shadow-[0_0_12px_rgba(245,197,24,0.3)]"
+              />
+            </div>
 
-            <div className="flex flex-col gap-[1px]">
+            <div className="flex flex-col">
               <p className="text-[18px] font-bold leading-snug text-gray-100">30-Day</p>
               <p className="text-[18px] font-bold leading-snug text-gray-100">Money Back</p>
               <p className="text-[18px] font-bold leading-snug text-gray-100">Guarantee</p>
             </div>
           </div>
-          <div
-            className="hidden h-20 w-px md:block"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent, rgba(212,175,55,0.4) 20%, rgba(212,175,55,0.4) 80%, transparent)",
-            }}
-          />
+
+          {/* Divider 2 */}
+          <div className="w-full max-w-[320px] h-px bg-amber-500/20 md:hidden" />
+          <div className="hidden md:block h-20 w-px bg-gradient-to-b from-transparent via-amber-500/30 to-transparent" />
 
           {/* ── Section 3: Secure Checkout ── */}
           <div
-            className={`flex items-center gap-4 transition-all duration-500 ${visible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
-              }`}
+            className={`flex items-center gap-4 sm:gap-5 w-full max-w-[320px] md:max-w-none md:w-auto transition-all duration-500 ${
+              visible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+            }`}
             style={{ transitionDelay: "240ms" }}
           >
-            <Image className="w-[100px] h-[100px] md:w-[150px] md:h-[150px]"
-              src="/images/trustBadgeBanner/secure.png"
-              alt="Warranty Badge"
-              width={130}
-              height={130}
-            />
+            <div className="w-[100px] h-[100px] sm:w-[110px] sm:h-[110px] md:w-[140px] md:h-[140px] shrink-0 flex items-center justify-center">
+              <Image
+                src="/images/trustBadgeBanner/secure.png"
+                alt="Secure Badge"
+                width={140}
+                height={140}
+                className="w-full h-full object-contain drop-shadow-[0_0_12px_rgba(245,197,24,0.3)]"
+              />
+            </div>
 
-            <div>
-              <p className="text-[17px] font-bold tracking-wider text-gray-100">100% SECURE</p>
-              <p className="text-[17px] font-bold tracking-wider text-gray-100">CHECKOUT</p>
+            <div className="flex flex-col">
+              <p className="text-[17px] font-bold tracking-wider text-gray-100 whitespace-nowrap">
+                100% SECURE
+              </p>
+              <p className="text-[17px] font-bold tracking-wider text-gray-100">
+                CHECKOUT
+              </p>
               <div className="mt-2 flex items-center gap-2">
                 {/* Visa */}
-                <div className="flex h-7 items-center justify-center rounded bg-white px-2 shadow-lg">
+                <div className="flex h-7 items-center justify-center rounded bg-white px-2 shadow-xs">
                   <span className="text-[13px] font-extrabold italic" style={{ color: "#1a1f71" }}>
                     VISA
                   </span>
                 </div>
 
-                <div className="flex h-7 items-center justify-center rounded bg-white px-2 shadow-lg">
+                {/* Mastercard */}
+                <div className="flex h-7 items-center justify-center rounded bg-white px-2 shadow-xs">
                   <div className="flex">
                     <div className="h-[18px] w-[18px] rounded-full" style={{ background: "#eb001b" }} />
-                    <div className="h-[18px] w-[18px] -ml-2 rounded-full" style={{ background: "#f79e1b", opacity: 0.92 }} />
+                    <div
+                      className="h-[18px] w-[18px] -ml-2 rounded-full"
+                      style={{ background: "#f79e1b", opacity: 0.92 }}
+                    />
                   </div>
                 </div>
 
                 {/* PayPal */}
-                <div className="flex h-7 items-center justify-center rounded bg-white px-2 shadow-lg">
-                  <span className="text-[12px] font-extrabold" style={{ color: "#253b80" }}>Pay</span>
-                  <span className="text-[12px] font-extrabold" style={{ color: "#179bd7" }}>Pal</span>
+                <div className="flex h-7 items-center justify-center rounded bg-white px-2 shadow-xs">
+                  <span className="text-[12px] font-extrabold" style={{ color: "#253b80" }}>
+                    Pay
+                  </span>
+                  <span className="text-[12px] font-extrabold" style={{ color: "#179bd7" }}>
+                    Pal
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <style>{`
-          @keyframes medalGlow {
-            0%, 100% { box-shadow: 0 0 24px rgba(212,175,55,0.35), 0 4px 16px rgba(0,0,0,0.6); }
-            50%       { box-shadow: 0 0 40px rgba(212,175,55,0.65), 0 4px 22px rgba(0,0,0,0.7); }
-          }
-          @keyframes starPulse {
-            0%, 100% { text-shadow: 0 0 8px rgba(245,197,24,0.6); }
-            50%       { text-shadow: 0 0 18px rgba(245,197,24,1); }
-          }
-          @keyframes shieldFloat {
-            0%, 100% { transform: translateY(0);  }
-            50%       { transform: translateY(-4px); }
-          }
-        `}</style>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

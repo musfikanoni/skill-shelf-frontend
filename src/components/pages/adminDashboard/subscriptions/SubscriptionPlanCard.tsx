@@ -25,7 +25,7 @@ export const SubscriptionPlanCard: React.FC<SubscriptionPlanCardProps> = ({
   onDelete,
 }) => {
   return (
-    <div className={`relative flex flex-col p-8 ${isPopular ? 'py-12 min-h-[640px] z-10' : 'py-8 min-h-[540px]'} bg-white rounded-3xl outline-2 outline-offset-[-2.10px] ${isPopular ? 'outline-violet-700 shadow-[0px_26px_52px_-12px_rgba(67,0,115,0.10)]' : 'outline-slate-200'} h-fit min-w-[320px] max-w-[400px] transition-all duration-300`}>
+    <div className={`relative flex flex-col p-6 sm:p-8 ${isPopular ? 'py-10 sm:py-12 min-h-[580px] sm:min-h-[640px] z-10' : 'py-8 min-h-[500px] sm:min-h-[540px]'} bg-white rounded-3xl outline-2 outline-offset-[-2.10px] ${isPopular ? 'outline-violet-700 shadow-[0px_26px_52px_-12px_rgba(67,0,115,0.10)]' : 'outline-slate-200'} h-fit w-full max-w-[400px] transition-all duration-300`}>
       {isPopular && (
         <div className="absolute -top-4 left-[60%] -translate-x-1/2 w-48 h-9 bg-linear-to-b from-violet-700 to-violet-950 rounded-full flex items-center justify-center text-white text-sm font-bold font-inter shadow-md">
           ⭐ MOST POPULAR

@@ -18,7 +18,7 @@ export default function Footer() {
 
   return (
     <div className="bg-[#0f0f1a] font-sans mt-12">
-      <section className="relative">
+      <section className="relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -27,25 +27,25 @@ export default function Footer() {
         />
 
         {/* overlay */}
-        <div className="absolute inset-0 bg-black/65 backdrop-blur-md" />
+        <div className="absolute inset-0 bg-black/75 backdrop-blur-md" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-20 pb-28 flex flex-col lg:flex-row items-center justify-center gap-12">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-14 sm:pt-16 md:pt-20 pb-16 sm:pb-24 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* Left */}
-          <div className="text-center lg:text-left">
+          <div className="text-center lg:text-left max-w-xl">
             <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-amber-400 border border-amber-400/40 bg-amber-400/10 rounded-full px-4 py-1.5 mb-6">
               ✦ Earn up to 50% Commission
             </span>
 
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-5">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-4">
               Join Our Affiliate Program
-            </h1>
+            </h2>
 
-            <p className="text-[#FFFCF7] text-base sm:text-lg max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed">
+            <p className="text-[#FFFCF7] text-sm sm:text-base md:text-lg mb-8 leading-relaxed">
               Turn your audience into income. Earn generous commissions by
-              promoting our premium products!
+              promoting our premium digital products and expert-led courses!
             </p>
 
-            <div className="grid grid-cols-3 gap-3 mb-10 max-w-lg mx-auto lg:mx-0">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
               {[
                 {
                   icon: "💰",
@@ -65,42 +65,50 @@ export default function Footer() {
               ].map((f) => (
                 <div
                   key={f.title}
-                  className="bg-white/8 backdrop-blur border border-white/10 rounded-md py-2 px-4 text-center"
+                  className="bg-white/8 backdrop-blur border border-white/10 rounded-xl py-3 px-3 text-center"
                 >
                   <div className="text-2xl mb-1">{f.icon}</div>
                   <div className="text-white text-xs font-semibold">
                     {f.title}
                   </div>
-                  <div className="text-white text-[10px]">{f.sub}</div>
+                  <div className="text-white/70 text-[10px] mt-0.5">{f.sub}</div>
                 </div>
               ))}
+            </div>
+
+            <div className="flex justify-center lg:justify-start">
+              <Link href="/affiliate">
+                <button className="px-8 py-3 rounded-xl font-bold text-gray-900 bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] hover:shadow-[0_0_20px_rgba(245,197,24,0.4)] transition-all active:scale-95 text-sm sm:text-base cursor-pointer">
+                  Join as Affiliate →
+                </button>
+              </Link>
             </div>
           </div>
 
           {/* Right image */}
-          <div className="absolute -top-25 -right-4 flex-shrink-0 hidden lg:flex">
+          <div className="relative flex-shrink-0 hidden lg:flex">
             <img
               src="/images/footerImg/rightImg.png"
               alt="affiliate"
-              className="w-full h-[480px] object-cover rounded-lg"
+              className="w-full max-w-[420px] h-auto object-cover rounded-2xl shadow-2xl"
             />
           </div>
         </div>
       </section>
 
-      <footer className="bg-[#0f0f1a] pt-14 pb-8 px-6">
+      <footer className="bg-[#0f0f1a] pt-12 sm:pt-14 pb-8 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-12">
             {/* Logo */}
-            <div>
+            <div className="space-y-4">
               <Link href="/">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   <Image
                     src={footerLogo}
                     width={44}
                     height={44}
                     alt="logo"
-                    className="w-[30px] h-[30px] md:w-[60px] md:h-[60px]"
+                    className="w-[32px] h-[32px] md:w-[48px] md:h-[48px]"
                   />
                   <p className="flex items-center leading-none">
                     <span className="text-[1.7rem] md:text-[2rem] font-extrabold bg-gradient-to-r from-[#4F8EF7] to-[#7B3FE4] bg-clip-text text-transparent font-[family-name:var(--font-nunito)]">
@@ -113,7 +121,7 @@ export default function Footer() {
                 </div>
               </Link>
 
-              <p className="text-white/60 text-sm">
+              <p className="text-white/60 text-xs sm:text-sm leading-relaxed">
                 Discover top-tier course modules, digital books, and interactive
                 learning tools designed to boost your professional career and
                 personal growth.
@@ -122,7 +130,7 @@ export default function Footer() {
 
             {/* Products */}
             <div>
-              <h4 className="text-white font-semibold text-lg mb-4">
+              <h4 className="text-white font-semibold text-base sm:text-lg mb-4">
                 Products
               </h4>
               <ul className="space-y-2.5">
@@ -133,12 +141,12 @@ export default function Footer() {
                   { name: "Membership Plans", href: "/membership" },
                 ].map((item) => (
                   <li key={item.name}>
-                    <a
+                    <Link
                       href={item.href}
-                      className="text-white/70 hover:text-violet-400 text-xs"
+                      className="text-white/70 hover:text-amber-400 text-xs sm:text-sm transition-colors"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -146,7 +154,7 @@ export default function Footer() {
 
             {/* Support */}
             <div>
-              <h4 className="text-white font-semibold text-lg mb-4">Support</h4>
+              <h4 className="text-white font-semibold text-base sm:text-lg mb-4">Support</h4>
               <ul className="space-y-2.5">
                 {[
                   "Contact Us",
@@ -157,7 +165,7 @@ export default function Footer() {
                   <li key={item}>
                     <a
                       href="#"
-                      className="text-white/70 hover:text-violet-400 text-xs"
+                      className="text-white/70 hover:text-amber-400 text-xs sm:text-sm transition-colors"
                     >
                       {item}
                     </a>
@@ -168,22 +176,37 @@ export default function Footer() {
 
             {/* Newsletter */}
             <div>
-              <h4 className="text-white font-semibold text-lg mb-2">
+              <h4 className="text-white font-semibold text-base sm:text-lg mb-2">
                 Stay Updated
               </h4>
-              <p className="text-white/70 text-xs mb-4">
-                Get the latest products and offers.
+              <p className="text-white/70 text-xs sm:text-sm mb-4">
+                Get the latest products and special offers directly in your inbox.
               </p>
+              <div className="flex flex-col gap-2">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-white/10 border border-white/20 text-white placeholder-white/40 text-xs sm:text-sm rounded-lg px-3.5 py-2.5 outline-none focus:border-amber-400 transition"
+                />
+                <button
+                  onClick={handleSubscribe}
+                  className="bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold text-xs sm:text-sm rounded-lg py-2.5 transition active:scale-95 cursor-pointer"
+                >
+                  {subscribed ? "Subscribed!" : "Subscribe"}
+                </button>
+              </div>
             </div>
           </div>
 
           {/* bottom */}
-          <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between text-xs text-white/70">
+          <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/70 text-center sm:text-left">
             <p>© 2026 SkillShelf. All rights reserved.</p>
 
-            <div className="flex gap-5">
+            <div className="flex flex-wrap justify-center gap-5">
               {["Privacy", "Terms", "Refund Policy"].map((item) => (
-                <a key={item} href="#" className="hover:text-slate-300">
+                <a key={item} href="#" className="hover:text-amber-400 transition-colors">
                   {item}
                 </a>
               ))}

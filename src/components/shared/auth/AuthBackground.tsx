@@ -20,7 +20,7 @@ export default function AuthBackground({
             <div className="absolute inset-0 bg-black/40 backdrop-blur-xs" />
 
             {/* Content */}
-            <div className="relative z-10">
+            <div className="relative z-10 w-full px-4 py-8 flex justify-center">
                 {children}
             </div>
 

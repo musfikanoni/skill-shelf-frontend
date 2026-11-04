@@ -38,7 +38,7 @@ export default function PageHeader({
     <section
       className={`
         relative w-full flex flex-col items-center justify-center
-        py-14 px-6 overflow-hidden
+        py-12 sm:py-14 px-4 sm:px-6 overflow-hidden
         bg-[#0d1224]
         ${className}
       `}
@@ -70,7 +70,8 @@ export default function PageHeader({
         className="
           relative z-10
           text-white font-bold tracking-tight
-          text-2xl sm:text-3xl
+          text-2xl sm:text-3xl md:text-4xl
+          text-center
           mb-2
         "
         style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
@@ -78,12 +79,11 @@ export default function PageHeader({
         {title}
       </h1>
 
-
       {description && (
         <p
           className="
             relative z-10
-            text-slate-400 text-sm sm:text-base
+            text-slate-400 text-xs sm:text-sm md:text-base
             text-center max-w-md leading-relaxed
           "
         >

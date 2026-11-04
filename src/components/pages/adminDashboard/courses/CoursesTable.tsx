@@ -130,7 +130,7 @@ export const CoursesTable = ({
             value={statusFilter}
             onValueChange={(value) => setStatusFilter(value ?? "all")}
           >
-            <SelectTrigger className="w-40! h-11! px-4 py-2 rounded-xl outline-2! outline-offset-[-2px]! outline-slate-300! border-none! bg-white! focus:ring-0! text-slate-900 text-lg font-medium leading-6">
+            <SelectTrigger className="w-full sm:w-40! h-11! px-4 py-2 rounded-xl outline-2! outline-offset-[-2px]! outline-slate-300! border-none! bg-white! focus:ring-0! text-slate-900 text-lg font-medium leading-6">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
             <SelectContent
@@ -258,7 +258,7 @@ export const CoursesTable = ({
         open={!!courseToDelete}
         onOpenChange={(open) => !open && setCourseToDelete(null)}
       >
-        <DialogContent className="sm:max-w-[480px] bg-white rounded-[24px]! p-0 overflow-hidden border-none shadow-2xl">
+        <DialogContent className="w-[92vw] max-w-[480px] bg-white rounded-[24px]! p-0 overflow-hidden border-none shadow-2xl">
           <div className="p-6 pb-5">
             <div className="flex justify-between items-center mb-3">
               <DialogTitle className="text-[22px] font-bold text-[#0F172A] font-inter">

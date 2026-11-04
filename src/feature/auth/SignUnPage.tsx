@@ -70,7 +70,7 @@ export default function SignUpPage() {
 
   return (
     <AuthBackground>
-      <div className="max-w-[540px] lg:w-[540px] h-auto mx-auto bg-[#FFF] p-6 rounded-2xl">
+      <div className="relative w-full max-w-[540px] h-auto mx-auto bg-[#FFF] p-6 sm:p-8 rounded-2xl shadow-xl">
         <button
           type="button"
           onClick={() => router.push("/")}

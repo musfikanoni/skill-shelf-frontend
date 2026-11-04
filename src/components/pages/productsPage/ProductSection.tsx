@@ -56,6 +56,7 @@ export default function ProductSection() {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [priceRange, setPriceRange] = useState('all');
     const [minRating, setMinRating] = useState(0);
+    const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
     const filteredProducts = useMemo(() => {
         return products.filter((product: Product) => {
@@ -89,43 +90,53 @@ export default function ProductSection() {
     return (
         <div className="min-h-screen pt-12 px-4 sm:px-6 lg:px-8 font-sans">
             <div className="max-w-6xl mx-auto">
-                <header className="mb-12">
-                    <h1 className="text-4xl font-extrabold text-[#0F172A] tracking-tight">Best Selling Products</h1>
-                    <p className="mt-3 text-lg text-slate-500">Browse our collection of high-quality SkillShelf products</p>
+                <header className="mb-8 md:mb-12">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] tracking-tight">Best Selling Products</h1>
+                    <p className="mt-2 text-sm sm:text-base md:text-lg text-slate-500">Browse our collection of high-quality SkillShelf products</p>
                 </header>
 
-                <div className="flex flex-col lg:flex-row gap-8">
+                <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
                     <aside className="w-full lg:w-72 flex-shrink-0">
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 sticky top-8">
-                            <div className="flex items-center gap-2 mb-8 text-slate-800">
-                                <FilterIcon />
-                                <span className="font-bold text-lg">Filters</span>
+                        <div className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-100 lg:sticky lg:top-8">
+                            <div 
+                                onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
+                                className="flex items-center justify-between text-slate-800 cursor-pointer lg:cursor-default"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <FilterIcon />
+                                    <span className="font-bold text-base sm:text-lg">Filters</span>
+                                </div>
+                                <span className="lg:hidden text-xs font-bold text-purple-600 bg-purple-50 px-3 py-1 rounded-full">
+                                    {isMobileFilterOpen ? "Hide Filters" : "Show Filters"}
+                                </span>
                             </div>
 
-                            <FilterGroup title="Category">
-                                {['all', 'Templates', 'Graphics', 'Ebooks', 'Bundles'].map((cat) => (
-                                    <RadioButton
-                                        key={cat}
-                                        label={cat}
-                                        name="category"
-                                        checked={selectedCategory === cat}
-                                        onChange={() => setSelectedCategory(cat)}
-                                    />
-                                ))}
-                            </FilterGroup>
+                            <div className={`${isMobileFilterOpen ? "block" : "hidden"} lg:block mt-6`}>
+                                <FilterGroup title="Category">
+                                    {['all', 'Templates', 'Graphics', 'Ebooks', 'Bundles'].map((cat) => (
+                                        <RadioButton
+                                            key={cat}
+                                            label={cat}
+                                            name="category"
+                                            checked={selectedCategory === cat}
+                                            onChange={() => setSelectedCategory(cat)}
+                                        />
+                                    ))}
+                                </FilterGroup>
 
-                            <FilterGroup title="Price Range">
-                                <RadioButton label="All Prices" name="price" checked={priceRange === 'all'} onChange={() => setPriceRange('all')} />
-                                <RadioButton label="Under $50" name="price" checked={priceRange === 'under50'} onChange={() => setPriceRange('under50')} />
-                                <RadioButton label="$50 - $100" name="price" checked={priceRange === '50-100'} onChange={() => setPriceRange('50-100')} />
-                                <RadioButton label="Over $100" name="price" checked={priceRange === 'over100'} onChange={() => setPriceRange('over100')} />
-                            </FilterGroup>
+                                <FilterGroup title="Price Range">
+                                    <RadioButton label="All Prices" name="price" checked={priceRange === 'all'} onChange={() => setPriceRange('all')} />
+                                    <RadioButton label="Under $50" name="price" checked={priceRange === 'under50'} onChange={() => setPriceRange('under50')} />
+                                    <RadioButton label="$50 - $100" name="price" checked={priceRange === '50-100'} onChange={() => setPriceRange('50-100')} />
+                                    <RadioButton label="Over $100" name="price" checked={priceRange === 'over100'} onChange={() => setPriceRange('over100')} />
+                                </FilterGroup>
 
-                            <FilterGroup title="Minimum Rating">
-                                <RadioButton label="All" name="rating" checked={minRating === 0} onChange={() => setMinRating(0)} />
-                                <RadioButton label="4+" name="rating" checked={minRating === 4} onChange={() => setMinRating(4)} />
-                                <RadioButton label="4.5+" name="rating" checked={minRating === 4.5} onChange={() => setMinRating(4.5)} />
-                            </FilterGroup>
+                                <FilterGroup title="Minimum Rating">
+                                    <RadioButton label="All" name="rating" checked={minRating === 0} onChange={() => setMinRating(0)} />
+                                    <RadioButton label="4+" name="rating" checked={minRating === 4} onChange={() => setMinRating(4)} />
+                                    <RadioButton label="4.5+" name="rating" checked={minRating === 4.5} onChange={() => setMinRating(4.5)} />
+                                </FilterGroup>
+                            </div>
                         </div>
                     </aside>
 

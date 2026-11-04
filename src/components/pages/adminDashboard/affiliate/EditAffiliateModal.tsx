@@ -50,7 +50,7 @@ export function EditAffiliateModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px] bg-white rounded-xl border border-slate-200 shadow-lg p-0 overflow-hidden">
+      <DialogContent className="w-[92vw] max-w-[425px] bg-white rounded-xl border border-slate-200 shadow-lg p-0 overflow-hidden">
         <DialogHeader className="p-6 border-b border-slate-100">
           <DialogTitle className="text-lg font-semibold text-slate-900">
             Edit Affiliate Information

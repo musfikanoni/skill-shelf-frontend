@@ -197,7 +197,7 @@ export default function SubscriptionsPage() {
           !open && setDeleteConfirm({ ...deleteConfirm, isOpen: false })
         }
       >
-        <DialogContent className="max-w-[400px] p-8 bg-white rounded-3xl shadow-2xl border-none">
+        <DialogContent className="w-[92vw] max-w-[400px] p-6 sm:p-8 bg-white rounded-3xl shadow-2xl border-none">
           <div className="flex flex-col items-center gap-6">
             <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center">
               <AlertCircle size={32} className="text-red-500" />

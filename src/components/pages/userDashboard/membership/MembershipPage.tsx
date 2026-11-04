@@ -37,7 +37,7 @@ const PricingCard = ({
 
   return (
     <div
-      className={`relative flex flex-col bg-white rounded-2xl p-8 shadow-sm border-2 transition-all duration-300 ${
+      className={`relative flex flex-col bg-white rounded-2xl p-6 sm:p-8 shadow-sm border-2 transition-all duration-300 ${
         isPro ? "border-indigo-500 md:scale-105 z-10" : "border-transparent"
       }`}
     >
@@ -232,13 +232,13 @@ export default function MembershipPage() {
         </div>
 
         {/* Hero Banner */}
-        <div className="relative overflow-hidden w-full bg-gradient-to-b from-[#6C3FC5] via-[#6C3FC5] to-[#341E5F] rounded-2xl p-10 md:p-16 text-center text-white mb-16 shadow-xl shadow-indigo-200/50">
+        <div className="relative overflow-hidden w-full bg-gradient-to-b from-[#6C3FC5] via-[#6C3FC5] to-[#341E5F] rounded-2xl p-6 sm:p-10 md:p-16 text-center text-white mb-10 sm:mb-16 shadow-xl shadow-indigo-200/50">
           <div className="relative z-10">
-            <Crown className="w-14 h-14 mx-auto mb-6 text-white opacity-90" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">
+            <Crown className="w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-4 sm:mb-6 text-white opacity-90" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 tracking-tight">
               Choose Your Membership Plan
             </h2>
-            <p className="text-indigo-100 text-lg opacity-90">
+            <p className="text-indigo-100 text-sm sm:text-base md:text-lg opacity-90">
               Get unlimited access to premium SkillShelf products and courses
             </p>
           </div>

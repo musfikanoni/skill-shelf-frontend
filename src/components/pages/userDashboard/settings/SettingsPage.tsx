@@ -182,7 +182,7 @@ const SettingsPage = () => {
 
             {/* Main Content Sections */}
             <div className="bg-white shadow-sm border border-gray-200 rounded-xl overflow-hidden">
-                <div className="p-8 space-y-12">
+                <div className="p-4 sm:p-8 space-y-8 sm:space-y-12">
                     <PersonalInfoSection 
                         profile={profile}
                         onProfileChange={(updates) => setProfile((prev) => ({ ...prev, ...updates }))}
