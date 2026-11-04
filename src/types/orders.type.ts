@@ -86,17 +86,20 @@ export type OrderDetailsData = {
     name: string;
     email: string;
   };
-  itemType: 'PRODUCT';
+  itemType: 'PRODUCT' | 'COURSE' | 'BUNDLE' | string;
   itemId: string;
-  stripeSessionId: string;
+  stripeSessionId?: string;
   amount: number;
-  status: 'PENDING' | 'PAID' | 'FAILED' | 'CANCELLED';
-  expiresAt: string;
-  quantity: number;
-  planType: 'basic' | 'pro' | 'vip';
+  status: 'PENDING' | 'PAID' | 'FAILED' | 'CANCELLED' | string;
+  expiresAt?: string;
+  quantity?: number;
+  planType?: 'basic' | 'pro' | 'vip' | string;
+  product?: Product | any;
+  course?: any;
+  bundle?: any;
   createdAt: string;
   updatedAt: string;
-  __v: number;
+  __v?: number;
 };
 
 export type OrderDetailsResponse = {
