@@ -241,19 +241,19 @@ export function CreateCouponForm({ onClose, onSuccess, initialData, isEditing = 
             />
 
             {/* Actions */}
-            <div className="flex items-end justify-end gap-3 pt-6">
+            <div className="md:col-span-2 flex flex-col sm:flex-row items-center justify-end gap-3 pt-6">
               <Button
                 type="button"
                 variant="outline"
                 onClick={onClose}
-                className="flex-1 !h-14 rounded-[14px] border-2 border-[#CAD5E2] shadow-none text-slate-700 text-base font-bold font-inter bg-transparent hover:bg-slate-50 transition-all"
+                className="w-full sm:w-36 !h-14 rounded-[14px] border-2 border-[#CAD5E2] shadow-none text-slate-700 text-base font-bold font-inter bg-transparent hover:bg-slate-50 transition-all"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 style={{ background: 'linear-gradient(180deg, #F5C518 50%, #D73200 222.14%)' }}
-                className="flex-1 !h-14 rounded-[14px] border-none shadow-none text-slate-900 text-base font-bold font-inter hover:opacity-90 transition-opacity"
+                className="w-full sm:w-48 !h-14 rounded-[14px] border-none shadow-none text-slate-900 text-base font-bold font-inter hover:opacity-90 transition-opacity"
               >
                 {isEditing ? 'Update Coupon' : 'Create Coupon'}
               </Button>

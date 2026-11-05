@@ -31,9 +31,9 @@ export function CategoryTable({
   isLoading = false,
 }: CategoryTableProps) {
   return (
-    <div className="w-full rounded-lg border border-gray-200 bg-white">
-      <div className="overflow-x-auto">
-        <Table>
+    <div className="w-full rounded-lg border border-gray-200 bg-white overflow-hidden">
+      <div className="overflow-x-auto w-full">
+        <Table className="w-full min-w-[600px]">
           <TableHeader className="bg-slate-50">
             <TableRow className="hover:bg-transparent border-slate-200 text-left">
               <TableHead className="h-14 px-6 text-slate-700 text-base font-bold font-inter">

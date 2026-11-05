@@ -138,16 +138,6 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   };
 
-  const isLoading = isDataLoading || isAuthLoading;
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-[500px] bg-white rounded-lg border shadow-sm">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
-
   if (isError) {
     return (
       <div className="flex items-center justify-center h-[500px] bg-white rounded-lg border text-red-500 font-medium">
@@ -157,17 +147,17 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
   }
 
   return (
-    <div className="w-full bg-white rounded-lg shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.10)] outline-2 outline-offset-[-2px] outline-slate-200 flex flex-col w-full overflow-hidden">
+    <div className="w-full bg-white rounded-lg shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.10)] outline-2 outline-offset-[-2px] outline-slate-200 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="self-stretch min-h-24 py-4 border-b border-slate-200 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 px-4 sm:px-6 bg-white z-20">
-        <div className="text-slate-900 text-xl font-bold font-inter leading-7">
+      <div className="self-stretch py-4 border-b border-slate-200 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 px-4 sm:px-6 bg-white z-20">
+        <div className="text-slate-900 text-xl font-bold font-inter leading-7 shrink-0">
           All Products
         </div>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
           {/* Search */}
-          <div className="w-full md:w-[320px] lg:w-[400px] !h-14 px-4 py-2 rounded-lg outline-2 outline-offset-[-2px] outline-slate-300 flex items-center gap-2 bg-white">
-            <Search className="w-5 h-5 text-slate-500" />
+          <div className="w-full sm:w-64 md:w-72 lg:w-96 !h-12 sm:!h-14 px-4 py-2 rounded-lg outline-2 outline-offset-[-2px] outline-slate-300 flex items-center gap-2 bg-white">
+            <Search className="w-5 h-5 text-slate-500 shrink-0" />
             <input
               type="text"
               placeholder="Search products..."
@@ -176,7 +166,7 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
                 setSearchTerm(e.target.value);
                 setCurrentPage(1);
               }}
-              className="flex-1 bg-transparent outline-none text-slate-700 text-base font-medium font-inter placeholder:text-slate-700/50"
+              className="flex-1 min-w-0 bg-transparent outline-none text-slate-700 text-sm sm:text-base font-medium font-inter placeholder:text-slate-400"
             />
           </div>
 
@@ -187,18 +177,20 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
               setCurrentPage(1);
             }}
           >
-            <SelectTrigger className="w-48 !h-14 px-3 py-2 rounded-lg border-2 border-slate-300 shadow-none focus:ring-0 flex justify-between items-center bg-white">
-              <SelectValue placeholder="Category" />
+            <SelectTrigger className="w-full sm:w-44 !h-12 sm:!h-14 px-4 py-2 rounded-lg border-2 border-slate-300 shadow-none focus:ring-0 flex justify-between items-center bg-white text-slate-700 text-sm sm:text-base font-medium shrink-0">
+              <span className="truncate">
+                {selectedCategory === "all" ? "All Categories" : selectedCategory}
+              </span>
             </SelectTrigger>
             <SelectContent sideOffset={6} className="rounded-lg">
-              <SelectItem value="all" className="py-2 px-4">
+              <SelectItem value="all" className="py-2 px-4 cursor-pointer">
                 All Categories
               </SelectItem>
               {categories.map((category: any) => (
                 <SelectItem
                   key={category}
                   value={category}
-                  className="py-2 px-4"
+                  className="py-2 px-4 cursor-pointer"
                 >
                   {category}
                 </SelectItem>
@@ -209,8 +201,8 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
       </div>
 
       {/* Table Content */}
-      <div className="flex-1 overflow-auto min-h-[480px]">
-        <Table>
+      <div className="flex-1 overflow-x-auto w-full min-h-[480px]">
+        <Table className="w-full min-w-[800px]">
           <TableHeader className="bg-slate-50 sticky top-0 z-10">
             <TableRow className="h-14 border-b border-slate-200">
               <TableHead className="pl-6 pr-3 py-3 font-bold text-slate-900 text-start">
@@ -237,7 +229,15 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {paginatedProducts.length > 0 ? (
+            {isDataLoading ? (
+              Array.from({ length: 5 }).map((_, i) => (
+                <TableRow key={i} className="h-16 border-b border-slate-100">
+                  <TableCell colSpan={7} className="px-6">
+                    <div className="h-4 bg-slate-100 rounded animate-pulse w-full" />
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : paginatedProducts.length > 0 ? (
               paginatedProducts.map((product: any) => (
                 <TableRow
                   key={product.id}
@@ -317,22 +317,24 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
       </div>
 
       {/* Pagination Footer */}
-      <div className="h-20 px-6 border-t border-slate-200 flex items-center justify-between bg-white">
-        <div className="text-slate-500 text-sm font-medium font-inter">
+      <div className="min-h-20 py-4 px-4 sm:px-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white">
+        <div className="text-slate-500 text-xs sm:text-sm font-medium font-inter text-center sm:text-left">
           Showing{" "}
-          {paginatedProducts.length > 0
-            ? (currentPage - 1) * ITEMS_PER_PAGE + 1
-            : 0}{" "}
-          to {Math.min(currentPage * ITEMS_PER_PAGE, filteredProducts.length)}{" "}
-          of {filteredProducts.length} entries
+          <span className="font-semibold text-slate-800">
+            {paginatedProducts.length > 0
+              ? (currentPage - 1) * ITEMS_PER_PAGE + 1
+              : 0}{" "}
+            to {Math.min(currentPage * ITEMS_PER_PAGE, filteredProducts.length)}
+          </span>{" "}
+          of <span className="font-semibold text-slate-800">{filteredProducts.length}</span> entries
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center flex-wrap justify-center gap-1.5 sm:gap-2">
           <Button
             variant="outline"
             onClick={handlePrevious}
             disabled={currentPage === 1}
-            className="!h-10 rounded-lg border-slate-300 text-slate-700 font-bold"
+            className="!h-10 px-3 sm:px-4 rounded-lg border-slate-300 text-slate-700 font-bold"
           >
             Previous
           </Button>
@@ -347,7 +349,7 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
                 variant={currentPage === page ? "default" : "outline"}
                 onClick={() => setCurrentPage(page)}
                 className={cn(
-                  "!h-10 w-10 p-0 rounded-lg font-bold",
+                  "!h-10 w-9 sm:w-10 p-0 rounded-lg font-bold",
                   currentPage === page
                     ? "bg-[linear-gradient(180deg,_#F5C518_50%,_#D73200_222.14%)] text-black border-none"
                     : "border-slate-300 text-slate-700",
@@ -362,7 +364,7 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
             variant="outline"
             onClick={handleNext}
             disabled={currentPage === totalPages}
-            className="!h-10 rounded-lg border-slate-300 text-slate-700 font-bold"
+            className="!h-10 px-3 sm:px-4 rounded-lg border-slate-300 text-slate-700 font-bold"
           >
             Next
           </Button>

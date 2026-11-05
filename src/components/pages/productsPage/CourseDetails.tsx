@@ -137,8 +137,8 @@ export default function CourseDetails({ id }: { id: string }) {
       <PageTitle title={course.title} />
       <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md overflow-hidden">
         {/* TOP SECTION */}
-        <div className="flex flex-col md:flex-row gap-6 md:gap-8 p-4 sm:p-6 md:p-8 border-b border-gray-100">
-          <div className="w-full md:w-[420px] lg:w-[460px] aspect-video shrink-0 bg-slate-900 rounded-2xl overflow-hidden flex items-center justify-center border border-gray-100 shadow-sm">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8 border-b border-gray-100">
+          <div className="w-full sm:max-w-md md:max-w-none md:w-[280px] lg:w-[420px] xl:w-[460px] aspect-video shrink-0 bg-slate-900 rounded-2xl overflow-hidden flex items-center justify-center border border-gray-100 shadow-sm mx-auto md:mx-0">
             <Image
               src={course.thumbnail || "/images/pageHeaderImg/courseImg.png"}
               width={600}

@@ -83,8 +83,8 @@ export function OrdersTable({
       />
 
       <Card className="bg-white rounded-lg shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.10)] outline-2 outline-offset-[-2px] outline-slate-200 border-none overflow-hidden">
-        <div className="overflow-x-auto">
-          <Table>
+        <div className="overflow-x-auto w-full">
+          <Table className="w-full min-w-[750px]">
             <TableHeader>
               <TableRow className="bg-slate-50 hover:bg-slate-50 h-14 border-b border-slate-200">
                 <TableHead className="pl-6 font-bold text-slate-900 text-start">
@@ -183,19 +183,22 @@ export function OrdersTable({
       </Card>
 
       {totalPages > 1 && (
-        <div className="h-20 px-6 border-t border-slate-200 flex items-center justify-between bg-white rounded-lg shadow-sm">
-          <div className="text-slate-500 text-sm font-medium">
-            Showing {(currentPage - 1) * pageSize + 1} to{' '}
-            {Math.min(currentPage * pageSize, totalItems)} of {totalItems}{' '}
-            orders
+        <div className="min-h-20 py-4 px-4 sm:px-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white rounded-lg shadow-sm">
+          <div className="text-slate-500 text-xs sm:text-sm font-medium text-center sm:text-left">
+            Showing{" "}
+            <span className="font-semibold text-slate-800">
+              {(currentPage - 1) * pageSize + 1} to{" "}
+              {Math.min(currentPage * pageSize, totalItems)}
+            </span>{" "}
+            of <span className="font-semibold text-slate-800">{totalItems}</span> orders
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center flex-wrap justify-center gap-1.5 sm:gap-2">
             <Button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               variant={'outline'}
-              className="!h-10 rounded-lg border-slate-300 text-slate-700 font-bold"
+              className="!h-10 px-3 sm:px-4 rounded-lg border-slate-300 text-slate-700 font-bold"
             >
               Previous
             </Button>
@@ -212,7 +215,7 @@ export function OrdersTable({
                     variant={currentPage === page ? 'default' : 'outline'}
                     onClick={() => handlePageChange(page)}
                     className={cn(
-                      "!h-10 w-10 p-0 rounded-lg font-bold",
+                      "!h-10 w-9 sm:w-10 p-0 rounded-lg font-bold",
                       currentPage === page
                         ? "bg-[linear-gradient(180deg,_#F5C518_50%,_#D73200_222.14%)] text-black border-none"
                         : "border-slate-300 text-slate-700"
@@ -228,7 +231,7 @@ export function OrdersTable({
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               variant={'outline'}
-              className="!h-10 rounded-lg border-slate-300 text-slate-700 font-bold"
+              className="!h-10 px-3 sm:px-4 rounded-lg border-slate-300 text-slate-700 font-bold"
             >
               Next
             </Button>

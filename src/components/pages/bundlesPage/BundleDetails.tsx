@@ -109,15 +109,15 @@ export default function BundleDetails({ id }: { id: string }) {
             <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md overflow-hidden">
 
                 {/* TOP SECTION */}
-                <div className="flex flex-col sm:flex-row gap-8 p-5 sm:p-8 border-b border-gray-100">
+                <div className="flex flex-col md:flex-row gap-6 md:gap-6 lg:gap-8 p-5 sm:p-6 lg:p-8 border-b border-gray-100">
                     {/* Image */}
-                    <div className="w-full sm:w-[300px] md:w-[350px] aspect-square mx-auto sm:mx-0 shrink-0 bg-slate-50 rounded-2xl overflow-hidden flex items-center justify-center border border-gray-100 shadow-inner">
+                    <div className="w-full max-w-[280px] md:max-w-none md:w-[250px] lg:w-[320px] xl:w-[350px] aspect-square mx-auto md:mx-0 shrink-0 bg-slate-50 rounded-2xl overflow-hidden flex items-center justify-center border border-gray-100 shadow-inner p-2">
                         <Image
                             src={bundle.products?.[0]?.images?.[0] || bundle.courses?.[0]?.thumbnail || "/images/pageHeaderImg/courseImg.png"}
                             width={350}
                             height={350}
                             alt={bundle.name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                         />
                     </div>
 

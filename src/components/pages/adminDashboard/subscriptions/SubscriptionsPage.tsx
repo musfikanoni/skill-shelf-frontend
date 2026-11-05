@@ -85,7 +85,7 @@ export default function SubscriptionsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+      <div className="min-h-[70vh] flex items-center justify-center">
         <Loading title="Loading Subscriptions" message="Fetching subscription plans..." />
       </div>
     );

@@ -141,7 +141,7 @@ export const CreateSubscriptionPlanModal: React.FC<CreateSubscriptionPlanModalPr
 
   return (
     <Dialog open={true} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="w-[92vw]! max-w-[750px]! p-4 sm:p-6 bg-white rounded-2xl shadow-[0px_0px_10px_0px_rgba(0,0,0,0.10)] border-none gap-6 overflow-y-auto max-h-[90vh] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300">
+      <DialogContent className="w-[92vw]! max-w-[92vw]! sm:max-w-[750px]! p-4 sm:p-6 bg-white rounded-2xl shadow-[0px_0px_10px_0px_rgba(0,0,0,0.10)] border-none gap-6 overflow-y-auto overflow-x-hidden max-h-[90vh] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300">
         <DialogHeader className="gap-3">
           <div className="flex items-center gap-2">
             <div className="p-2.5 bg-amber-500/10 rounded-full flex items-center justify-center">
@@ -229,37 +229,37 @@ export const CreateSubscriptionPlanModal: React.FC<CreateSubscriptionPlanModalPr
 
           {/* Features List */}
           <div className="flex flex-col gap-4">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
               <label className="text-stone-900 text-base font-medium font-inter">
                 Plan Features <span className="text-red-600">*</span>
               </label>
               <button
                 type="button"
                 onClick={() => appendFeature({ value: "" })}
-                className="px-3 py-2 rounded-md outline-1 outline-gray-200 flex items-center gap-2 hover:bg-gray-50 transition-colors"
+                className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-md outline-1 outline-gray-200 flex items-center gap-1.5 sm:gap-2 hover:bg-gray-50 transition-colors shrink-0"
               >
-                <Plus size={20} className="text-stone-900" />
-                <span className="text-stone-900 text-base font-medium font-roboto">Add Feature</span>
+                <Plus size={18} className="text-stone-900" />
+                <span className="text-stone-900 text-xs sm:text-sm font-medium font-roboto">Add Feature</span>
               </button>
             </div>
 
             <div className="flex flex-col gap-3">
               {featureFields.map((field, index) => (
-                <div key={field.id} className="flex gap-3.5 items-center">
+                <div key={field.id} className="flex gap-2 sm:gap-3.5 items-center">
                   <div className="flex-1 flex flex-col gap-1">
                     <input
                       {...form.register(`features.${index}.value` as const)}
                       type="text"
                       placeholder="Enter feature description..."
-                      className="w-full px-4 py-3.5 bg-gray-100 rounded-md outline-1 outline-gray-300 text-slate-900 text-sm font-normal font-inter focus:outline-amber-500"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3.5 bg-gray-100 rounded-md outline-1 outline-gray-300 text-slate-900 text-sm font-normal font-inter focus:outline-amber-500"
                     />
                   </div>
                   <button
                     type="button"
                     onClick={() => removeFeature(index)}
-                    className="p-3.5 bg-gray-100 rounded-md outline-1 outline-gray-300 hover:bg-red-50 text-red-600 shrink-0 transition-colors"
+                    className="p-2.5 sm:p-3.5 bg-gray-100 rounded-md outline-1 outline-gray-300 hover:bg-red-50 text-red-600 shrink-0 transition-colors"
                   >
-                    <Trash2 size={20} />
+                    <Trash2 size={18} />
                   </button>
                 </div>
               ))}
@@ -267,18 +267,18 @@ export const CreateSubscriptionPlanModal: React.FC<CreateSubscriptionPlanModalPr
           </div>
 
           {/* Access Control: Products */}
-          <div className="flex flex-col gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100">
-            <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-4 p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-100">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
               <label className="text-stone-900 text-base font-bold font-inter">
                 Product Access
               </label>
               <button
                 type="button"
                 onClick={() => appendProduct({ product: "", fileAccess: "basic" })}
-                className="px-3 py-2 rounded-md bg-white border border-slate-200 flex items-center gap-2 hover:bg-slate-50 transition-colors"
+                className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-md bg-white border border-slate-200 flex items-center gap-1.5 sm:gap-2 hover:bg-slate-50 transition-colors shrink-0"
               >
-                <Plus size={18} className="text-amber-500" />
-                <span className="text-stone-900 text-sm font-bold">Add Product</span>
+                <Plus size={16} className="text-amber-500" />
+                <span className="text-stone-900 text-xs sm:text-sm font-bold">Add Product</span>
               </button>
             </div>
 
@@ -328,18 +328,18 @@ export const CreateSubscriptionPlanModal: React.FC<CreateSubscriptionPlanModalPr
           </div>
 
           {/* Access Control: Courses */}
-          <div className="flex flex-col gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100">
-            <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-4 p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-100">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
               <label className="text-stone-900 text-base font-bold font-inter">
                 Course Access
               </label>
               <button
                 type="button"
                 onClick={() => appendCourse({ value: "" })}
-                className="px-3 py-2 rounded-md bg-white border border-slate-200 flex items-center gap-2 hover:bg-slate-50 transition-colors"
+                className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-md bg-white border border-slate-200 flex items-center gap-1.5 sm:gap-2 hover:bg-slate-50 transition-colors shrink-0"
               >
-                <Plus size={18} className="text-blue-500" />
-                <span className="text-stone-900 text-sm font-bold">Add Course</span>
+                <Plus size={16} className="text-blue-500" />
+                <span className="text-stone-900 text-xs sm:text-sm font-bold">Add Course</span>
               </button>
             </div>
 
@@ -374,18 +374,18 @@ export const CreateSubscriptionPlanModal: React.FC<CreateSubscriptionPlanModalPr
           </div>
 
           {/* Access Control: Bundles */}
-          <div className="flex flex-col gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100">
-            <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-4 p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-100">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
               <label className="text-stone-900 text-base font-bold font-inter">
                 Bundle Access
               </label>
               <button
                 type="button"
                 onClick={() => appendBundle({ value: "" })}
-                className="px-3 py-2 rounded-md bg-white border border-slate-200 flex items-center gap-2 hover:bg-slate-50 transition-colors"
+                className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-md bg-white border border-slate-200 flex items-center gap-1.5 sm:gap-2 hover:bg-slate-50 transition-colors shrink-0"
               >
-                <Plus size={18} className="text-purple-500" />
-                <span className="text-stone-900 text-sm font-bold">Add Bundle</span>
+                <Plus size={16} className="text-purple-500" />
+                <span className="text-stone-900 text-xs sm:text-sm font-bold">Add Bundle</span>
               </button>
             </div>
 
@@ -420,17 +420,17 @@ export const CreateSubscriptionPlanModal: React.FC<CreateSubscriptionPlanModalPr
           </div>
 
           {/* Footer Actions */}
-          <div className="flex justify-end gap-6 mt-4">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4 mt-4">
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-3 bg-gray-100 rounded-2xl outline-1 outline-gray-300 text-stone-900 text-base font-medium font-roboto hover:bg-gray-200 transition-colors"
+              className="w-full sm:w-auto px-6 py-3 bg-gray-100 rounded-2xl outline-1 outline-gray-300 text-stone-900 text-base font-medium font-roboto hover:bg-gray-200 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-6 py-3 bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] rounded-2xl flex items-center gap-2.5 text-black text-base font-medium font-roboto hover:opacity-90 transition-opacity"
+              className="w-full sm:w-auto px-6 py-3 bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] rounded-2xl flex items-center justify-center gap-2.5 text-black text-base font-medium font-roboto hover:opacity-90 transition-opacity"
             >
               <SvgPricingCreate className="w-5 h-5 text-black" />
               {isEdit ? "Update Plan" : "Create Plan"}

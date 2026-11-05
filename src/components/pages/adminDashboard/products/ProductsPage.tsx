@@ -6,6 +6,7 @@ import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { AccessDenied } from "@/components/shared/auth/AccessDenied";
 import { ProductsTable } from "@/components/shared/productsTable/ProductsTable";
 import { CreateProductForm } from "./CreateProductForm";
+import { useGetAllProductsQuery } from "@/redux/api/userDashboardApi/productApi";
 import Loading from "@/components/Others/Loading";
 
 export default function ProductsPage() {
@@ -13,6 +14,10 @@ export default function ProductsPage() {
   const [editingProduct, setEditingProduct] = useState<any>(null);
 
   const { isAuthorized, isLoading: isAuthLoading } = useAdminAuth();
+
+  const { isLoading: isProductsLoading } = useGetAllProductsQuery(undefined, {
+    skip: !isAuthorized,
+  });
 
   const toggleForm = () => {
     if (isFormVisible) {
@@ -51,12 +56,12 @@ export default function ProductsPage() {
     };
   };
 
-  if (isAuthLoading) {
+  if (isAuthLoading || (isAuthorized && isProductsLoading)) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center">
         <Loading
-          title="Verifying Authorization"
-          message="Loading products manager..."
+          title="Loading Products"
+          message="Fetching products inventory..."
         />
       </div>
     );
@@ -67,7 +72,7 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500">
+    <div className="flex flex-col gap-6 md:gap-8 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <h1 className="text-3xl font-extrabold text-[#1E293B]">Products</h1>

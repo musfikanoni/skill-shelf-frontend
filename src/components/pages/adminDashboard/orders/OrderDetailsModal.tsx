@@ -51,7 +51,7 @@ export function OrderDetailsModal({ orderId, isOpen, onClose }: OrderDetailsModa
             <div className="space-y-8">
               
               {/* Quick Summary Row */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-1">
                   <p className="text-slate-500 text-[11px] font-bold uppercase tracking-wider">Order Status</p>
                   <div className="pt-1">

@@ -72,24 +72,24 @@ export function UsersTable({
   return (
     <div className="w-full bg-white rounded-lg shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.10)] outline-2 outline-offset-[-2px] outline-slate-200 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="p-6 flex items-center justify-between bg-white border-b border-slate-100">
-        <h2 className="text-xl font-bold text-slate-900">{tableTitle}</h2>
-        <div className="flex items-center gap-3">
-          <div className="relative w-64">
+      <div className="p-4 sm:p-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white border-b border-slate-100">
+        <h2 className="text-xl font-bold text-slate-900 shrink-0">{tableTitle}</h2>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+          <div className="relative w-full sm:w-64 md:w-72">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              placeholder="Search users......"
+              placeholder="Search users..."
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
               className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/10 transition-all placeholder:text-slate-300"
             />
           </div>
-          <div className="relative">
+          <div className="relative w-full sm:w-auto shrink-0">
             <select
               value={membershipFilter}
               onChange={(e) => handleMembershipFilter(e.target.value as any)}
-              className="appearance-none bg-white border border-slate-200 rounded-xl px-4 py-2 pr-10 text-sm font-medium text-slate-700 focus:outline-none min-w-[120px] cursor-pointer"
+              className="w-full sm:w-auto appearance-none bg-white border border-slate-200 rounded-xl px-4 py-2 pr-10 text-sm font-medium text-slate-700 focus:outline-none min-w-[130px] cursor-pointer"
             >
               <option value="all">All Plans</option>
               <option value="VIP">VIP</option>
@@ -116,8 +116,8 @@ export function UsersTable({
       </div>
 
       {/* Table Content */}
-      <div className="flex-1 overflow-auto">
-        <Table>
+      <div className="flex-1 overflow-x-auto w-full">
+        <Table className="w-full min-w-[800px]">
           <TableHeader className="bg-slate-50/50">
             <TableRow className="border-b border-slate-100">
               <TableHead className="px-6 py-4 font-bold text-[#1E293B] text-center">
@@ -243,8 +243,8 @@ export function UsersTable({
       </div>
 
       {/* Pagination Footer */}
-      <div className="p-6 flex items-center justify-between bg-white border-t border-slate-100">
-        <div className="text-slate-400 text-xs font-medium">
+      <div className="p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white border-t border-slate-100">
+        <div className="text-slate-400 text-xs sm:text-sm font-medium text-center sm:text-left">
           Showing{" "}
           <span className="text-slate-900 font-bold">
             {data.length > 0 ? (currentPage - 1) * pageSize + 1 : 0}-
@@ -254,24 +254,24 @@ export function UsersTable({
           users
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-1.5 sm:gap-2 shrink-0">
           <Button
             variant="outline"
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="h-10 px-4 rounded-xl border-slate-200 text-slate-400 font-bold hover:bg-slate-50 disabled:opacity-30"
+            className="h-9 sm:h-10 px-2.5 sm:px-4 rounded-xl border-slate-200 text-slate-400 font-bold hover:bg-slate-50 disabled:opacity-30 text-xs sm:text-sm"
           >
             Previous
           </Button>
 
-          <div className="flex gap-2">
+          <div className="flex gap-1 sm:gap-1.5">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <Button
                 key={page}
                 variant={currentPage === page ? "default" : "outline"}
                 onClick={() => handlePageChange(page)}
                 className={cn(
-                  "w-10 h-10 rounded-xl font-bold transition-all",
+                  "w-8 sm:w-10 h-8 sm:h-10 text-xs sm:text-sm rounded-xl font-bold transition-all",
                   currentPage === page
                     ? "bg-[#F59E0B] text-white border-none shadow-md shadow-orange-100"
                     : "border-slate-200 text-slate-700 hover:border-slate-300",
@@ -286,7 +286,7 @@ export function UsersTable({
             variant="outline"
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages || totalPages === 0}
-            className="h-10 px-4 rounded-xl border-slate-200 text-slate-400 font-bold hover:bg-slate-50 disabled:opacity-30"
+            className="h-9 sm:h-10 px-2.5 sm:px-4 rounded-xl border-slate-200 text-slate-400 font-bold hover:bg-slate-50 disabled:opacity-30 text-xs sm:text-sm"
           >
             Next
           </Button>

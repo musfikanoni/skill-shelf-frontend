@@ -16,18 +16,21 @@ const colorMap = {
   blue: "outline-blue-200 text-blue-600",
 };
 
-export function AffiliateStatCard({ label, value, color }: AffiliateStatCardProps) {
+export function AffiliateStatCard({ label, value, color = "emerald" }: AffiliateStatCardProps) {
+  const colorStyle = colorMap[color] || colorMap.emerald;
+  const [outlineColor, textColor] = colorStyle.split(' ');
+
   return (
     <div className={cn(
-      "h-40 px-6 pt-6 bg-white rounded-2xl outline outline-2 outline-offset-[-2px] flex flex-col justify-start items-start gap-2",
-      colorMap[color].split(' ')[0]
+      "w-full min-h-[115px] p-5 sm:p-6 bg-white rounded-2xl outline outline-2 outline-offset-[-2px] flex flex-col justify-between gap-3 shadow-sm",
+      outlineColor
     )}>
-      <div className="text-slate-600 text-base font-semibold font-['Inter'] leading-6">
+      <div className="text-slate-600 text-sm sm:text-base font-semibold font-['Inter'] leading-snug">
         {label}
       </div>
       <div className={cn(
-        "text-4xl font-bold font-['Inter'] leading-10",
-        colorMap[color].split(' ')[1]
+        "text-3xl sm:text-4xl font-bold font-['Inter'] leading-none",
+        textColor
       )}>
         {value}
       </div>

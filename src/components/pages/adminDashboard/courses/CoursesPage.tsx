@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CreateCourseForm } from "./CreateCourseForm";
+import Loading from "@/components/Others/Loading";
 // import { CourseModuleManager } from "./CourseModuleManager";
 
 import { useGetAllCoursesQuery } from "@/redux/api/userDashboardApi/courseApi";
@@ -11,11 +12,19 @@ import { CourseStatCard } from "./CourseStatCard";
 import { CourseModuleManager } from "./CourseModuleManager";
 
 export default function CoursesPage() {
-  const { data: coursesData } = useGetAllCoursesQuery();
+  const { data: coursesData, isLoading } = useGetAllCoursesQuery();
   const [showForm, setShowForm] = useState(false);
   const [showModules, setShowModules] = useState(false);
   const [editingCourse, setEditingCourse] = useState<any | null>(null);
   const [activeCourseId, setActiveCourseId] = useState<string | null>(null);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <Loading title="Loading Courses" message="Fetching course catalog and curriculum..." />
+      </div>
+    );
+  }
 
   const courses = coursesData?.data || [];
   const totalCourses = courses.length;

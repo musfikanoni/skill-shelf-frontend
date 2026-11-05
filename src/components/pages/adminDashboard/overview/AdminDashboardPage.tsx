@@ -46,14 +46,14 @@ export function AdminDashboardPage () {
   }
 
   return (
-    <div className="animate-in fade-in duration-500">
-        <div>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-[#1E293B]">Super Admin Dashboard</h1>
-            <p className="text-sm md:text-base text-slate-400 font-medium mt-1">Welcome to the admin panel!</p>
-        </div>
-        <div className="w-full space-y-8 py-6 md:py-8">
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+    <div className="flex flex-col gap-6 md:gap-8 animate-in fade-in duration-500">
+      <div>
+        <h1 className="text-2xl md:text-3xl font-extrabold text-[#1E293B]">Super Admin Dashboard</h1>
+        <p className="text-sm md:text-base text-slate-400 font-medium mt-1">Welcome to the admin panel!</p>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             <StatCard
             icon={<DollarSign className="w-6 h-6 text-blue-500" />}
             label="Total Revenue"
@@ -134,9 +134,8 @@ export function AdminDashboardPage () {
                 borderColor="border-yellow-500/30"
                 />
             </div>
-            </div>
+          </div>
         </Card>
-        </div>
     </div>
   )
 }

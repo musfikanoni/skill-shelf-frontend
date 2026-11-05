@@ -110,18 +110,18 @@ export const CoursesTable = ({
 
   return (
     <div className="w-full bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
-      <div className="p-6 border-b border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <h3 className="text-slate-900 text-xl font-bold font-inter leading-7">
+      <div className="p-4 sm:p-6 border-b border-slate-200 flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
+        <h3 className="text-slate-900 text-xl font-bold font-inter leading-7 shrink-0">
           All Courses
         </h3>
 
-        <div className="flex flex-wrap items-center gap-4 w-full md:w-auto">
-          <div className="flex-1 md:w-80 h-11 px-4 py-2 rounded-2xl outline outline-2 outline-offset-[-2px] outline-slate-300 flex items-center gap-2 bg-white focus-within:outline-slate-500 transition-colors">
-            <Search className="w-5 h-5 text-slate-500" />
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
+          <div className="w-full sm:w-64 md:w-80 h-11 px-4 py-2 rounded-2xl outline outline-2 outline-offset-[-2px] outline-slate-300 flex items-center gap-2 bg-white focus-within:outline-slate-500 transition-colors">
+            <Search className="w-5 h-5 text-slate-500 shrink-0" />
             <input
               type="text"
               placeholder="Search Courses..."
-              className="flex-1 bg-transparent border-none outline-none text-slate-700 placeholder:text-slate-400 text-base font-medium"
+              className="flex-1 min-w-0 bg-transparent border-none outline-none text-slate-700 placeholder:text-slate-400 text-sm sm:text-base font-medium"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -131,20 +131,20 @@ export const CoursesTable = ({
             value={statusFilter}
             onValueChange={(value) => setStatusFilter(value ?? "all")}
           >
-            <SelectTrigger className="w-full sm:w-40! h-11! px-4 py-2 rounded-xl outline-2! outline-offset-[-2px]! outline-slate-300! border-none! bg-white! focus:ring-0! text-slate-900 text-lg font-medium leading-6">
+            <SelectTrigger className="w-full sm:w-40 !h-11 px-4 py-2 rounded-2xl border-2 border-slate-300 bg-white shadow-none focus:ring-0 text-slate-900 text-sm sm:text-base font-medium leading-6 shrink-0 cursor-pointer hover:border-slate-400 transition-colors">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
             <SelectContent
-              sideOffset={4}
-              className="bg-white! border-2! border-slate-200! rounded-lg shadow-xl"
+              sideOffset={6}
+              className="bg-white border-2 border-slate-200 rounded-xl shadow-xl py-1"
             >
-              <SelectItem value="all" className="text-lg! font-medium!">
+              <SelectItem value="all" className="py-2 px-4 cursor-pointer">
                 All Status
               </SelectItem>
-              <SelectItem value="published" className="text-lg! font-medium!">
+              <SelectItem value="published" className="py-2 px-4 cursor-pointer">
                 Published
               </SelectItem>
-              <SelectItem value="draft" className="text-lg! font-medium!">
+              <SelectItem value="draft" className="py-2 px-4 cursor-pointer">
                 Draft
               </SelectItem>
             </SelectContent>
@@ -152,7 +152,8 @@ export const CoursesTable = ({
         </div>
       </div>
 
-      <Table className="w-full">
+      <div className="w-full overflow-x-auto min-w-0">
+        <Table className="w-full min-w-[750px]">
         <TableHeader className="bg-slate-50">
           <TableRow className="hover:bg-slate-50 border-b border-slate-200 h-12!">
             <TableHead className="w-80 px-8! text-left text-slate-700 text-base font-bold font-inter leading-6">
@@ -254,6 +255,7 @@ export const CoursesTable = ({
           )}
         </TableBody>
       </Table>
+      </div>
 
       <Dialog
         open={!!courseToDelete}
