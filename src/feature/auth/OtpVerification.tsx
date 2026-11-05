@@ -77,7 +77,6 @@ export default function OtpVerification() {
     const email = localStorage.getItem("email");
     localStorage.setItem("otpTimer", "120");
     setTimeLeft(120);
-    console.log("Resending OTP...");
 
     if (type === "forget-password") {
       forgetResendOtp({ email });
@@ -95,7 +94,6 @@ export default function OtpVerification() {
   const onSubmit = async (data: OtpFormValues) => {
     const email = localStorage.getItem("email");
     const otpValue = data.otp.join("");
-    console.log("OTP submitted:", otpValue);
 
     const payload = {
       email,

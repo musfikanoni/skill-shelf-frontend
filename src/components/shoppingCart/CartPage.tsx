@@ -3,6 +3,8 @@
 import { useState } from "react";
 import SecondaryButton from "../shared/secondaryButton/SecondaryButton";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface CartItem {
     id: number;
@@ -33,6 +35,7 @@ const initialItems: CartItem[] = [
 ];
 
 export default function CartPage() {
+    const router = useRouter();
     const [items, setItems] = useState<CartItem[]>(initialItems);
     const [coupon, setCoupon] = useState("");
     const [couponApplied, setCouponApplied] = useState(false);
@@ -214,9 +217,12 @@ export default function CartPage() {
                         <div className="space-y-3 mt-2 text-center">
                             <SecondaryButton
                                 label="Proceed to Checkout"
-                                onClick={() => console.log("click")}
+                                onClick={() => router.push("/bundles")}
                             />
-                            <button className="md:ml-4 lg:ml-0 border-2 border-gray-200 hover:border-gray-300 text-gray-700 font-bold py-2 px-11 rounded-lg transition-colors text-sm bg-white cursor-pointer">
+                            <button
+                                onClick={() => router.push("/products")}
+                                className="md:ml-4 lg:ml-0 border-2 border-gray-200 hover:border-gray-300 text-gray-700 font-bold py-2 px-11 rounded-lg transition-all text-sm bg-white cursor-pointer active:scale-95"
+                            >
                                 Continue Shopping
                             </button>
                         </div>

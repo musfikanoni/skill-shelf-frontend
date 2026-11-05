@@ -109,8 +109,6 @@ export function ProductsTable({ onEdit }: ProductsTableProps) {
   const handleEdit = (product: any) => {
     if (onEdit) {
       onEdit(product);
-    } else {
-      console.log("Edit product:", product.id);
     }
   };
 

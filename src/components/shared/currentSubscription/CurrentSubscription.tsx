@@ -36,7 +36,7 @@ export default function CurrentSubscription() {
                 <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                     <SecondaryButton
                         label="Update Payment Method"
-                        onClick={() => console.log("click button")}
+                        onClick={() => {}}
                     />
 
                     <button className="w-full sm:w-auto cursor-pointer bg-[#e83939] hover:bg-[#e83939]/80 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-200">

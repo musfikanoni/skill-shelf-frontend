@@ -1,4 +1,3 @@
-
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 import { logout, setUser } from "@/redux/features/user/userSlice";
 import Cookies from "js-cookie";
@@ -9,7 +8,7 @@ import { useDispatch } from "react-redux";
 
 interface DecodedToken {
   id: string;
-  role: string; 
+  role: string;
   exp: number;
 }
 
@@ -18,7 +17,6 @@ const profile = [
     name: "Blog",
     link: "/blog",
   },
-
   {
     name: "Payment",
     link: "/payment",
@@ -37,13 +35,12 @@ const useAuthUser = () => {
   const navigate = useRouter();
 
   useEffect(() => {
-    const token = Cookies.get("token");
+    const token = Cookies.get("token") || Cookies.get("accessToken");
 
     if (token) {
       try {
         const decoded: DecodedToken = jwtDecode(token);
         const decodedUser = jwtDecode<DecodedToken>(token);
-        console.log(decodedUser);
         setTemp(decodedUser);
         if (decodedUser.role === "INDIVIDUAL") {
           setProfileLinks([
@@ -59,34 +56,12 @@ const useAuthUser = () => {
               name: "Messaging",
               link: "/messaging",
             },
-
-            {
-              name: "Consultation",
-              link: "/my-consultation",
-            },
-            {
-              name: "Favorite",
-              link: "/favorite",
-            },
-            ...profile,
-          ]);
-        }
-        if (decodedUser.role === "COMPANY") {
-          setProfileLinks([
-            {
-              name: "Company",
-              link: "/company",
-            },
-            {
-              name: "Job List",
-              link: "/job-list",
-            },
             ...profile,
           ]);
         }
         if (decoded.exp * 1000 < Date.now()) {
-
           Cookies.remove("token");
+          Cookies.remove("accessToken");
           return;
         }
       } catch (error) {
@@ -97,7 +72,6 @@ const useAuthUser = () => {
 
   const { data, error, isLoading } = useGetMeQuery({});
 
-  console.log(data);
   useEffect(() => {
     if (data?.success) {
       dispatch(
@@ -110,9 +84,11 @@ const useAuthUser = () => {
 
   const handleLogout = () => {
     Cookies.remove("token");
+    Cookies.remove("accessToken");
     dispatch(logout());
     navigate.push("/signIn");
   };
+
   return {
     user: data?.data || temp,
     isLoading,

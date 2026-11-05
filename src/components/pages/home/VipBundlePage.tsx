@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import SecondaryButton from "../../shared/secondaryButton/SecondaryButton";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import PageLoading from "../../Others/Loading";
 import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
 import { toast } from "sonner";
 import {
@@ -24,10 +23,18 @@ export default function VipBundlePage() {
 
   if (isLoading) {
     return (
-      <PageLoading
-        title="Loading VIP Access"
-        message="Preparing your ultimate digital library..."
-      />
+      <div
+        className="min-h-[450px] flex flex-col items-center justify-center px-4 py-12 md:py-16 animate-pulse"
+        style={{
+          background:
+            "radial-gradient(ellipse at top left, #3b1a6e 0%, #1a0a3c 40%, #0f0626 100%)",
+        }}
+      >
+        <div className="h-8 w-72 bg-amber-400/20 rounded-full mb-6" />
+        <div className="h-10 w-96 max-w-full bg-purple-900/40 rounded-xl mb-4" />
+        <div className="h-4 w-80 max-w-full bg-purple-900/30 rounded mb-10" />
+        <div className="w-full max-w-2xl h-64 bg-purple-950/40 border border-purple-800/30 rounded-2xl" />
+      </div>
     );
   }
 

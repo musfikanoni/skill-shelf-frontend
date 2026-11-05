@@ -18,6 +18,9 @@ const HeroSection = () => {
           src={heroBgColor}
           alt="hero"
           fill
+          priority
+          sizes="100vw"
+          quality={85}
           className="w-full h-full object-cover object-right"
         />
       </div>
@@ -27,7 +30,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 px-4 sm:px-6 lg:px-12 pt-24 sm:pt-28 md:pt-32 pb-16 flex items-center">
         <div className="max-w-2xl space-y-6">
-          <div className="inline-flex items-center gap-2 bg-[#201212] backdrop-blur-md px-4 py-1.5 rounded-full text-xs sm:text-sm text-yellow-400 font-medium border border-white/10">
+          <div className="inline-flex items-center gap-2 bg-[#201212] backdrop-blur-md px-4 py-1.5 rounded-full text-xs sm:text-sm text-yellow-400 font-medium border border-white/10 shadow-xs">
             ✨ Trusted by 10,000+ Digital Entrepreneurs
           </div>
 

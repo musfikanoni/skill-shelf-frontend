@@ -11,7 +11,6 @@ import { useGetMySubscriptionQuery } from "@/redux/api/userDashboardApi/subscrip
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import LoginRequiredModal from "../../shared/payment/LoginRequiredModal";
-import Loading from "../../Others/Loading";
 
 const CheckIcon: React.FC = () => (
   <svg
@@ -234,10 +233,33 @@ const PricingPlans: React.FC = () => {
   if (isLoading) {
     return (
       <section className="flex flex-col items-center justify-center py-16 px-4">
-        <Loading
-          title="Loading Membership Plans"
-          message="Fetching available tiers and pricing..."
-        />
+        {pathName === "/" && (
+          <div className="text-center mb-10">
+            <div className="h-6 w-36 bg-purple-100/60 rounded-full mx-auto mb-3 animate-pulse" />
+            <div className="h-10 w-72 bg-gray-200 rounded-lg mx-auto mb-3 animate-pulse" />
+            <div className="h-4 w-96 max-w-full bg-gray-200 rounded mx-auto animate-pulse" />
+          </div>
+        )}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl items-center">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="bg-white rounded-2xl p-8 border border-gray-100 shadow-xs flex flex-col justify-between animate-pulse"
+              style={{ minHeight: 450 }}
+            >
+              <div className="space-y-4">
+                <div className="h-6 w-32 bg-gray-200 rounded mx-auto" />
+                <div className="h-10 w-40 bg-gray-200 rounded mx-auto" />
+                <div className="space-y-2.5 pt-4">
+                  {[1, 2, 3, 4, 5].map((j) => (
+                    <div key={j} className="h-4 w-4/5 bg-gray-200 rounded" />
+                  ))}
+                </div>
+              </div>
+              <div className="h-12 w-full bg-gray-200 rounded-xl mt-6" />
+            </div>
+          ))}
+        </div>
       </section>
     );
   }

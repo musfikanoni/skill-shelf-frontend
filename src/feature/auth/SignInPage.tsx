@@ -7,7 +7,7 @@ import { useSignInMutation } from "@/redux/api/auth/AuthApi";
 import CustomInput from "@/ui/CustomeInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
-import { Crown, Sparkles, UserCheck, X } from "lucide-react";
+import { Crown, UserCheck, UserRoundKey, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -115,7 +115,7 @@ export default function SignInPage() {
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <span className="p-1 rounded-md bg-amber-100 text-amber-600 shadow-xs">
-                <Sparkles size={16} className="animate-pulse" />
+                <UserRoundKey size={16} className="animate-pulse" />
               </span>
               <span className="text-xs sm:text-sm font-bold text-gray-800">
                 Recruiter Demo Access

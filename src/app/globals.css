@@ -4,14 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
-
 @keyframes checkmark {
   to {
     stroke-dashoffset: 0;
   }
 }
-
-
 
 @theme {
   --color-primary: #168B86;
@@ -142,12 +139,45 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-
-
-body {
-  font-family: var(--font-secondary); 
+/* Smooth Scrolling & Typography Optimization */
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-button, a{
+body {
+  font-family: var(--font-secondary);
+  overflow-x: hidden;
+}
+
+/* Brand Selection Highlight */
+::selection {
+  background: #F5C518;
+  color: #000000;
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+button, a {
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }

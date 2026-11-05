@@ -5,7 +5,6 @@ import Image from "next/image";
 import SecondaryButton from "../../shared/secondaryButton/SecondaryButton";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { useRouter } from "next/navigation";
-import Loading from "../../Others/Loading";
 import { useGetProductsQuery } from "@/redux/api/landingPageApi/LandingPageApi";
 import { getProductCategoryName } from "@/constants/productCategory";
 
@@ -116,7 +115,7 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
 
         {/* Category Badge */}
         {categoryName && (
-          <span className="absolute top-4 left-4 bg-purple-100 text-purple-700 text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+          <span className="absolute top-4 left-1/2 -translate-x-1/2 bg-purple-100 text-purple-700 text-[10px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full whitespace-nowrap shadow-xs z-10">
             {categoryName}
           </span>
         )}
@@ -161,7 +160,7 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
             shadow-md shadow-purple-500/20
             hover:shadow-lg hover:shadow-purple-500/30
             transition-all duration-300
-            cursor-pointer
+            cursor-pointer active:scale-98
           "
         >
           View Details
@@ -188,10 +187,36 @@ const BestSellingProducts: FC = () => {
 
   if (isLoading) {
     return (
-      <Loading
-        title="Loading Products"
-        message="Fetching our best selling items..."
-      />
+      <section className="bg-gray-50 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-5">
+            <div className="inline-block h-7 w-36 bg-purple-100/70 rounded-full animate-pulse" />
+          </div>
+          <div className="text-center mb-8 sm:mb-14">
+            <div className="h-10 w-72 bg-gray-200 rounded-lg mx-auto mb-3 animate-pulse" />
+            <div className="h-4 w-96 max-w-full bg-gray-200 rounded mx-auto animate-pulse" />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl p-4 border border-gray-100 shadow-xs flex flex-col justify-between animate-pulse"
+              >
+                <div>
+                  <div className="w-full h-44 bg-gray-200 rounded-xl mb-4" />
+                  <div className="h-4 w-20 bg-gray-200 rounded mb-2" />
+                  <div className="h-5 w-4/5 bg-gray-200 rounded mb-3" />
+                  <div className="h-3.5 w-28 bg-gray-200 rounded mb-4" />
+                </div>
+                <div>
+                  <div className="h-6 w-24 bg-gray-200 rounded mb-3" />
+                  <div className="h-10 w-full bg-gray-200 rounded-xl" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     );
   }
 
@@ -200,7 +225,6 @@ const BestSellingProducts: FC = () => {
   return (
     <section className="bg-gray-50 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
-
         {/* Section Badge */}
         <div className="text-center mb-5">
           <span className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full">

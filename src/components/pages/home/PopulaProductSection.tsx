@@ -5,7 +5,6 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import SectionHeader from "../../shared/sectionHeader/SectionHeader";
 import { usePathname, useRouter } from "next/navigation";
 import { useGetBundlesQuery } from "@/redux/api/landingPageApi/LandingPageApi";
-import PageLoading from "../../Others/Loading";
 
 // Types for our Bundle data
 interface BundleItem {
@@ -42,10 +41,36 @@ export default function PopulaProductSection() {
 
   if (isLoading) {
     return (
-      <PageLoading
-        title="Loading Bundles"
-        message="Curating our best value packages..."
-      />
+      <section className="bg-white py-16 px-4 font-sans">
+        <div className="max-w-6xl mx-auto space-y-6">
+          <div className="text-center mb-10">
+            <div className="h-6 w-36 bg-amber-100/70 rounded-full mx-auto mb-3 animate-pulse" />
+            <div className="h-9 w-72 bg-gray-200 rounded-lg mx-auto mb-2 animate-pulse" />
+            <div className="h-4 w-96 max-w-full bg-gray-200 rounded mx-auto animate-pulse" />
+          </div>
+          {[1, 2].map((i) => (
+            <div
+              key={i}
+              className="border border-gray-100 rounded-3xl p-6 sm:p-8 md:p-10 shadow-xs flex flex-col md:flex-row justify-between gap-6 animate-pulse"
+            >
+              <div className="flex-1 space-y-4">
+                <div className="h-4 w-40 bg-orange-100 rounded" />
+                <div className="h-7 w-64 bg-gray-200 rounded-lg" />
+                <div className="h-4 w-4/5 bg-gray-200 rounded" />
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <div className="h-7 w-28 bg-gray-100 rounded-lg" />
+                  <div className="h-7 w-32 bg-gray-100 rounded-lg" />
+                  <div className="h-7 w-24 bg-gray-100 rounded-lg" />
+                </div>
+              </div>
+              <div className="md:w-64 flex flex-col justify-between border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-6 space-y-4">
+                <div className="h-8 w-32 bg-gray-200 rounded" />
+                <div className="h-12 w-full bg-gray-200 rounded-xl" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     );
   }
 
@@ -64,39 +89,40 @@ export default function PopulaProductSection() {
         {
           text: "CREATOR BUNDLE",
           icon: <Palette className="w-4 h-4" />,
-          colorClass: "text-orange-400",
+          colorClass: "text-purple-600",
         },
         {
-          text: "BEGINNER STARTER PACK",
+          text: "GROWTH BUNDLE",
           icon: <Rocket className="w-4 h-4" />,
-          colorClass: "text-teal-500",
+          colorClass: "text-blue-600",
         },
       ];
 
       const sideLabels = [
-        { text: "BEST VALUE", colorClass: "bg-orange-500" },
+        { text: "TOP BUNDLE", colorClass: "bg-red-500" },
         { text: "CREATOR", colorClass: "bg-purple-600" },
-        { text: "STARTER", colorClass: "bg-teal-500" },
+        { text: "GROWTH", colorClass: "bg-blue-600" },
       ];
 
-      const currentPrice = bundle.price || 0;
+      const currentPrice = Number(bundle.price) || 0;
 
-      // Extract products with their basic/pro/vip price
-      const productItems: BundleItem[] = (bundle.products || []).map((p: any) => ({
-        name: p.name || p.title || "Product",
-        type: "product" as const,
-        price:
-          typeof p.price === "number"
-            ? p.price
-            : p.price?.basic || p.price?.pro || p.price?.vip || 0,
-      }));
+      // Extract products and courses with their names, types, and prices
+      const productItems: BundleItem[] = (bundle.products || []).map(
+        (p: any) => ({
+          name: p.name || "Product",
+          type: "product" as const,
+          price:
+            typeof p.price === "number" ? p.price : Number(p.price?.basic) || 0,
+        })
+      );
 
-      // Extract courses with their individual price
-      const courseItems: BundleItem[] = (bundle.courses || []).map((c: any) => ({
-        name: c.title || c.name || "Course",
-        type: "course" as const,
-        price: typeof c.price === "number" ? c.price : 0,
-      }));
+      const courseItems: BundleItem[] = (bundle.courses || []).map(
+        (c: any) => ({
+          name: c.title || "Course",
+          type: "course" as const,
+          price: Number(c.price) || 0,
+        })
+      );
 
       // Combined items (both products and courses)
       const allItems = [...productItems, ...courseItems];

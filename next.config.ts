@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  compress: true,
+  reactStrictMode: true,
   experimental: {
     agentFeedback: true,
   },
@@ -16,6 +17,7 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
@@ -27,17 +29,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "paeyking-store.sfo3.digitaloceanspaces.com",
-        pathname: "/products/**",
-      },
-      {
-        protocol: "https",
         hostname: "res.cloudinary.com",
-        pathname: "/fkzn0avi/image/upload/**",
       },
     ],
   },

@@ -36,11 +36,9 @@ export default function ForgetPassPage() {
 
   const onSubmit = async (data: FormValues) => {
     localStorage.setItem("email", data.email);
-    console.log("Form Data:", data);
     try {
       const response = await forgetPassword(data).unwrap();
       if (response?.success) {
-        console.log("OTP sent successfully");
         toast.success("OTP sent successfully to your email");
         router.push("/otp?type=forget-password");
       }

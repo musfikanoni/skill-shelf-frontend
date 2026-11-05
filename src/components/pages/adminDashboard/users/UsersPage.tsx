@@ -26,7 +26,7 @@ export default function UsersPage() {
   const [deletingUserId, setDeletingUserId] = useState<string | null>(null);
   const pageSize = 10;
 
-  const { data: apiResponse, isLoading } = useGetAllUsersQuery({
+  const { data: apiResponse, isLoading, refetch } = useGetAllUsersQuery({
     page: currentPage,
     limit: pageSize,
     searchTerm,
@@ -80,8 +80,9 @@ export default function UsersPage() {
     }
   };
 
-  const handleRefresh = (user: Users) => {
-    console.log("Refresh user:", user);
+  const handleRefresh = (_user: Users) => {
+    refetch();
+    toast.success("User list refreshed");
   };
 
   const handlePageChange = (page: number) => {

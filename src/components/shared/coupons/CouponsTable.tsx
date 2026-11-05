@@ -118,8 +118,6 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
   const handleEdit = (coupon: Coupon) => {
     if (onEdit) {
       onEdit(coupon);
-    } else {
-      console.log("Edit coupon:", coupon._id);
     }
   };
 

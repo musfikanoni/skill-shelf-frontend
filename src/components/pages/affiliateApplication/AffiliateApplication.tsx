@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 type FormData = {
     firstName: string;
@@ -20,9 +21,9 @@ export default function AffiliateApplication() {
         reset,
     } = useForm<FormData>();
 
-    const onSubmit = async (data: any) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log("Form submitted:", data);
+    const onSubmit = async (_data: any) => {
+        await new Promise((resolve) => setTimeout(resolve, 600));
+        toast.success("Application submitted successfully!");
         reset();
     };
 

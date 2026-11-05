@@ -58,7 +58,6 @@ export default function ResetPasswordPage() {
       }).unwrap();
 
       if (response?.success) {
-        console.log("Password reset successfully");
         toast.success("Password reset successfully");
         router.push("/signIn");
       } else {

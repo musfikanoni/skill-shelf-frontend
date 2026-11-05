@@ -11,7 +11,6 @@ import {
   Globe,
 } from "lucide-react";
 import { useGetCategoriesQuery } from "@/redux/api/landingPageApi/LandingPageApi";
-import PageLoading from "../../Others/Loading";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { isProductCategory } from "@/constants/productCategory";
@@ -22,10 +21,23 @@ const BrowseCategory = () => {
 
   if (isLoading) {
     return (
-      <PageLoading
-        title="Loading Categories"
-        message="Organizing our collections for you..."
-      />
+      <section className="bg-[#f5f6f7] py-16">
+        <div className="max-w-6xl mx-auto px-4 lg:px-0 text-center">
+          <div className="h-9 w-64 bg-gray-200 rounded-lg mx-auto mb-2 animate-pulse" />
+          <div className="h-4 w-80 max-w-full bg-gray-200 rounded mx-auto mb-10 animate-pulse" />
+          <div className="flex flex-wrap justify-center items-center gap-4">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div
+                key={i}
+                className="w-[calc(50%-8px)] sm:w-44 md:w-48 bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col items-center gap-3 animate-pulse"
+              >
+                <div className="w-12 h-12 rounded-full bg-gray-200" />
+                <div className="h-4 w-20 bg-gray-200 rounded" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     );
   }
 
@@ -80,33 +92,34 @@ const BrowseCategory = () => {
           Explore our expert-led courses across popular categories
         </p>
 
-        {/* Categories */}
-        <div className="flex flex-wrap justify-center gap-6 mt-10">
-          {categories.map((item: any, index: number) => {
-            const Icon = item.icon;
+        <div className="flex flex-wrap justify-center items-center gap-4 mt-10">
+          {categories.map((cat: any) => {
+            const Icon = cat.icon;
+
             return (
               <div
-                key={item.id || index}
-                onClick={() => router.push("/courses")}
-                className="bg-white border border-gray-200 rounded-lg p-6 flex flex-col items-center justify-center hover:shadow-md transition cursor-pointer group w-[calc(50%-12px)] sm:w-40 md:w-44 lg:w-44"
+                key={cat.id}
+                onClick={() => router.push(`/courses?category=${cat.id}`)}
+                className="w-[calc(50%-8px)] sm:w-44 md:w-48 bg-white p-5 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center justify-center cursor-pointer group hover:-translate-y-1"
               >
                 <div
-                  className={`w-16 h-16 flex items-center justify-center rounded-xl overflow-hidden mb-4 ${item.bg} group-hover:scale-105 transition-transform duration-300`}
+                  className={`w-12 h-12 flex items-center justify-center rounded-full ${cat.bg} ${cat.color} group-hover:scale-110 transition-transform overflow-hidden`}
                 >
-                  {item.image ? (
+                  {cat.image ? (
                     <Image
-                      src={item.image}
-                      alt={item.name}
-                      width={64}
-                      height={64}
+                      src={cat.image}
+                      alt={cat.name}
+                      width={48}
+                      height={48}
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <Icon className={`w-8 h-8 ${item.color}`} />
+                    <Icon className="w-6 h-6" />
                   )}
                 </div>
-                <p className="text-sm font-semibold text-gray-700 group-hover:text-gray-900 transition-colors">
-                  {item.name}
+
+                <p className="mt-3 text-sm font-medium text-gray-700 group-hover:text-black text-center">
+                  {cat.name}
                 </p>
               </div>
             );

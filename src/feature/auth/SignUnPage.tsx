@@ -48,7 +48,6 @@ export default function SignUpPage() {
 
   const onSubmit = async (data: FormValues) => {
     localStorage.setItem("email", data.email);
-    console.log("Form Data:", data);
 
     const payload = {
       name: data.name,

@@ -1,9 +1,7 @@
-
 "use client";
 
 import { Star, CheckCircle2, User } from "lucide-react";
 import { useGetReviewsQuery } from "@/redux/api/landingPageApi/LandingPageApi";
-import PageLoading from "../../Others/Loading";
 import Image from "next/image";
 
 interface Testimonial {
@@ -20,10 +18,39 @@ export default function OurCustomer() {
 
   if (isLoading) {
     return (
-      <PageLoading
-        title="Loading Reviews"
-        message="Hearing from our amazing community..."
-      />
+      <div className="bg-white py-12 sm:py-16 md:py-20 px-4 font-sans">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-center mb-6">
+            <div className="h-7 w-64 bg-purple-100/60 rounded-md animate-pulse" />
+          </div>
+          <div className="text-center mb-10 sm:mb-16">
+            <div className="h-10 w-72 bg-gray-200 rounded-lg mx-auto mb-3 animate-pulse" />
+            <div className="h-5 w-80 max-w-full bg-gray-200 rounded mx-auto animate-pulse" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="bg-[#f8fafc]/50 rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col shadow-xs animate-pulse"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-gray-200 shrink-0" />
+                  <div className="space-y-2 flex-1">
+                    <div className="h-4 w-24 bg-gray-200 rounded" />
+                    <div className="h-3 w-16 bg-gray-200 rounded" />
+                  </div>
+                </div>
+                <div className="h-4 w-20 bg-gray-200 rounded mb-4" />
+                <div className="space-y-2 mb-6">
+                  <div className="h-3.5 w-full bg-gray-200 rounded" />
+                  <div className="h-3.5 w-4/5 bg-gray-200 rounded" />
+                </div>
+                <div className="h-4 w-28 bg-gray-200 rounded mt-auto" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     );
   }
 
@@ -71,7 +98,7 @@ export default function OurCustomer() {
           {testimonials.map((t, index) => (
             <div
               key={index}
-              className="bg-[#f8fafc]/50 rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col shadow-sm"
+              className="bg-[#f8fafc]/50 rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="relative w-12 h-12 shrink-0 overflow-hidden rounded-full border-2 border-purple-200 bg-purple-50 flex items-center justify-center">
@@ -79,6 +106,8 @@ export default function OurCustomer() {
                     <Image
                       src={t.image}
                       alt={t.name}
+                      width={48}
+                      height={48}
                       className="w-full h-full object-cover"
                     />
                   ) : (

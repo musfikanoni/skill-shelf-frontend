@@ -1,24 +1,24 @@
+"use client";
 
-"use client"
-import AppSidebar from "@/components/shared/appSidebar/app-sidebar"
-import { SiteHeader } from "@/components/shared/siteHeader/site-header"
-import { SidebarProvider } from "@/components/ui/sidebar"
-import { TooltipProvider } from "@/components/ui/tooltip"
-import { useGetMeQuery } from "@/redux/api/getMe/getMeApi"
+import AppSidebar from "@/components/shared/appSidebar/app-sidebar";
+import { SiteHeader } from "@/components/shared/siteHeader/site-header";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { useGetMeQuery } from "@/redux/api/getMe/getMeApi";
+import { usePathname } from "next/navigation";
 
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-
-  const {data: getMeData} = useGetMeQuery("")
-//   console.log("getMeData =============================", getMeData?.data?.role)
-  const roleManage = getMeData?.data?.role
-  console.log("roleManage" ,roleManage)
-  //   const token = useAppSelector((state) => state.auth.token);
-  // const decodedToken = useDecodedToken(token);
-  const role = roleManage // decodedToken?.role || "USER";
+  const pathname = usePathname();
+  const { data: getMeData } = useGetMeQuery({});
+  const apiRole = getMeData?.data?.role;
+  const inferredRole = pathname?.startsWith("/admin-dashboard")
+    ? "SUPER_ADMIN"
+    : "USER";
+  const role = apiRole || inferredRole;
 
   return (
     <TooltipProvider>
@@ -39,5 +39,5 @@ export default function DashboardLayout({
         </div>
       </SidebarProvider>
     </TooltipProvider>
-  )
+  );
 }

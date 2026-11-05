@@ -133,9 +133,7 @@ export default function Affiliate() {
   // Function to fetch user ID by email
   const getUserIdByEmail = async (email: string) => {
     try {
-      // Option 3: For now, we'll simulate - you'll need to implement this based on your API
-      console.log("Looking up user by email:", email);
-      // Return the email as fallback - but ideally you should get the actual user ID
+      // Return the email as fallback
       return email;
     } catch (error) {
       console.error("Error fetching user:", error);
@@ -183,7 +181,6 @@ export default function Affiliate() {
       };
 
       
-      console.log("Sending payload:", payload);
       const result = await createAffiliate(payload).unwrap();
       
       // Handle successful submission

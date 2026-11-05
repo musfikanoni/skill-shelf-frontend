@@ -33,8 +33,6 @@ export default function OrderDetailsPage() {
 
   const order: OrderDetailsData = (data?.data as OrderDetailsData) || data;
 
-  console.log("order data--------", order);
-
   if (isLoading) {
     return <Loading />;
   }
