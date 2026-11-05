@@ -90,10 +90,10 @@ const PlanCard: React.FC<PlanCardProps> = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={`
-        relative flex flex-col rounded-2xl px-5 sm:px-8 py-8 transition-all duration-300
+        relative flex flex-col rounded-2xl px-6 sm:px-7 lg:px-8 py-8 transition-all duration-300
         ${
           isPopular
-            ? "border-2 border-purple-500 shadow-2xl shadow-purple-200 md:scale-[1.03] bg-white z-10"
+            ? "border-2 border-purple-500 shadow-2xl shadow-purple-200 lg:scale-[1.03] bg-white z-10"
             : "border border-gray-200 bg-white shadow-md"
         }
         ${hovered && !isPopular ? "shadow-xl -translate-y-1" : ""}
@@ -124,9 +124,9 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
       <ul className="flex flex-col gap-3 mb-8 flex-1">
         {plan.features.map((feature, idx) => (
-          <li key={idx} className="flex items-center gap-2.5">
-            <CheckIcon />
-            <span className="text-gray-600 text-sm">{feature}</span>
+          <li key={idx} className="flex items-start gap-2.5">
+            <span className="mt-0.5 shrink-0"><CheckIcon /></span>
+            <span className="text-gray-600 text-sm leading-relaxed">{feature}</span>
           </li>
         ))}
       </ul>
@@ -240,7 +240,7 @@ const PricingPlans: React.FC = () => {
             <div className="h-4 w-96 max-w-full bg-gray-200 rounded mx-auto animate-pulse" />
           </div>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-md md:max-w-3xl lg:max-w-5xl items-stretch md:[&>*:last-child:nth-child(odd)]:col-span-2 md:[&>*:last-child:nth-child(odd)]:max-w-md md:[&>*:last-child:nth-child(odd)]:w-full md:[&>*:last-child:nth-child(odd)]:mx-auto lg:[&>*:last-child:nth-child(odd)]:col-span-1 lg:[&>*:last-child:nth-child(odd)]:max-w-none">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
@@ -301,7 +301,7 @@ const PricingPlans: React.FC = () => {
           </>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-md md:max-w-3xl lg:max-w-5xl items-stretch md:[&>*:last-child:nth-child(odd)]:col-span-2 md:[&>*:last-child:nth-child(odd)]:max-w-md md:[&>*:last-child:nth-child(odd)]:w-full md:[&>*:last-child:nth-child(odd)]:mx-auto lg:[&>*:last-child:nth-child(odd)]:col-span-1 lg:[&>*:last-child:nth-child(odd)]:max-w-none">
           {plans.map((plan) => (
             <PlanCard
               key={plan._id}

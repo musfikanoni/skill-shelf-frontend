@@ -7,14 +7,14 @@ import footerLogo from "@/assets/images/logo.png";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  // const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubscribe = () => {
-    if (email) {
-      setSubscribed(true);
-      setEmail("");
-    }
-  };
+  // const handleSubscribe = () => {
+  //   if (email) {
+  //     setSubscribed(true);
+  //     setEmail("");
+  //   }
+  // };
 
   return (
     <div className="bg-[#0f0f1a] font-sans mt-12">
@@ -182,7 +182,7 @@ export default function Footer() {
               <p className="text-white/70 text-xs sm:text-sm mb-4">
                 Get the latest products and special offers directly in your inbox.
               </p>
-              <div className="flex flex-col gap-2">
+              {/* <div className="flex flex-col gap-2">
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -196,7 +196,7 @@ export default function Footer() {
                 >
                   {subscribed ? "Subscribed!" : "Subscribe"}
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
 

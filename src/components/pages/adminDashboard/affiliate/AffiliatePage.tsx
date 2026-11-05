@@ -16,6 +16,7 @@ import {
 } from "@/components/shared/affiliate/AffiliateTable";
 import { AffiliateStatCard } from "@/components/shared/affiliate/AffiliateStatCard";
 import { DeleteConfirmationDialog } from "@/components/shared/users/DeleteConfirmationDialog";
+import Loading from "@/components/Others/Loading";
 
 export default function AffiliatePage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -127,8 +128,19 @@ export default function AffiliatePage() {
     });
   }, [affiliates, searchTerm]);
 
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <Loading
+          title="Loading Affiliates"
+          message="Fetching affiliate partners and commissions..."
+        />
+      </div>
+    );
+  }
+
   return (
-    <div>
+    <div className="flex flex-col gap-6 md:gap-8 animate-in fade-in duration-500">
       <div>
         <h1 className="text-2xl md:text-3xl font-extrabold text-[#1E293B]">
           Affiliate
@@ -138,7 +150,7 @@ export default function AffiliatePage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:py-6 lg:py-8 md:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         <AffiliateStatCard
           label="Total Earnings"
           value={`$${meta.total * 50}`}
@@ -157,7 +169,7 @@ export default function AffiliatePage() {
         />
       </div>
 
-      <div className="py-6 lg:py-8">
+      <div className="w-full">
         <AffiliateTable
           data={filteredAffiliates}
           isLoading={isLoading}

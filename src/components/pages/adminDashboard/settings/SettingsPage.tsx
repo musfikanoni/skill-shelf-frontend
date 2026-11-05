@@ -13,6 +13,7 @@ import { PasswordSection } from './PasswordSection';
 import { PaymentMethodsSection } from './PaymentMethodsSection';
 import { DangerZone } from './DangerZone';
 import { useChangePasswordMutation } from '@/redux/api/auth/AuthApi';
+import Loading from '@/components/Others/Loading';
 
 const DEFAULT_AVATAR = "https://placehold.co/128x128";
 
@@ -153,8 +154,8 @@ const SettingsPage = () => {
 
     if (isLoading) {
         return (
-            <div className="flex items-center justify-center min-h-[400px]">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+            <div className="min-h-[70vh] flex items-center justify-center">
+                <Loading title="Loading Settings" message="Fetching account and profile preferences..." />
             </div>
         );
     }

@@ -6,11 +6,20 @@ import { BundlesStatCard } from "./BundlesStatCard";
 import { BundlesTable } from "./BundlesTable";
 import { CreateBundleModal } from "./CreateBundleModal";
 import { useGetAllBundlesQuery } from "@/redux/api/userDashboardApi/bundleApi";
+import Loading from "@/components/Others/Loading";
 
 export default function BundlesPage() {
-  const { data: bundlesData } = useGetAllBundlesQuery();
+  const { data: bundlesData, isLoading } = useGetAllBundlesQuery();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingBundle, setEditingBundle] = useState<any | null>(null);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <Loading title="Loading Bundles" message="Fetching bundle catalog..." />
+      </div>
+    );
+  }
 
   const bundles = bundlesData?.data || [];
   const totalBundles = bundles.length;

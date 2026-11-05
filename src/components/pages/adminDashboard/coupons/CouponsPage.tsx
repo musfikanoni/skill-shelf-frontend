@@ -6,7 +6,7 @@ import {
   useUpdateCouponMutation 
 } from "@/redux/api/userDashboardApi/couponApi";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import Loading from "@/components/Others/Loading";
 import CouponsClientManager from "./CouponsClientManager";
 import { CouponsStatCard } from "./CouponsStatCard";
 import { CreateCouponForm } from "./CreateCouponForm";
@@ -53,8 +53,8 @@ export default function CouponsPage() {
 
   if (couponsLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="w-10 h-10 animate-spin text-amber-500" />
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <Loading title="Loading Coupons" message="Fetching promotional coupons..." />
       </div>
     );
   }

@@ -33,7 +33,8 @@ export function SubscriptionsTable({ data }: SubscriptionTableProps) {
 
   return (
     <div className="w-full bg-white rounded-2xl border-2 border-slate-200 overflow-hidden">
-      <Table>
+      <div className="overflow-x-auto w-full">
+        <Table className="w-full min-w-[800px]">
         <TableHeader className="bg-slate-50">
           <TableRow className="hover:bg-transparent border-slate-200">
             <TableHead className="w-[300px] h-14 px-6 text-slate-700 text-base font-bold font-inter">Subscriber</TableHead>
@@ -115,5 +116,6 @@ export function SubscriptionsTable({ data }: SubscriptionTableProps) {
         </TableBody>
       </Table>
     </div>
-  );
+  </div>
+);
 }

@@ -19,12 +19,10 @@ export default function CourseClientManager({
   onCreateClick,
   buttonLabel = "Create Course",
 }: CourseClientManagerProps) {
-  const [stats, content] = React.Children.toArray(children);
-
   const isClose = buttonLabel.toLowerCase() === "close" || buttonLabel.toLowerCase() === "cancel";
 
   return (
-    <div>
+    <div className="flex flex-col gap-6 md:gap-8 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <h1 className="text-3xl font-extrabold text-[#1E293B]">{title}</h1>
@@ -33,23 +31,15 @@ export default function CourseClientManager({
         <div>
           <Button
             onClick={onCreateClick}
-            className="cursor-pointer py-5 px-7 border-0 flex-1 bg-[linear-gradient(180deg,_#F5C518_50%,_#D73200_222.14%)] text-black hover:from-[#F9C32C] hover:to-[#EFA00B] hover:text-black transition-all duration-300"
+            className="cursor-pointer py-5 px-7 border-0 bg-[linear-gradient(180deg,_#F5C518_50%,_#D73200_222.14%)] text-black hover:from-[#F9C32C] hover:to-[#EFA00B] hover:text-black transition-all duration-300 font-bold rounded-[14px]"
           >
-            {isClose ? <X className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+            {isClose ? <X className="h-4 w-4 mr-1" /> : <Plus className="h-4 w-4 mr-1" />}
             {buttonLabel}
           </Button>
         </div>
       </div>
 
-      {/* Stats Cards Section */}
-      <div className="py-6 lg:py-8">
-        {stats}
-      </div>
-
-      {/* Main Content Section */}
-      <div>
-        {content}
-      </div>
+      {children}
     </div>
   );
 }

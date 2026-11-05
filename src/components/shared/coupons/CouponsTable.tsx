@@ -145,23 +145,23 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
   };
 
   return (
-    <div className="self-stretch h-[420px] bg-white rounded-lg shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.10)] outline-2 outline-offset-[-2px] outline-slate-200 inline-flex flex-col justify-start items-start w-full overflow-hidden">
+    <div className="self-stretch min-h-[420px] bg-white rounded-lg shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.10)] outline-2 outline-offset-[-2px] outline-slate-200 inline-flex flex-col justify-start items-start w-full overflow-hidden">
       {/* Header */}
-      <div className="self-stretch min-h-24 py-4 border-b border-slate-200 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 px-4 sm:px-6 bg-white z-20">
-        <div className="text-slate-900 text-xl font-bold font-inter leading-7">
+      <div className="self-stretch py-4 border-b border-slate-200 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 px-4 sm:px-6 bg-white z-20">
+        <div className="text-slate-900 text-xl font-bold font-inter leading-7 shrink-0">
           All Coupons
         </div>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
           {/* Search */}
-          <div className="w-full md:w-[320px] lg:w-[450px] !h-14 px-4 py-2 rounded-lg outline-2 outline-offset-[-2px] outline-slate-300 flex items-center gap-2 bg-white">
-            <Search className="w-5 h-5 text-slate-500" />
+          <div className="w-full sm:w-64 md:w-72 lg:w-96 !h-12 sm:!h-14 px-4 py-2 rounded-lg outline-2 outline-offset-[-2px] outline-slate-300 flex items-center gap-2 bg-white">
+            <Search className="w-5 h-5 text-slate-500 shrink-0" />
             <input
               type="text"
               placeholder="Search Coupons..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="flex-1 bg-transparent outline-none text-slate-700 text-base font-medium font-inter placeholder:text-slate-700/50"
+              className="flex-1 min-w-0 bg-transparent outline-none text-slate-700 text-sm sm:text-base font-medium font-inter placeholder:text-slate-400"
             />
           </div>
 
@@ -170,7 +170,7 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
             value={selectedStatus}
             onValueChange={(value) => setSelectedStatus(value ?? "all")}
           >
-            <SelectTrigger className="w-36 !h-14 px-3 py-2 rounded-lg border-2 border-slate-300 shadow-none focus:ring-0 flex justify-between items-center bg-white">
+            <SelectTrigger className="w-full sm:w-36 !h-12 sm:!h-14 px-3 py-2 rounded-lg border-2 border-slate-300 shadow-none focus:ring-0 flex justify-between items-center bg-white text-slate-900 text-sm sm:text-base font-medium shrink-0">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
             <SelectContent sideOffset={6} className="rounded-lg">
@@ -189,8 +189,8 @@ export function CouponsTable({ data = [], onEdit }: CouponsTableProps) {
       </div>
 
       {/* Table Content */}
-      <div className="self-stretch flex-1 w-full overflow-auto">
-        <Table className="w-full text-left border-collapse">
+      <div className="self-stretch flex-1 w-full overflow-x-auto">
+        <Table className="w-full min-w-[750px] text-left border-collapse">
           <TableHeader>
             <TableRow className="h-14 bg-slate-50 border-b border-slate-200 hover:bg-slate-50">
               <TableHead

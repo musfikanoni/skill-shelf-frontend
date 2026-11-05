@@ -78,8 +78,8 @@ export function AffiliateTable({
         searchPlaceholder="Search Affiliate..."
       />
 
-      <div className="flex-1 overflow-auto">
-        <Table className="border-collapse">
+      <div className="flex-1 overflow-x-auto w-full">
+        <Table className="w-full min-w-[800px] border-collapse">
           <TableHeader className="sticky top-0 z-10">
             <TableRow className="h-14 border-b border-slate-200 bg-slate-50 hover:bg-slate-50">
               <TableHead className="w-36 pl-6 py-4 font-bold text-slate-700 text-base">Name</TableHead>

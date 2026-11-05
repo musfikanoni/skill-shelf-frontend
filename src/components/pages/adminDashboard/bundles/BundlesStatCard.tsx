@@ -34,20 +34,16 @@ export const BundlesStatCard: React.FC<BundlesStatCardProps> = ({
 
   return (
     <div
-      className={`w-full h-32 px-6 pt-6 pb-0.5 bg-white rounded-2xl shadow-[0px_4px_6px_-4px_rgba(0,0,0,0.10)] shadow-lg outline outline-2 outline-offset-[-2px] ${styles.outline} inline-flex flex-col justify-start items-start gap-2`}
+      className={`w-full min-h-[115px] p-5 sm:p-6 bg-white rounded-2xl shadow-sm outline outline-2 outline-offset-[-2px] ${styles.outline} flex flex-col justify-between gap-3`}
     >
-      <div className="self-stretch h-6 relative">
-        <div className="left-0 top-[-2px] absolute justify-start text-slate-600 text-base font-semibold font-inter leading-6">
-          {label}
-        </div>
-      </div>
-      <div className="self-stretch h-10 relative">
-        <div
-          className={`left-0 top-[-2px] absolute justify-start ${styles.text} text-4xl font-bold font-inter leading-10`}
-        >
-          {value}
-        </div>
-      </div>
+      <span className="text-slate-600 text-sm sm:text-base font-semibold font-inter leading-snug">
+        {label}
+      </span>
+      <span
+        className={`${styles.text} text-3xl sm:text-4xl font-bold font-inter leading-none`}
+      >
+        {value}
+      </span>
     </div>
   );
 };

@@ -94,14 +94,14 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
       {/* Header filter controls */}
-      <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="relative w-full sm:w-80">
+      <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+        <div className="relative w-full sm:w-64 md:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <Input
             placeholder="Search bundles..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 h-10 rounded-xl bg-slate-50 border-slate-200"
+            className="pl-10 h-11 rounded-xl bg-slate-50 border-slate-200"
           />
         </div>
 
@@ -110,8 +110,8 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
             value={statusFilter}
             onValueChange={(val: any) => setStatusFilter(val ?? "all")}
           >
-            <SelectTrigger className="w-full sm:w-40 h-10 rounded-xl bg-slate-50 border-slate-200">
-              <SelectValue placeholder="All Status" />
+            <SelectTrigger className="w-full sm:w-40 h-11 rounded-xl bg-slate-50 border-slate-200 font-medium">
+              <span>{statusFilter === "all" ? "All Status" : statusFilter === "active" ? "Active" : "Inactive"}</span>
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Status</SelectItem>
@@ -123,8 +123,8 @@ export const BundlesTable: React.FC<BundlesTableProps> = ({ onEdit }) => {
       </div>
 
       {/* Table view */}
-      <div className="overflow-x-auto">
-        <Table>
+      <div className="overflow-x-auto w-full">
+        <Table className="w-full min-w-[850px]">
           <TableHeader>
             <TableRow className="bg-slate-50/70 hover:bg-slate-50/70 border-b border-slate-200">
               <TableHead className="font-bold text-slate-700 py-4 px-6">

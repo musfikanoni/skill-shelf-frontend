@@ -109,26 +109,30 @@ export default function FeaturedCourses() {
         {courses[0] && (
           <div
             onClick={() => handleViewDetails(courses[0]._id)}
-            className="relative rounded-3xl overflow-hidden group cursor-pointer h-full min-h-[280px] sm:min-h-[320px] lg:min-h-[550px] flex flex-col shadow-xl"
+            className="relative rounded-3xl overflow-hidden group cursor-pointer h-full min-h-[380px] sm:min-h-[440px] md:min-h-[480px] lg:min-h-[550px] flex flex-col justify-between p-5 sm:p-8 shadow-xl"
           >
             <img
               src={courses[0].thumbnail}
               alt={courses[0].title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/20" />
 
-            <span className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-purple-600 text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 sm:px-4 sm:py-1.5 rounded-full">
-              {courses[0].category?.name || "COURSE"}
-            </span>
+            <div className="relative z-10 flex items-center justify-between">
+              <span className="bg-purple-600 text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 sm:px-4 sm:py-1.5 rounded-full shadow-sm">
+                {courses[0].category?.name || "COURSE"}
+              </span>
+            </div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 text-white">
-              <h3 className="text-base sm:text-xl lg:text-3xl font-bold mb-1 sm:mb-2 line-clamp-1 sm:line-clamp-2">
+            <div className="relative z-10 text-white pt-6">
+              <h3 className="text-base sm:text-xl lg:text-3xl font-bold mb-1.5 sm:mb-2 line-clamp-1 sm:line-clamp-2">
                 {courses[0].title}
               </h3>
-              <p className="hidden sm:block text-gray-300 mb-4 max-w-md line-clamp-2 text-sm sm:text-base">
-                {courses[0].description.replace(/"/g, "")}
-              </p>
+              <div className="hidden sm:block mb-3 sm:mb-4 max-w-md">
+                <p className="text-gray-300 line-clamp-2 text-sm sm:text-base leading-relaxed">
+                  {courses[0].description.replace(/"/g, "")}
+                </p>
+              </div>
               <StarRating
                 rating={courses[0].averageRating}
                 reviews={courses[0].totalReviews}
@@ -166,20 +170,22 @@ export default function FeaturedCourses() {
               <div
                 key={course._id}
                 onClick={() => handleViewDetails(course._id)}
-                className="relative rounded-3xl overflow-hidden group cursor-pointer aspect-auto sm:aspect-square min-h-[280px] sm:min-h-0 shadow-lg"
+                className="relative rounded-3xl overflow-hidden group cursor-pointer aspect-auto sm:aspect-square min-h-[280px] sm:min-h-0 shadow-lg flex flex-col justify-between p-5"
               >
                 <img
                   src={course.thumbnail}
                   alt={course.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
 
-                <span className="absolute top-4 left-4 bg-purple-600 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">
-                  {course.category?.name || "COURSE"}
-                </span>
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="bg-purple-600 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow-sm">
+                    {course.category?.name || "COURSE"}
+                  </span>
+                </div>
 
-                <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                <div className="relative z-10 text-white pt-4">
                   <h3 className="text-base sm:text-lg font-bold mb-1 line-clamp-1">
                     {course.title}
                   </h3>
@@ -217,22 +223,24 @@ export default function FeaturedCourses() {
           {courses[3] && (
             <div
               onClick={() => handleViewDetails(courses[3]._id)}
-              className="relative rounded-3xl overflow-hidden group cursor-pointer flex-1 min-h-[280px] sm:min-h-[250px] shadow-lg"
+              className="relative rounded-3xl overflow-hidden group cursor-pointer flex-1 min-h-[280px] sm:min-h-[260px] shadow-lg flex flex-col justify-between p-5 sm:p-6"
             >
               <img
                 src={courses[3].thumbnail}
                 alt={courses[3].title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20" />
 
-              <span className="absolute top-4 left-4 bg-purple-600 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">
-                {courses[3].category?.name || "COURSE"}
-              </span>
+              <div className="relative z-10 flex items-center justify-between">
+                <span className="bg-purple-600 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow-sm">
+                  {courses[3].category?.name || "COURSE"}
+                </span>
+              </div>
 
-              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-white">
-                <h3 className="text-lg sm:text-2xl font-bold mb-1">{courses[3].title}</h3>
-                <p className="text-xs sm:text-sm text-gray-400 mb-3 line-clamp-1">
+              <div className="relative z-10 text-white pt-4">
+                <h3 className="text-lg sm:text-2xl font-bold mb-1 line-clamp-1">{courses[3].title}</h3>
+                <p className="text-xs sm:text-sm text-gray-300 mb-3 line-clamp-1">
                   {courses[3].description.replace(/"/g, "")}
                 </p>
                 <div className="border-t border-white/20 mt-3 sm:mt-4 pt-3 sm:pt-4 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm mb-3 sm:mb-4">

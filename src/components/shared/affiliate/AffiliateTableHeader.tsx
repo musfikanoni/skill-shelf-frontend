@@ -29,11 +29,11 @@ export function AffiliateTableHeader({
   }
 
   return (
-    <div className="p-6 flex items-center justify-between bg-white border-b border-slate-200">
-      <h2 className="text-xl font-bold text-slate-900">{tableTitle}</h2>
+    <div className="p-4 sm:p-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white border-b border-slate-200">
+      <h2 className="text-xl font-bold text-slate-900 shrink-0">{tableTitle}</h2>
       
-      <div className="flex items-center gap-3">
-        <div className="relative w-64">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+        <div className="relative w-full sm:w-64 md:w-72">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
@@ -43,9 +43,10 @@ export function AffiliateTableHeader({
           />
         </div>
         
-        <div className="relative group">
+        <div className="relative group shrink-0">
           <button 
-            className="px-4 py-2 rounded-xl outline-1 -outline-offset-1 outline-slate-300 flex justify-between items-center gap-2 bg-white hover:bg-slate-50 transition-all min-w-[120px]"
+            type="button"
+            className="w-full sm:w-auto px-4 py-2 rounded-xl outline-1 -outline-offset-1 outline-slate-300 flex justify-between items-center gap-2 bg-white hover:bg-slate-50 transition-all min-w-[120px]"
           >
             <span className="text-slate-900 text-sm font-medium">{getStatusLabel(selectedStatus)}</span>
             <ChevronDown className="w-4 h-4 text-slate-500" />

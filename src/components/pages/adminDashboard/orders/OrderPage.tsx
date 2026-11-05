@@ -82,12 +82,12 @@ export default function OrdersPage() {
     setSelectedOrderId(null);
   };
 
-  if (isAuthLoading) {
+  if (isAuthLoading || (isAuthorized && isOrdersLoading)) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center">
         <Loading
-          title="Verifying Authorization"
-          message="Loading customer orders..."
+          title="Loading Orders"
+          message="Fetching customer orders and transaction history..."
         />
       </div>
     );
@@ -99,7 +99,7 @@ export default function OrdersPage() {
   }
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="flex flex-col gap-6 md:gap-8 animate-in fade-in duration-500">
       {/* Page Header */}
       <div className="space-y-1">
         <h1 className="text-3xl font-bold text-slate-900">Orders</h1>

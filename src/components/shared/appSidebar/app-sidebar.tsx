@@ -182,7 +182,7 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
   };
 
   return (
-    <Sidebar {...props} className="border-none bg-white shadow-xl">
+    <Sidebar {...props} className="border-none !border-r-0 group-data-[side=left]:!border-r-0 bg-white shadow-xl">
       <SidebarHeader className="mt-6">
         <Link href="/">
           <Logo />
@@ -190,36 +190,6 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
       </SidebarHeader>
       <SidebarContent className="px-4">
         <SidebarMenu className="gap-2">
-          {/* {sidebarData?.navMain.map((item) => {
-           //  const isActive =
-          //     pathname === item.url ||
-         //      (item.url !== "/dashboard" && pathname.startsWith(item.url));
-
-            const isDashboardRoute =
-              item.url === "/dashboard" || item.url === "/admin-dashboard";
-
-            const isActive = isDashboardRoute
-              ? pathname === item.url
-              : pathname.startsWith(item.url);
-
-            return (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton
-                  render={<Link href={item.url} />}
-                  isActive={isActive}
-                  className={`h-12 rounded-lg transition-all duration-200 px-4 gap-3 ${isActive
-                    ? "bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black shadow-md hover:from-[#F9C32C] hover:to-[#EFA00B] hover:text-black"
-                    : "bg-[#F8FAFC] text-slate-500 hover:bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] hover:text-slate-900"
-                    }`}
-                >
-                  <item.icon
-                    className={`h-5 w-5 ${isActive ? "text-black" : "hover:text-black"}`}
-                  />
-                  <span className="font-semibold">{item.title}</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            );
-          })} */}
 
           {sidebarData?.navMain.map((item) => {
             const isDashboardRoute =
@@ -296,7 +266,6 @@ export default function AppSidebar({ role, ...props }: AppSidebarProps) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
-      <SidebarRail />
     </Sidebar>
   );
 }

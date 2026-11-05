@@ -10,6 +10,7 @@ import { Category, CategoryTable } from "@/components/shared/categories/Category
 import CategoryModal from "./AddCategoryModal";
 import DeleteModal from "@/components/shared/modals/DeleteModal";
 import { isProductCategory } from "@/constants/productCategory";
+import Loading from "@/components/Others/Loading";
 
 export default function CategoriesPage() {
   const { data: categoriesData, isLoading } = useGetAllCategoriesQuery();
@@ -96,15 +97,23 @@ export default function CategoriesPage() {
     setSelectedCategory(null);
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <Loading title="Loading Categories" message="Fetching categories taxonomy..." />
+      </div>
+    );
+  }
+
   return (
-    <div>
+    <div className="flex flex-col gap-6 md:gap-8 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         {/* ... existing header ... */}
         <div className="space-y-1">
           <h1 className="text-3xl font-extrabold text-[#1E293B]">Categories</h1>
           <p className="text-slate-400 font-medium">Manage all categories</p>
         </div>
-        <div className="lg:flex md:flex-row gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <Button
             onClick={handleExport}
             variant="outline"
@@ -117,7 +126,7 @@ export default function CategoriesPage() {
 
           <Button 
             onClick={() => setIsAddModalOpen(true)}
-            className="cursor-pointer py-5 px-7 border-0 flex-1 bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black  hover:from-[#F9C32C] hover:to-[#EFA00B] hover:text-black"
+            className="cursor-pointer py-5 px-7 border-0 bg-[linear-gradient(180deg,#F5C518_50%,#D73200_222.14%)] text-black  hover:from-[#F9C32C] hover:to-[#EFA00B] hover:text-black font-bold"
           >
             <Plus className="h-4 w-4 " />
             Add Category
@@ -125,7 +134,7 @@ export default function CategoriesPage() {
         </div>
       </div>
 
-      <div className="sm:py-6 lg:py-8">
+      <div className="w-full">
         <CategoryTable
           data={categories}
           isLoading={isLoading}
