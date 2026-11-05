@@ -273,10 +273,6 @@ pnpm start
 
 ---
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
 <div align="center">
   <sub>Designed & Developed by <b>Mst. Musfika Naznin Oni</b> • Powered by Next.js 16 & React 19</sub>
 </div>
