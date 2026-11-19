@@ -23,7 +23,7 @@ const DEMO_CREDENTIALS = {
   },
   user: {
     role: "Demo User",
-    email: "user@gmail.com",
+    email: "musfikaaoni@gmail.com",
     password: "12345678",
   },
 };
